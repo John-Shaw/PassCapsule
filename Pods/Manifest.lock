@@ -1,0 +1,10 @@
+PODS:
+  - EAIntroView (2.6.4)
+
+DEPENDENCIES:
+  - EAIntroView (~> 2.6.4)
+
+SPEC CHECKSUMS:
+  EAIntroView: 8f66dc6b79f2d52db26af8fc5476a05ffc549d4c
+
+COCOAPODS: 0.36.4
