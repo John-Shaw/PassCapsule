@@ -22,6 +22,7 @@
     EAIntroPage *page1 = [EAIntroPage page];
     page1.title = @"Hello world";
     page1.desc = @"test1";
+    page1.bgImage = [UIImage imageNamed:@"intro1" ];
     // custom
     EAIntroPage *page2 = [EAIntroPage page];
     page2.title = @"This is page 2";
@@ -32,6 +33,7 @@
     page2.descPositionY = 200;
     page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title2"]];
     page2.titleIconPositionY = 100;
+    page2.bgImage= [UIImage imageNamed:@"intro2"];
     
     // custom view from nib
     //    EAIntroPage *page3 = [EAIntroPage pageWithCustomViewFromNibNamed:@"IntroPage"];
