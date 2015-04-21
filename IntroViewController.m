@@ -18,37 +18,69 @@
 @implementation IntroViewController
 
 -(void)viewDidLoad{
-    // basic
-    EAIntroPage *page1 = [EAIntroPage page];
-    page1.title = @"Hello world";
-    page1.desc = @"test1";
-    page1.bgImage = [UIImage imageNamed:@"intro1" ];
-    // custom
-    EAIntroPage *page2 = [EAIntroPage page];
-    page2.title = @"This is page 2";
-    page2.titleFont = [UIFont fontWithName:@"Georgia-BoldItalic" size:20];
-    page2.titlePositionY = 220;
-    page2.desc = @"test2";
-    page2.descFont = [UIFont fontWithName:@"Georgia-Italic" size:18];
-    page2.descPositionY = 200;
-    page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title2"]];
-    page2.titleIconPositionY = 100;
-    page2.bgImage= [UIImage imageNamed:@"intro2"];
-    
-    // custom view from nib
-    //    EAIntroPage *page3 = [EAIntroPage pageWithCustomViewFromNibNamed:@"IntroPage"];
-    //    page3.bgImage = [UIImage imageNamed:@"bg2"];
-    
-    NSArray *pages= @[page1,page2];
-    
-    [self.introView setPages:pages];
+//    BOOL isFirst = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirst"];
+    BOOL isFirst = NO;
+    BOOL isLogin = YES;
+    if ( isFirst) {
+        // basic
+        EAIntroPage *page1 = [EAIntroPage page];
+        page1.title = @"安全的密码管家";
+        page1.titlePositionY = self.view.frame.size.height - 200;
+        page1.desc = @"";
+        page1.descPositionY = 300;
+        page1.bgImage = [UIImage imageNamed:@"bg1" ];
+        // custom
+        EAIntroPage *page2 = [EAIntroPage page];
+        page2.title = @"多用户支持";
+        page2.titleFont = [UIFont fontWithName:@"Georgia-BoldItalic" size:20];
+        page2.titlePositionY = 400;
+        page2.desc = @"";
+        page2.descFont = [UIFont fontWithName:@"Georgia-Italic" size:18];
+        page2.descPositionY = 300;
+        //   page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title2"]];
+        page2.titleIconPositionY = 100;
+        page2.bgImage= [UIImage imageNamed:@"bg2"];
+        
+        //    custom view from nib
+        EAIntroPage *page3 = [EAIntroPage page];
+        
+        page3.bgImage = [UIImage imageNamed:@"bg3"];
+        
+        
+        [self.introView  setSwipeToExit:NO];
+        
+        
+        NSArray *pages= @[page1,page2,page3];
+        self.introView.pageControlY = 60;
+        self.introView.skipButton = nil;
+        [self.introView setPages:pages];
+        
+    } else if (isLogin){
+        [self.introView hideWithFadeOutDuration:0];
+        NSLog(@"%@",self.introView);
+      
+
+
+    }
     
     
 }
 
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
+-(void)viewDidAppear:(BOOL)animated{
+//    [self performSegueWithIdentifier:@"toLoginView" sender:self];
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"Yyyyyyy";
+    label.frame = CGRectMake(0, 0, 100, 44);
+    label.center = CGPointMake(300, 300);
+    [self.view addSubview:label];
 }
+
+- (IBAction)toRegistView:(UIButton *)sender {
+}
+- (IBAction)toLoginView:(UIButton *)sender {
+    [self.introView hideWithFadeOutDuration:0.5f];
+    [self performSegueWithIdentifier:@"toLoginView" sender:self];
+}
+
 
 @end

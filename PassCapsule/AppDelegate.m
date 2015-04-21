@@ -16,7 +16,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:@YES forKey:@"isFirst"];
+    
+    
     return YES;
 }
 
