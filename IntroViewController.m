@@ -12,7 +12,7 @@
 
 @interface IntroViewController()
 @property (weak, nonatomic) IBOutlet EAIntroView *introView;
-
+@property (strong, nonatomic) UITextField *txField;
 @end
 
 @implementation IntroViewController{
@@ -72,25 +72,26 @@
 //    [self performSegueWithIdentifier:@"toLoginView" sender:self];
 
     
-    UITextField *txField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
-    txField.center = CGPointMake(self.view.bounds.size.width/2,
+    self.txField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
+    self.txField.center = CGPointMake(self.view.bounds.size.width/2,
                                  self.view.bounds.size.height/2);
-    txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
-    txField.layer.cornerRadius = 7;
-    [txField setSecureTextEntry:YES];
-    xLength = txField.bounds.size.width;
+    self.txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+    self.txField.layer.cornerRadius = 7;
+    [self.txField setSecureTextEntry:YES];
+    xLength = self.txField.bounds.size.width;
     
     UIButton *unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     [unlockBtn setOpaque:NO];
-    unlockBtn.center = CGPointMake(txField.center.x + txField.frame.size.width/2 + 0, txField.center.y);
+    unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
     [unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
     [unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:txField];
+
+    [self.view addSubview:self.txField];
     [self.view addSubview:unlockBtn];
 }
 
 -(void)toMainView:(UIButton *)sender{
+    
     [UIView animateWithDuration:0.75f
                      animations:^{
                          sender.transform = CGAffineTransformMakeRotation(M_PI);
@@ -99,6 +100,9 @@
                          [UIView animateWithDuration:0.75f
                                           animations:^{
                                               sender.center = CGPointMake(sender.center.x - xLength, sender.center.y);
+                                              self.txField.backgroundColor = [UIColor greenColor];
+                                              self.txField.frame = CGRectMake(self.txField.frame.origin.x, self.txField.frame.origin.y, 0, 44);
+                                              
                                           } completion:^(BOOL finished) {
                                               [self performSegueWithIdentifier:@"showMainView" sender:self];
                                           }];
