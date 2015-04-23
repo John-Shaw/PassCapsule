@@ -15,7 +15,9 @@
 
 @end
 
-@implementation IntroViewController
+@implementation IntroViewController{
+    int xLength;
+}
 
 -(void)viewDidLoad{
 //    BOOL isFirst = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirst"];
@@ -68,17 +70,46 @@
 
 -(void)viewDidAppear:(BOOL)animated{
 //    [self performSegueWithIdentifier:@"toLoginView" sender:self];
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"Yyyyyyy";
-    label.frame = CGRectMake(0, 0, 100, 44);
-    label.center = CGPointMake(300, 300);
-    [self.view addSubview:label];
+
+    
+    UITextField *txField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
+    txField.center = CGPointMake(self.view.bounds.size.width/2,
+                                 self.view.bounds.size.height/2);
+    txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+    txField.layer.cornerRadius = 7;
+    [txField setSecureTextEntry:YES];
+    xLength = txField.bounds.size.width;
+    
+    UIButton *unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [unlockBtn setOpaque:NO];
+    unlockBtn.center = CGPointMake(txField.center.x + txField.frame.size.width/2 + 0, txField.center.y);
+    [unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+    [unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:txField];
+    [self.view addSubview:unlockBtn];
+}
+
+-(void)toMainView:(UIButton *)sender{
+    [UIView animateWithDuration:0.75f
+                     animations:^{
+                         sender.transform = CGAffineTransformMakeRotation(M_PI);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.75f
+                                          animations:^{
+                                              sender.center = CGPointMake(sender.center.x - xLength, sender.center.y);
+                                          } completion:^(BOOL finished) {
+                                              [self performSegueWithIdentifier:@"showMainView" sender:self];
+                                          }];
+                     }];
+    
 }
 
 - (IBAction)toRegistView:(UIButton *)sender {
 }
 - (IBAction)toLoginView:(UIButton *)sender {
-    [self.introView hideWithFadeOutDuration:0.5f];
+    
     [self performSegueWithIdentifier:@"toLoginView" sender:self];
 }
 

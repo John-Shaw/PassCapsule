@@ -150,7 +150,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JVX-HY-0Uf" firstAttribute="bottom" secondItem="JiW-eY-etx" secondAttribute="top" id="3JP-ax-XO8"/>
                             <constraint firstItem="JVX-HY-0Uf" firstAttribute="bottom" secondItem="JiW-eY-etx" secondAttribute="top" id="5Hl-pH-GeZ"/>
@@ -192,11 +192,12 @@
                     </view>
                     <connections>
                         <outlet property="introView" destination="JVX-HY-0Uf" id="LV9-2S-FCk"/>
+                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="showMainView" id="ENA-zv-PVG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhZ-Vo-tJO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2266.5" y="-17"/>
+            <point key="canvasLocation" x="-2218.5" y="-39"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AK9-IT-Rp0">
@@ -214,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zfk-Ye-3bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1500" y="505"/>
+            <point key="canvasLocation" x="-2575.5" y="821"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
@@ -344,7 +345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ak-CI-Jd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1524" y="-269"/>
+            <point key="canvasLocation" x="-1797" y="821"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
