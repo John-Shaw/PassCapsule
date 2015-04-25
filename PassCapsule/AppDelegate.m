@@ -16,8 +16,24 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+    
     NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
     [userDefault setObject:@YES forKey:@"isFirst"];
+    
+    BOOL isFirst = YES;
+    BOOL isLogin = NO;
+    
+    if (isFirst) {
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
+        [self.window makeKeyAndVisible];
+    } else if(!isLogin){
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self.window makeKeyAndVisible];
+    }
+    
     
     
     return YES;

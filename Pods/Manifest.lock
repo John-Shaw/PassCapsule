@@ -1,10 +1,22 @@
 PODS:
   - EAIntroView (2.6.4)
+  - pop (1.0.7)
 
 DEPENDENCIES:
   - EAIntroView (~> 2.6.4)
+  - pop (from `https://github.com/facebook/pop.git`)
+
+EXTERNAL SOURCES:
+  pop:
+    :git: https://github.com/facebook/pop.git
+
+CHECKOUT OPTIONS:
+  pop:
+    :commit: 038f29b2de47db3fce803c5a180eee604ebe1977
+    :git: https://github.com/facebook/pop.git
 
 SPEC CHECKSUMS:
-  EAIntroView: 8f66dc6b79f2d52db26af8fc5476a05ffc549d4c
+  EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
 
 COCOAPODS: 0.36.4
