@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5299B7AA1AE51B3E001DA01A /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5299B7A91AE51B3E001DA01A /* IntroViewController.m */; };
+		5263E8511AE8FDE000D79116 /* LockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* LockViewController.m */; };
+		5275131F1AEB95F4000462CB /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275131E1AEB95F4000462CB /* IntroViewController.m */; };
 		52B2B1B81ADFB0E700192404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1B71ADFB0E700192404 /* main.m */; };
 		52B2B1BB1ADFB0E700192404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* AppDelegate.m */; };
 		52B2B1BE1ADFB0E700192404 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BD1ADFB0E700192404 /* FirstViewController.m */; };
@@ -31,8 +32,10 @@
 
 /* Begin PBXFileReference section */
 		39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5299B7A81AE51B3E001DA01A /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = ../IntroViewController.h; sourceTree = "<group>"; };
-		5299B7A91AE51B3E001DA01A /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = ../IntroViewController.m; sourceTree = "<group>"; };
+		5263E84F1AE8FDE000D79116 /* LockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockViewController.h; sourceTree = "<group>"; };
+		5263E8501AE8FDE000D79116 /* LockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockViewController.m; sourceTree = "<group>"; };
+		5275131D1AEB95F4000462CB /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		5275131E1AEB95F4000462CB /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		5299B7AB1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		5299B7AC1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		52B2B1B21ADFB0E700192404 /* PassCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +84,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		527513201AEB961D000462CB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5275131D1AEB95F4000462CB /* IntroViewController.h */,
+				5275131E1AEB95F4000462CB /* IntroViewController.m */,
+				52B2B1BC1ADFB0E700192404 /* FirstViewController.h */,
+				52B2B1BD1ADFB0E700192404 /* FirstViewController.m */,
+				52B2B1BF1ADFB0E700192404 /* SecondViewController.h */,
+				52B2B1C01ADFB0E700192404 /* SecondViewController.m */,
+				5263E84F1AE8FDE000D79116 /* LockViewController.h */,
+				5263E8501AE8FDE000D79116 /* LockViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		52B2B1A91ADFB0E700192404 = {
 			isa = PBXGroup;
 			children = (
@@ -104,14 +122,9 @@
 		52B2B1B41ADFB0E700192404 /* PassCapsule */ = {
 			isa = PBXGroup;
 			children = (
-				5299B7A81AE51B3E001DA01A /* IntroViewController.h */,
-				5299B7A91AE51B3E001DA01A /* IntroViewController.m */,
+				527513201AEB961D000462CB /* Controllers */,
 				52B2B1B91ADFB0E700192404 /* AppDelegate.h */,
 				52B2B1BA1ADFB0E700192404 /* AppDelegate.m */,
-				52B2B1BC1ADFB0E700192404 /* FirstViewController.h */,
-				52B2B1BD1ADFB0E700192404 /* FirstViewController.m */,
-				52B2B1BF1ADFB0E700192404 /* SecondViewController.h */,
-				52B2B1C01ADFB0E700192404 /* SecondViewController.m */,
 				52B2B1C21ADFB0E700192404 /* Main.storyboard */,
 				52B2B1C51ADFB0E700192404 /* Images.xcassets */,
 				52B2B1C71ADFB0E700192404 /* LaunchScreen.xib */,
@@ -291,10 +304,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B2B1C11ADFB0E700192404 /* SecondViewController.m in Sources */,
+				5263E8511AE8FDE000D79116 /* LockViewController.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* AppDelegate.m in Sources */,
 				52B2B1BE1ADFB0E700192404 /* FirstViewController.m in Sources */,
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
-				5299B7AA1AE51B3E001DA01A /* IntroViewController.m in Sources */,
+				5275131F1AEB95F4000462CB /* IntroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
