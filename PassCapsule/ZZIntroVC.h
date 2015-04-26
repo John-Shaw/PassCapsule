@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IntroViewController : UIViewController
+@interface ZZIntroVC : UIViewController
 
 @end

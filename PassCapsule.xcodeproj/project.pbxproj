@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5263E8511AE8FDE000D79116 /* LockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* LockViewController.m */; };
-		5275131F1AEB95F4000462CB /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275131E1AEB95F4000462CB /* IntroViewController.m */; };
+		5200C4931AEC82EA00FF89C2 /* ZZCategoryTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200C4921AEC82EA00FF89C2 /* ZZCategoryTableVC.m */; };
+		5263E8511AE8FDE000D79116 /* ZZLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* ZZLockVC.m */; };
+		5275131F1AEB95F4000462CB /* ZZIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275131E1AEB95F4000462CB /* ZZIntroVC.m */; };
 		52B2B1B81ADFB0E700192404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1B71ADFB0E700192404 /* main.m */; };
 		52B2B1BB1ADFB0E700192404 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* AppDelegate.m */; };
-		52B2B1BE1ADFB0E700192404 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BD1ADFB0E700192404 /* FirstViewController.m */; };
 		52B2B1C11ADFB0E700192404 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1C01ADFB0E700192404 /* SecondViewController.m */; };
 		52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C51ADFB0E700192404 /* Images.xcassets */; };
@@ -32,10 +32,12 @@
 
 /* Begin PBXFileReference section */
 		39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5263E84F1AE8FDE000D79116 /* LockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockViewController.h; sourceTree = "<group>"; };
-		5263E8501AE8FDE000D79116 /* LockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockViewController.m; sourceTree = "<group>"; };
-		5275131D1AEB95F4000462CB /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		5275131E1AEB95F4000462CB /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		5200C4911AEC82EA00FF89C2 /* ZZCategoryTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZCategoryTableVC.h; sourceTree = "<group>"; };
+		5200C4921AEC82EA00FF89C2 /* ZZCategoryTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZCategoryTableVC.m; sourceTree = "<group>"; };
+		5263E84F1AE8FDE000D79116 /* ZZLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZLockVC.h; sourceTree = "<group>"; };
+		5263E8501AE8FDE000D79116 /* ZZLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZLockVC.m; sourceTree = "<group>"; };
+		5275131D1AEB95F4000462CB /* ZZIntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZZIntroVC.h; sourceTree = "<group>"; };
+		5275131E1AEB95F4000462CB /* ZZIntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZZIntroVC.m; sourceTree = "<group>"; };
 		5299B7AB1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		5299B7AC1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		52B2B1B21ADFB0E700192404 /* PassCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,8 +45,6 @@
 		52B2B1B71ADFB0E700192404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52B2B1B91ADFB0E700192404 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52B2B1BA1ADFB0E700192404 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		52B2B1BC1ADFB0E700192404 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		52B2B1BD1ADFB0E700192404 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		52B2B1BF1ADFB0E700192404 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		52B2B1C01ADFB0E700192404 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		52B2B1C31ADFB0E700192404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,14 +87,14 @@
 		527513201AEB961D000462CB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5275131D1AEB95F4000462CB /* IntroViewController.h */,
-				5275131E1AEB95F4000462CB /* IntroViewController.m */,
-				52B2B1BC1ADFB0E700192404 /* FirstViewController.h */,
-				52B2B1BD1ADFB0E700192404 /* FirstViewController.m */,
+				5275131D1AEB95F4000462CB /* ZZIntroVC.h */,
+				5275131E1AEB95F4000462CB /* ZZIntroVC.m */,
+				5263E84F1AE8FDE000D79116 /* ZZLockVC.h */,
+				5263E8501AE8FDE000D79116 /* ZZLockVC.m */,
 				52B2B1BF1ADFB0E700192404 /* SecondViewController.h */,
 				52B2B1C01ADFB0E700192404 /* SecondViewController.m */,
-				5263E84F1AE8FDE000D79116 /* LockViewController.h */,
-				5263E8501AE8FDE000D79116 /* LockViewController.m */,
+				5200C4911AEC82EA00FF89C2 /* ZZCategoryTableVC.h */,
+				5200C4921AEC82EA00FF89C2 /* ZZCategoryTableVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -304,11 +304,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B2B1C11ADFB0E700192404 /* SecondViewController.m in Sources */,
-				5263E8511AE8FDE000D79116 /* LockViewController.m in Sources */,
+				5200C4931AEC82EA00FF89C2 /* ZZCategoryTableVC.m in Sources */,
+				5263E8511AE8FDE000D79116 /* ZZLockVC.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* AppDelegate.m in Sources */,
-				52B2B1BE1ADFB0E700192404 /* FirstViewController.m in Sources */,
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
-				5275131F1AEB95F4000462CB /* IntroViewController.m in Sources */,
+				5275131F1AEB95F4000462CB /* ZZIntroVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

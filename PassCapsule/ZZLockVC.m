@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "LockViewController.h"
+#import "ZZLockVC.h"
 
-@interface LockViewController ()
+@interface ZZLockVC ()
 @property (strong, nonatomic) UITextField *txField;
 @end
 
-@implementation LockViewController
+@implementation ZZLockVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
