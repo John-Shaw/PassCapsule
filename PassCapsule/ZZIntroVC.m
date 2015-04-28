@@ -8,7 +8,7 @@
 
 #import "ZZIntroVC.h"
 #import "EAIntroView.h"
-#import "FirstViewController.h"
+
 
 @interface ZZIntroVC()
 @property (weak, nonatomic) IBOutlet EAIntroView *introView;
