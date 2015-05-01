@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZZCategoryTableVC : UITableViewController
+@interface PCCategoryTableVC : UITableViewController
 
 @end

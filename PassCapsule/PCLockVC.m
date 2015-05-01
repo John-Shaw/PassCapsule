@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "ZZLockVC.h"
+#import "PCLockVC.h"
 
-@interface ZZLockVC ()
+@interface PCLockVC ()
 @property (strong, nonatomic) UITextField *txField;
 @end
 
-@implementation ZZLockVC
+@implementation PCLockVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

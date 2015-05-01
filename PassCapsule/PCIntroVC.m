@@ -6,15 +6,15 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "ZZIntroVC.h"
+#import "PCIntroVC.h"
 #import "EAIntroView.h"
 
 
-@interface ZZIntroVC()
+@interface PCIntroVC()
 @property (weak, nonatomic) IBOutlet EAIntroView *introView;
 @end
 
-@implementation ZZIntroVC
+@implementation PCIntroVC
 -(void)viewDidLoad{
 
     // basic

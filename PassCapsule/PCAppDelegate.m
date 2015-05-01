@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "PCAppDelegate.h"
 
-@interface AppDelegate ()
+@interface PCAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation PCAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
