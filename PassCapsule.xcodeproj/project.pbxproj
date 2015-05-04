@@ -12,7 +12,6 @@
 		5275131F1AEB95F4000462CB /* PCIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275131E1AEB95F4000462CB /* PCIntroVC.m */; };
 		52B2B1B81ADFB0E700192404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1B71ADFB0E700192404 /* main.m */; };
 		52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */; };
-		52B2B1C11ADFB0E700192404 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1C01ADFB0E700192404 /* SecondViewController.m */; };
 		52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C51ADFB0E700192404 /* Images.xcassets */; };
 		52B2B1C91ADFB0E700192404 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C71ADFB0E700192404 /* LaunchScreen.xib */; };
@@ -32,8 +31,8 @@
 
 /* Begin PBXFileReference section */
 		39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5200C4911AEC82EA00FF89C2 /* PCCategoryTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCategoryTableVC.h; sourceTree = "<group>"; };
-		5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCategoryTableVC.m; sourceTree = "<group>"; };
+		5200C4911AEC82EA00FF89C2 /* PCCategoryTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCategoryTableVC.h; sourceTree = "<group>"; usesTabs = 0; };
+		5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCategoryTableVC.m; sourceTree = "<group>"; usesTabs = 0; };
 		5263E84F1AE8FDE000D79116 /* PCLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLockVC.h; sourceTree = "<group>"; };
 		5263E8501AE8FDE000D79116 /* PCLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockVC.m; sourceTree = "<group>"; };
 		5275131D1AEB95F4000462CB /* PCIntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCIntroVC.h; sourceTree = "<group>"; };
@@ -45,8 +44,6 @@
 		52B2B1B71ADFB0E700192404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52B2B1B91ADFB0E700192404 /* PCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PCAppDelegate.h; sourceTree = "<group>"; };
 		52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PCAppDelegate.m; sourceTree = "<group>"; };
-		52B2B1BF1ADFB0E700192404 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		52B2B1C01ADFB0E700192404 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		52B2B1C31ADFB0E700192404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52B2B1C51ADFB0E700192404 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52B2B1C81ADFB0E700192404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -91,8 +88,6 @@
 				5275131E1AEB95F4000462CB /* PCIntroVC.m */,
 				5263E84F1AE8FDE000D79116 /* PCLockVC.h */,
 				5263E8501AE8FDE000D79116 /* PCLockVC.m */,
-				52B2B1BF1ADFB0E700192404 /* SecondViewController.h */,
-				52B2B1C01ADFB0E700192404 /* SecondViewController.m */,
 				5200C4911AEC82EA00FF89C2 /* PCCategoryTableVC.h */,
 				5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */,
 			);
@@ -219,6 +214,7 @@
 				TargetAttributes = {
 					52B2B1B11ADFB0E700192404 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = B5CC595BC4;
 					};
 					52B2B1CD1ADFB0E700192404 = {
 						CreatedOnToolsVersion = 6.3;
@@ -303,7 +299,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B2B1C11ADFB0E700192404 /* SecondViewController.m in Sources */,
 				5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */,
 				5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,
@@ -437,9 +432,14 @@
 			baseConfigurationReference = 39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PassCapsule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -448,9 +448,14 @@
 			baseConfigurationReference = 9DEBE8AE9F7C94D84C92D048 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PassCapsule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

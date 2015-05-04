@@ -34,12 +34,18 @@
     //    backTx.layer.cornerRadius = 7;
     //    backTx.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
     //    [self.view addSubview:backTx];
-    
+
     [self.view addSubview:self.txField];
     [self.view addSubview:unlockBtn];
     //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
     
 }
+
+/**
+ *  想象力
+ *
+ *  @param sender UIButton
+ */
 -(void)toMainView:(UIButton *)sender{
     //动画完全是靠想象力啊
     UITextField *backTx = [[UITextField alloc] initWithFrame:self.txField.frame];
