@@ -8,8 +8,9 @@
 
 #import "PCLockVC.h"
 
-@interface PCLockVC ()
+@interface PCLockVC ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *txField;
+@property (strong, nonatomic) UIButton *unlockBtn;
 @end
 
 @implementation PCLockVC
@@ -20,14 +21,15 @@
     self.txField.center = CGPointMake(self.view.bounds.size.width/2,
                                       self.view.bounds.size.height/2);
     self.txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+    self.txField.delegate = self;
     self.txField.layer.cornerRadius = 7;
     [self.txField setSecureTextEntry:YES];
     
-    UIButton *unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [unlockBtn setOpaque:NO];
-    unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
-    [unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
-    [unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
+    self.unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+    [self.unlockBtn setOpaque:NO];
+    self.unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
+    [self.unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+    [self.unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
     
     
     //    UITextField *backTx = [[UITextField alloc] initWithFrame:self.txField.frame];
@@ -36,9 +38,18 @@
     //    [self.view addSubview:backTx];
 
     [self.view addSubview:self.txField];
-    [self.view addSubview:unlockBtn];
+    [self.view addSubview:self.unlockBtn];
     //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
     
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [self toMainView:self.unlockBtn];
 }
 
 /**

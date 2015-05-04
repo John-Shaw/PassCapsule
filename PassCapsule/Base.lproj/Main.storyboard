@@ -99,7 +99,7 @@
                                     <constraint firstItem="igN-IJ-N86" firstAttribute="centerY" secondItem="PZD-XC-wuA" secondAttribute="centerY" priority="750" id="6wg-v6-bIu"/>
                                     <constraint firstItem="PZD-XC-wuA" firstAttribute="leading" secondItem="JVX-HY-0Uf" secondAttribute="leading" constant="8" id="F0Q-Xj-jbk"/>
                                     <constraint firstItem="PZD-XC-wuA" firstAttribute="bottom" secondItem="igN-IJ-N86" secondAttribute="bottom" priority="750" id="Iif-Xt-r92"/>
-                                    <constraint firstItem="igN-IJ-N86" firstAttribute="leading" secondItem="PZD-XC-wuA" secondAttribute="trailing" priority="999" constant="24" id="Mcx-o5-QLO"/>
+                                    <constraint firstItem="igN-IJ-N86" firstAttribute="leading" secondItem="PZD-XC-wuA" secondAttribute="trailing" priority="750" constant="24" id="Mcx-o5-QLO"/>
                                     <constraint firstItem="igN-IJ-N86" firstAttribute="trailing" secondItem="JVX-HY-0Uf" secondAttribute="trailingMargin" priority="999" id="ebG-SI-ved"/>
                                     <constraint firstAttribute="trailing" secondItem="igN-IJ-N86" secondAttribute="trailing" priority="998" constant="8" id="gH5-8u-UjC"/>
                                     <constraint firstItem="PZD-XC-wuA" firstAttribute="width" secondItem="igN-IJ-N86" secondAttribute="width" priority="999" id="hdt-U7-9FJ"/>
@@ -304,10 +304,10 @@
             </objects>
             <point key="canvasLocation" x="1650" y="-450"/>
         </scene>
-        <!--Second View Controller-->
+        <!--View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
