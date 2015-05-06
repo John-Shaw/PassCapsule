@@ -8,6 +8,7 @@
 
 #import "PCIntroVC.h"
 #import "EAIntroView.h"
+#import "PCXMLParser.h"
 
 
 @interface PCIntroVC()
@@ -51,7 +52,10 @@
     [self.introView setPages:pages];
     [self.introView setUseMotionEffects:YES];
     
-    
+    PCXMLParser *aPaser = [PCXMLParser new];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
+
+    [aPaser paserWithPath:path];
 }
 
 

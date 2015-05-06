@@ -36,7 +36,6 @@
     //    backTx.layer.cornerRadius = 7;
     //    backTx.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
     //    [self.view addSubview:backTx];
-
     [self.view addSubview:self.txField];
     [self.view addSubview:self.unlockBtn];
     //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);

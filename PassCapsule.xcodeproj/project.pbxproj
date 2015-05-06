@@ -14,8 +14,10 @@
 		52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */; };
 		52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C51ADFB0E700192404 /* Images.xcassets */; };
-		52B2B1C91ADFB0E700192404 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C71ADFB0E700192404 /* LaunchScreen.xib */; };
 		52B2B1D51ADFB0E700192404 /* PassCapsuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1D41ADFB0E700192404 /* PassCapsuleTests.m */; };
+		52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E9687A1AF9D03300E6E759 /* PCXMLParser.m */; };
+		52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E9687E1AF9D14C00E6E759 /* PCCapsule.m */; };
+		52E968821AF9D33E00E6E759 /* capsules.xml in Resources */ = {isa = PBXBuildFile; fileRef = 52E968811AF9D33E00E6E759 /* capsules.xml */; };
 		C92072574D5258FB9B062893 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8E6AF98A55F1387ECD793B /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +40,6 @@
 		5275131D1AEB95F4000462CB /* PCIntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCIntroVC.h; sourceTree = "<group>"; };
 		5275131E1AEB95F4000462CB /* PCIntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCIntroVC.m; sourceTree = "<group>"; };
 		5299B7AB1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		5299B7AC1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		52B2B1B21ADFB0E700192404 /* PassCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B1B61ADFB0E700192404 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52B2B1B71ADFB0E700192404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -46,10 +47,14 @@
 		52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PCAppDelegate.m; sourceTree = "<group>"; };
 		52B2B1C31ADFB0E700192404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		52B2B1C51ADFB0E700192404 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		52B2B1C81ADFB0E700192404 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		52B2B1CE1ADFB0E700192404 /* PassCapsuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PassCapsuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B1D31ADFB0E700192404 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52B2B1D41ADFB0E700192404 /* PassCapsuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PassCapsuleTests.m; sourceTree = "<group>"; };
+		52E968791AF9D03300E6E759 /* PCXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCXMLParser.h; sourceTree = "<group>"; };
+		52E9687A1AF9D03300E6E759 /* PCXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCXMLParser.m; sourceTree = "<group>"; };
+		52E9687D1AF9D14C00E6E759 /* PCCapsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCapsule.h; sourceTree = "<group>"; };
+		52E9687E1AF9D14C00E6E759 /* PCCapsule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCapsule.m; sourceTree = "<group>"; };
+		52E968811AF9D33E00E6E759 /* capsules.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = capsules.xml; sourceTree = "<group>"; };
 		9A8E6AF98A55F1387ECD793B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DEBE8AE9F7C94D84C92D048 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,12 +122,14 @@
 		52B2B1B41ADFB0E700192404 /* PassCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				52E968801AF9D32700E6E759 /* test resource */,
+				52E9687C1AF9D10A00E6E759 /* Model */,
+				52E968781AF9CF9B00E6E759 /* Utilities */,
 				527513201AEB961D000462CB /* Controllers */,
 				52B2B1B91ADFB0E700192404 /* PCAppDelegate.h */,
 				52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */,
 				52B2B1C21ADFB0E700192404 /* Main.storyboard */,
 				52B2B1C51ADFB0E700192404 /* Images.xcassets */,
-				52B2B1C71ADFB0E700192404 /* LaunchScreen.xib */,
 				52B2B1B51ADFB0E700192404 /* Supporting Files */,
 			);
 			path = PassCapsule;
@@ -152,6 +159,32 @@
 				52B2B1D31ADFB0E700192404 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52E968781AF9CF9B00E6E759 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				52E968791AF9D03300E6E759 /* PCXMLParser.h */,
+				52E9687A1AF9D03300E6E759 /* PCXMLParser.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		52E9687C1AF9D10A00E6E759 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52E9687D1AF9D14C00E6E759 /* PCCapsule.h */,
+				52E9687E1AF9D14C00E6E759 /* PCCapsule.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		52E968801AF9D32700E6E759 /* test resource */ = {
+			isa = PBXGroup;
+			children = (
+				52E968811AF9D33E00E6E759 /* capsules.xml */,
+			);
+			name = "test resource";
 			sourceTree = "<group>";
 		};
 		C3CDC9C99C4901A819BE022E /* Pods */ = {
@@ -247,8 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */,
-				52B2B1C91ADFB0E700192404 /* LaunchScreen.xib in Resources */,
 				52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */,
+				52E968821AF9D33E00E6E759 /* capsules.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,9 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */,
 				5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */,
 				5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,
+				52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */,
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
 				5275131F1AEB95F4000462CB /* PCIntroVC.m in Sources */,
 			);
@@ -333,15 +368,6 @@
 				5299B7AB1AE51B8B001DA01A /* zh-Hans */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		52B2B1C71ADFB0E700192404 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				52B2B1C81ADFB0E700192404 /* Base */,
-				5299B7AC1AE51B8B001DA01A /* zh-Hans */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -432,6 +458,7 @@
 			baseConfigurationReference = 39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PassCapsule/Info.plist;
@@ -448,6 +475,7 @@
 			baseConfigurationReference = 9DEBE8AE9F7C94D84C92D048 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PassCapsule/Info.plist;
