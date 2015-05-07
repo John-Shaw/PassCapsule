@@ -11,9 +11,8 @@
 
 @implementation PCXMLParser
 
--(void)paserWithPath:(NSString *)path{
+-(NSMutableArray *)paserWithPath:(NSString *)path{
     self.elementToParse = @[@"title",@"pass",@"site"];
-    
     //打开xml文件，读取数据到NSData
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"Books" ofType:@"xml"];
     NSFileHandle *file = [NSFileHandle fileHandleForReadingAtPath:path];
@@ -32,9 +31,11 @@
     
     if(flag) {
         NSLog(@"解析指定路径的xml文件成功");
+        return self.capsules;
     }
     else {
         NSLog(@"解析指定路径的xml文件失败");
+        return nil;
     }
     
 }
@@ -106,6 +107,10 @@
             NSLog(@"site :%@",self.aCapusle.site);
         }
     }
+}
+
+-(void)parserDidEndDocument:(NSXMLParser *)parser{
+    NSLog(@"%@",self.capsules);
 }
 
 @end

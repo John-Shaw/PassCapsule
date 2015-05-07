@@ -16,6 +16,6 @@
 @property (nonatomic,strong) PCCapsule *aCapusle;
 @property (nonatomic,strong) NSArray *elementToParse;
 @property (nonatomic,readwrite) BOOL storingFlag;
--(void)paserWithPath:(NSString *)path;
+-(NSMutableArray *)paserWithPath:(NSString *)path;
 
 @end
