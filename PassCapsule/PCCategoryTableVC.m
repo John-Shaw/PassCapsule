@@ -9,6 +9,7 @@
 #import "PCCategoryTableVC.h"
 #import "PCXMLParser.h"
 #import "PCCapsule.h"
+#import "PCCapsuleDetailVC.h"
 
 @implementation PCCategoryTableVC
 
@@ -28,6 +29,8 @@
 //    return _cells;
 //}
 
+
+#pragma mark - tableview date source delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [self.cells count];
@@ -48,10 +51,31 @@
     
     PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
     cell.textLabel.text = capsule.title;
-    
-    
+
     return cell;
 
+}
+
+#pragma mark - segues
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    if(indexPath){
+        if([segue.identifier isEqualToString:@"showCellDetail"]){
+            
+            
+            if ([segue.destinationViewController isKindOfClass:[PCCapsuleDetailVC class]]){
+                PCCapsuleDetailVC *cdvc = [segue destinationViewController];
+                
+                PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
+                
+                [cdvc setCapsuleTitle:capsule.title];
+                [cdvc setCapsuleDetail:capsule.site];
+                [cdvc setCapsuleImage:[UIImage imageNamed:@"lock_error"]];
+                
+            }
+        }
+    }
 }
 
 @end

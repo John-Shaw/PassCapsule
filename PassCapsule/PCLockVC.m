@@ -76,7 +76,7 @@
                          [UIView animateWithDuration:0.75f
                                           animations:^{
                                               sender.center = CGPointMake(sender.center.x - self.txField.frame.size.width, sender.center.y);
-                                              //                                              self.txField.backgroundColor = [UIColor greenColor];
+                                              //self.txField.backgroundColor = [UIColor greenColor];
                                               backTx.frame = CGRectMake(self.txField.frame.origin.x, self.txField.frame.origin.y, self.txField.frame.size.width, 44);
                                               
                                           } completion:^(BOOL finished) {

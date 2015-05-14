@@ -8,14 +8,26 @@
 
 #import "PCCapsuleDetailVC.h"
 @interface PCCapsuleDetailVC()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 @end
 
 @implementation PCCapsuleDetailVC
-
--(void)viewDidLoad{
-    
+-(void)setCapsuleTitle:(NSString *)title{
+    self.titleLabel.text = title;
 }
+
+-(void)setCapsuleDetail:(NSString *)detail{
+    self.detailLabel.text = detail;
+}
+
+-(void)setCapsuleImage:(UIImage *)image{
+    self.iconView.image = image;
+}
+
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -28,7 +40,7 @@
     
     
     if (indexPath.row == 1) {
-        cell.textLabel.text = @"aaaaaa";
+        cell.textLabel.text = @"testttttttt";
     }
     
     return cell;

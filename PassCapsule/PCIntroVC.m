@@ -17,7 +17,7 @@
 
 @implementation PCIntroVC
 -(void)viewDidLoad{
-
+    [super viewDidLoad];
     // basic
     EAIntroPage *page1 = [EAIntroPage page];
     page1.title = @"安全的密码管家";
@@ -43,14 +43,14 @@
     page3.bgImage = [UIImage imageNamed:@"bg3"];
     
     
-    [self.introView  setSwipeToExit:NO];
+//    [self.introView  setSwipeToExit:NO];
     
     
     NSArray *pages= @[page1,page2,page3];
     self.introView.pageControlY = 60;
-    self.introView.skipButton = nil;
+//    self.introView.skipButton = nil;
     [self.introView setPages:pages];
-    [self.introView setUseMotionEffects:YES];
+    
     
 
 }
