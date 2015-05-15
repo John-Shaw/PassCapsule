@@ -63,15 +63,13 @@
     if(indexPath){
         if([segue.identifier isEqualToString:@"showCellDetail"]){
             
-            
             if ([segue.destinationViewController isKindOfClass:[PCCapsuleDetailVC class]]){
                 PCCapsuleDetailVC *cdvc = [segue destinationViewController];
-                
                 PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
                 
-                [cdvc setCapsuleTitle:capsule.title];
-                [cdvc setCapsuleDetail:capsule.site];
-                [cdvc setCapsuleImage:[UIImage imageNamed:@"lock_error"]];
+                cdvc.titleLabel = capsule.title;
+                cdvc.detailLabel = capsule.site;
+                cdvc.imageName = @"lock_error";
                 
             }
         }

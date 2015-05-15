@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PCCapsuleDetailVC : UIViewController<UITableViewDataSource>
-- (void)setCapsuleTitle:(NSString *)title;
-- (void)setCapsuleDetail:(NSString *)detail;
-- (void)setCapsuleImage:(UIImage *)image;
+@property (nonatomic,strong) NSString *titleLabel;
+@property (nonatomic,strong) NSString *detailLabel;
+@property (nonatomic,strong) NSString *imageName;
 @end

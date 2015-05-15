@@ -8,25 +8,23 @@
 
 #import "PCCapsuleDetailVC.h"
 @interface PCCapsuleDetailVC()
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet UILabel *detailVeiw;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 @end
 
 @implementation PCCapsuleDetailVC
--(void)setCapsuleTitle:(NSString *)title{
-    self.titleLabel.text = title;
-}
 
--(void)setCapsuleDetail:(NSString *)detail{
-    self.detailLabel.text = detail;
-}
 
--(void)setCapsuleImage:(UIImage *)image{
-    self.iconView.image = image;
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    
+    self.titleView.text = self.titleLabel;
+    self.detailVeiw.text = self.detailLabel;
+    self.iconView.image = [UIImage imageNamed:@"lock_error"];
 }
-
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -39,9 +37,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
     
-    if (indexPath.row == 1) {
-        cell.textLabel.text = @"testttttttt";
-    }
+//    if (indexPath.row == 1) {
+//        cell.textLabel.text = @"testttttttt";
+//    }
     
     return cell;
     
