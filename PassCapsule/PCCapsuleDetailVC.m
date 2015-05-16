@@ -7,11 +7,12 @@
 //
 
 #import "PCCapsuleDetailVC.h"
-@interface PCCapsuleDetailVC()
-
+#import "PCCapsule.h"
+@interface PCCapsuleDetailVC() 
 @property (weak, nonatomic) IBOutlet UILabel *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *detailVeiw;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
+
 
 @end
 
@@ -21,29 +22,47 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    self.titleView.text = self.titleLabel;
-    self.detailVeiw.text = self.detailLabel;
-    self.iconView.image = [UIImage imageNamed:@"lock_error"];
+    self.titleView.text = self.capsule.title;
+    self.detailVeiw.text = self.capsule.account;
+    self.iconView.image = [UIImage imageNamed:self.capsule.iconName];
+
 }
 
 
+#pragma mark - table view delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *MyIdentifier = @"test";
+    static NSString *account = @"account";
+
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:account];
     
-    
-//    if (indexPath.row == 1) {
-//        cell.textLabel.text = @"testttttttt";
-//    }
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"用户名";
+        cell.detailTextLabel.text = self.capsule.account;
+    }
+    if (indexPath.row == 1) {
+        cell.textLabel.text = @"密码";
+        cell.detailTextLabel.text = @"*********";
+        
+    }
+    if (indexPath.row == 2) {
+        cell.textLabel.text = @"网站";
+        cell.detailTextLabel.text = self.capsule.site;
+    }
     
     return cell;
-    
-
 }
+
+
 
 @end

@@ -67,9 +67,10 @@
                 PCCapsuleDetailVC *cdvc = [segue destinationViewController];
                 PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
                 
-                cdvc.titleLabel = capsule.title;
-                cdvc.detailLabel = capsule.site;
-                cdvc.imageName = @"lock_error";
+                cdvc.capsule = capsule;
+//                cdvc.titleLabel = capsule.title;
+//                cdvc.detailLabel = capsule.site;
+//                cdvc.imageName = @"lock_error";
                 
             }
         }

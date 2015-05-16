@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PCCapsuleDetailVC : UIViewController<UITableViewDataSource>
-@property (nonatomic,strong) NSString *titleLabel;
-@property (nonatomic,strong) NSString *detailLabel;
-@property (nonatomic,strong) NSString *imageName;
+@class PCCapsule;
+@interface PCCapsuleDetailVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,strong) PCCapsule *capsule;
 @end

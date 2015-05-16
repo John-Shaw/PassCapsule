@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString  *title;
 @property (nonatomic, strong) NSString  *pass;
 @property (nonatomic, strong) NSString  *site;
-
+@property (nonatomic, strong) NSString  *account;
+@property (nonatomic, strong) NSString  *iconName;
 
 @end
