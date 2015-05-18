@@ -6,6 +6,7 @@
 <pass>111111111111</pass>  
 <site>plus.google.com</site>
 <icon>google_plus.png</icon>
+<category>互联网账户</category>
 </Capsule>  
 <Capsule id="2">  
 <title>知乎</title>
@@ -13,6 +14,7 @@
 <pass>23333333333</pass>  
 <site>www.zhihu.com</site>
 <icon>zhihu.png</icon>
+<category>互联网账户</category>
 </Capsule>  
 <Capsule id="3">  
 <title>豆瓣</title>
@@ -20,5 +22,14 @@
 <pass>mother fucker</pass>  
 <site>www.douban.com</site>
 <icon>douban.png</icon>
+<category>互联网账户</category>
+</Capsule>  
+<Capsule id="4">  
+<title>visa信用卡</title>
+<account>2333333333333</account>
+<pass>i dont care</pass>  
+<site>www.douban.com</site>
+<icon></icon>
+<category>信用卡</category>
 </Capsule>  
 </Capsules>

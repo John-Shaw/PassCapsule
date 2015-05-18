@@ -11,6 +11,10 @@
 #import "PCCapsule.h"
 #import "PCCapsuleDetailVC.h"
 
+@interface PCCategoryTableVC()
+@property (nonatomic,strong) NSMutableArray *categories;
+@end
+
 @implementation PCCategoryTableVC
 
 -(void)viewDidLoad{
@@ -19,37 +23,63 @@
 
     self.cells = [aPaser paserWithPath:path];
     
+    
     NSLog(@"%@",self.cells);
 }
 
 //-(NSMutableArray *)cells{
 //    if (!_cells) {
-//        _cells = [[NSMutableArray alloc] init];
+//        <#statements#>
 //    }
-//    return _cells;
 //}
 
+-(NSMutableArray *)categories{
+    if (!_categories) {
+        _categories = [[NSMutableArray alloc] init];
+        [_categories addObject:[self capsulesInCategory:@"互联网账户"]];
+        [_categories addObject:[self capsulesInCategory:@"信用卡"]];
+    }
+    return _categories;
+}
+
+-(NSArray *)capsulesInCategory:(NSString *)category{
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (PCCapsule *cell in self.cells) {
+        if ([cell.category isEqualToString:category]) {
+            [cells addObject:cell];
+        }
+    }
+    return cells;
+}
 
 #pragma mark - tableview date source delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.categories count];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return [self.cells count];
+    NSArray *category = self.categories[section];
+    return [category count];
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return @"互联网账户";
+    }
+    if (section == 1) {
+        return @"信用卡";
+    }
+    return @"unkonw";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *MyIdentifier = @"prototype";
     
-    /*
-     Retrieve a cell with the given identifier from the table view.
-     The cell is defined in the main storyboard: its identifier is MyIdentifier, and  its selection style is set to None.
-     */
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
-    // Set up the cell.
-//    NSString *timeZoneName = [self.timeZoneNames objectAtIndex:indexPath.row];
-//    cell.textLabel.text = timeZoneName;
-    
-    PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
+    NSArray *cells = self.categories[indexPath.section];
+    PCCapsule *capsule = [cells objectAtIndex:indexPath.row];
     cell.textLabel.text = capsule.title;
 
     return cell;
@@ -65,13 +95,9 @@
             
             if ([segue.destinationViewController isKindOfClass:[PCCapsuleDetailVC class]]){
                 PCCapsuleDetailVC *cdvc = [segue destinationViewController];
-                PCCapsule *capsule = [self.cells objectAtIndex:indexPath.row];
-                
+                NSArray *cells = self.categories[indexPath.section];
+                PCCapsule *capsule = [cells objectAtIndex:indexPath.row];
                 cdvc.capsule = capsule;
-//                cdvc.titleLabel = capsule.title;
-//                cdvc.detailLabel = capsule.site;
-//                cdvc.imageName = @"lock_error";
-                
             }
         }
     }

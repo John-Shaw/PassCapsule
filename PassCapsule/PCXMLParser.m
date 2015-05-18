@@ -12,7 +12,7 @@
 @implementation PCXMLParser
 
 -(NSMutableArray *)paserWithPath:(NSString *)path{
-    self.elementToParse = @[@"title",@"account",@"pass",@"site",@"icon"];
+    self.elementToParse = @[@"title",@"account",@"pass",@"site",@"icon",@"category"];
     //打开xml文件，读取数据到NSData
 //    NSString *path = [[NSBundle mainBundle] pathForResource:@"Books" ofType:@"xml"];
     NSFileHandle *file = [NSFileHandle fileHandleForReadingAtPath:path];
@@ -113,6 +113,10 @@
         if ([elementName isEqualToString:@"icon"]) {
             self.aCapusle.iconName = trimmedString;
             NSLog(@"iconName :%@",self.aCapusle.iconName);
+        }
+        if ([elementName isEqualToString:@"category"]) {
+            self.aCapusle.category = trimmedString;
+            NSLog(@"category :%@",self.aCapusle.category);
         }
     }
 }

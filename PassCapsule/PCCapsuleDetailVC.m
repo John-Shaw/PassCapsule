@@ -24,17 +24,22 @@
     
     self.titleView.text = self.capsule.title;
     self.detailVeiw.text = self.capsule.account;
-    self.iconView.image = [UIImage imageNamed:self.capsule.iconName];
+    
+    UIImage *image = [UIImage imageNamed:self.capsule.iconName];
+    if (image) {
+        self.iconView.image = image;
+    }
+    else{
+        self.iconView.image = [UIImage imageNamed:@"lock"];
+    }
+    
 
 }
 
 
 #pragma mark - table view delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
@@ -45,7 +50,7 @@
 
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:account];
-    
+
     if (indexPath.row == 0) {
         cell.textLabel.text = @"用户名";
         cell.detailTextLabel.text = self.capsule.account;
@@ -59,7 +64,6 @@
         cell.textLabel.text = @"网站";
         cell.detailTextLabel.text = self.capsule.site;
     }
-    
     return cell;
 }
 

@@ -6,106 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="AK9-IT-Rp0">
-            <objects>
-                <viewController id="qWP-v0-4pA" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EYA-1D-Uhz"/>
-                        <viewControllerLayoutGuide type="bottom" id="wBq-JA-SFl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mQr-if-a0U">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-XC-wuA">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.50599193570000001" green="0.56485837699999997" blue="0.56363654139999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="180" id="1Ed-9M-kA9"/>
-                                    <constraint firstAttribute="height" constant="44" id="faS-Z3-2WW"/>
-                                </constraints>
-                                <state key="normal" title="Regist">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.opacty">
-                                        <real key="value" value="0.75"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="1Ed-9M-kA9"/>
-                                        <include reference="faS-Z3-2WW"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="1Ed-9M-kA9"/>
-                                        <include reference="faS-Z3-2WW"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <segue destination="fLt-X2-kl0" kind="show" id="wb7-qX-MZa"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="注册界面" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Xi-Yo-vXb">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="PZD-XC-wuA" firstAttribute="leading" secondItem="mQr-if-a0U" secondAttribute="leadingMargin" constant="94" id="486-Oa-2II"/>
-                            <constraint firstItem="6Xi-Yo-vXb" firstAttribute="top" secondItem="EYA-1D-Uhz" secondAttribute="bottom" constant="166" id="Ttm-a3-EK7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6Xi-Yo-vXb" secondAttribute="trailing" constant="124" id="aVX-zC-vkt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PZD-XC-wuA" secondAttribute="trailing" constant="94" id="cpw-rk-8yn"/>
-                            <constraint firstItem="wBq-JA-SFl" firstAttribute="top" secondItem="PZD-XC-wuA" secondAttribute="bottom" constant="278" id="dM8-jN-aO2"/>
-                            <constraint firstItem="6Xi-Yo-vXb" firstAttribute="leading" secondItem="mQr-if-a0U" secondAttribute="leadingMargin" constant="124" id="tem-Lf-wdf"/>
-                        </constraints>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="PZD-XC-wuA"/>
-                                <include reference="6Xi-Yo-vXb"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Ttm-a3-EK7"/>
-                                <include reference="aVX-zC-vkt"/>
-                                <include reference="tem-Lf-wdf"/>
-                                <include reference="486-Oa-2II"/>
-                                <include reference="cpw-rk-8yn"/>
-                                <include reference="dM8-jN-aO2"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="PZD-XC-wuA"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Ttm-a3-EK7"/>
-                                <include reference="aVX-zC-vkt"/>
-                                <include reference="tem-Lf-wdf"/>
-                                <include reference="486-Oa-2II"/>
-                                <include reference="cpw-rk-8yn"/>
-                                <include reference="dM8-jN-aO2"/>
-                            </mask>
-                        </variation>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zfk-Ye-3bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2496" y="-367.5"/>
-        </scene>
-        <!--glance-->
+        <!--概览界面-->
         <scene sceneID="uMf-aY-JXx">
             <objects>
-                <tableViewController title="glance" id="yVi-B3-fCU" customClass="PCCategoryTableVC" sceneMemberID="viewController">
+                <tableViewController title="概览界面" id="yVi-B3-fCU" customClass="PCCategoryTableVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="1XW-Sy-tp2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,10 +53,10 @@
             </objects>
             <point key="canvasLocation" x="1650" y="-450"/>
         </scene>
-        <!--Capsule DetailVC-->
+        <!--详细界面-->
         <scene sceneID="epg-UL-x3e">
             <objects>
-                <viewController storyboardIdentifier="CapsuleDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SgM-vg-3RY" customClass="PCCapsuleDetailVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CapsuleDetail" title="详细界面" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SgM-vg-3RY" customClass="PCCapsuleDetailVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qzb-3z-1r4"/>
                         <viewControllerLayoutGuide type="bottom" id="sm5-Ss-3L6"/>
@@ -192,7 +96,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eRL-ty-ci2">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -239,11 +143,6 @@
                             <constraint firstItem="t3e-R7-KAV" firstAttribute="leading" secondItem="tmJ-Yv-bv3" secondAttribute="leading" id="uGM-yf-eLW"/>
                             <constraint firstItem="A4C-gU-zam" firstAttribute="leading" secondItem="tmJ-Yv-bv3" secondAttribute="leadingMargin" constant="11" id="uPx-hf-rj6"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Lnu-DC-hoR"/>
-                            </mask>
-                        </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="A4C-gU-zam"/>
@@ -335,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="360"/>
+            <point key="canvasLocation" x="1557" y="543"/>
         </scene>
         <!--login-->
         <scene sceneID="SzG-gF-ySj">
@@ -381,13 +280,46 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZD-XC-wuA">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.50599193570000001" green="0.56485837699999997" blue="0.56363654139999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="dpJ-Ll-w37"/>
+                                    <constraint firstAttribute="height" constant="44" id="faS-Z3-2WW"/>
+                                </constraints>
+                                <state key="normal" title="Regist">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.opacty">
+                                        <real key="value" value="0.75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="faS-Z3-2WW"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="dpJ-Ll-w37"/>
+                                        <include reference="faS-Z3-2WW"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="igN-IJ-N86" secondAttribute="centerY" constant="-60" id="50m-lF-H3I"/>
+                            <constraint firstAttribute="centerX" secondItem="PZD-XC-wuA" secondAttribute="centerX" id="JgA-Dx-0VH"/>
                             <constraint firstAttribute="centerY" secondItem="ilI-oT-NtT" secondAttribute="centerY" priority="990" constant="100" id="ZR2-UP-7zm"/>
                             <constraint firstAttribute="centerX" secondItem="ilI-oT-NtT" secondAttribute="centerX" constant="-0.5" id="keM-Gf-92S"/>
                             <constraint firstAttribute="centerX" secondItem="igN-IJ-N86" secondAttribute="centerX" id="qxA-CO-J49"/>
+                            <constraint firstItem="PZD-XC-wuA" firstAttribute="top" secondItem="igN-IJ-N86" secondAttribute="bottom" constant="54" id="xfL-WN-KPg"/>
                         </constraints>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
@@ -401,18 +333,23 @@
                             <mask key="subviews">
                                 <include reference="igN-IJ-N86"/>
                                 <include reference="ilI-oT-NtT"/>
+                                <include reference="PZD-XC-wuA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="JgA-Dx-0VH"/>
+                                <include reference="xfL-WN-KPg"/>
                             </mask>
                         </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ak-CI-Jd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2496" y="331"/>
+            <point key="canvasLocation" x="-2254.5" y="27.75"/>
         </scene>
-        <!--LockVC-->
+        <!--锁屏界面-->
         <scene sceneID="nRP-JQ-4Ng">
             <objects>
-                <viewController id="PYc-Yq-Juc" customClass="PCLockVC" sceneMemberID="viewController">
+                <viewController title="锁屏界面" id="PYc-Yq-Juc" customClass="PCLockVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lEE-at-PLU"/>
                         <viewControllerLayoutGuide type="bottom" id="yva-Ga-2u2"/>
@@ -485,7 +422,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89t-3M-4Xm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="822" y="549"/>
         </scene>
     </scenes>
     <resources>

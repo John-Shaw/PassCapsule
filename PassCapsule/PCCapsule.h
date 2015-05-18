@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString  *site;
 @property (nonatomic, strong) NSString  *account;
 @property (nonatomic, strong) NSString  *iconName;
+@property (nonatomic, strong) NSString  *category;
 
 @end

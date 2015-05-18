@@ -11,6 +11,7 @@
 		520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */; };
 		5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* PCLockVC.m */; };
 		5275131F1AEB95F4000462CB /* PCIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5275131E1AEB95F4000462CB /* PCIntroVC.m */; };
+		52A9395C1B06F3C900E1DC68 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 52A9395B1B06F3C900E1DC68 /* iTunesArtwork */; };
 		52B2B1B81ADFB0E700192404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1B71ADFB0E700192404 /* main.m */; };
 		52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */; };
 		52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		5275131D1AEB95F4000462CB /* PCIntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCIntroVC.h; sourceTree = "<group>"; };
 		5275131E1AEB95F4000462CB /* PCIntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCIntroVC.m; sourceTree = "<group>"; };
 		5299B7AB1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		52A9395B1B06F3C900E1DC68 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		52B2B1B21ADFB0E700192404 /* PassCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B1B61ADFB0E700192404 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52B2B1B71ADFB0E700192404 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		52B2B1B51ADFB0E700192404 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				52A9395B1B06F3C900E1DC68 /* iTunesArtwork */,
 				52B2B1B61ADFB0E700192404 /* Info.plist */,
 				52B2B1B71ADFB0E700192404 /* main.m */,
 			);
@@ -286,6 +289,7 @@
 			files = (
 				52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */,
 				52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */,
+				52A9395C1B06F3C900E1DC68 /* iTunesArtwork in Resources */,
 				52E968821AF9D33E00E6E759 /* capsules.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -489,7 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
