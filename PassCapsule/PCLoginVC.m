@@ -9,7 +9,9 @@
 #import "PCLoginVC.h"
 #import "EAIntroView.h"
 
-@interface PCLoginVC ()
+@interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *passTF;
+@property (weak, nonatomic) IBOutlet UITextField *accountTF;
 
 @end
 
@@ -17,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // basic
+    //FIXME:美化引导页
     EAIntroPage *page1   = [EAIntroPage page];
     page1.title          = @"PassCapsule";
 //    page1.titleColor = [UIColor colorWithRed:0.502 green:1.000 blue:0.000 alpha:1.000];
@@ -54,8 +56,28 @@
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:pages];
     intro.pageControlY = 60;
     [intro showInView:self.view animateDuration:0.0];
+    
+    // tap for dismissing keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    // very important make delegate useful
+    tap.delegate = self;
 }
 
+#pragma mark - textField delegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//TODO:点击屏幕键盘自动收回功能实现
+// tap dismiss keyboard
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
+//    [self.passTF resignFirstResponder];
+}
 
 /*
 #pragma mark - Navigation

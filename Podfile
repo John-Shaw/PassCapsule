@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0' 
 pod 'EAIntroView'
-pod 'pop'
-pod 'purelayout'
+pod 'IQKeyboardManager'

@@ -7,6 +7,7 @@
 //
 
 #import "PCAppDelegate.h"
+#import "IQKeyboardManager.h"
 
 @interface PCAppDelegate ()
 
@@ -33,7 +34,12 @@
 //        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 //        [self.window makeKeyAndVisible];
 //    }
+
     
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+
+    
+//    [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:50];
     
     
     return YES;

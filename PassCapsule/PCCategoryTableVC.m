@@ -27,11 +27,6 @@
     NSLog(@"%@",self.cells);
 }
 
-//-(NSMutableArray *)cells{
-//    if (!_cells) {
-//        <#statements#>
-//    }
-//}
 
 -(NSMutableArray *)categories{
     if (!_categories) {

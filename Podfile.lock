@@ -1,16 +1,13 @@
 PODS:
   - EAIntroView (2.6.4)
-  - pop (1.0.7)
-  - PureLayout (2.0.6)
+  - IQKeyboardManager (3.2.3)
 
 DEPENDENCIES:
   - EAIntroView
-  - pop
-  - purelayout
+  - IQKeyboardManager
 
 SPEC CHECKSUMS:
   EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
-  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
-  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
+  IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.1

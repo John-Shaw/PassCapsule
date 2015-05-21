@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -322,7 +323,7 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igN-IJ-N86">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igN-IJ-N86">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.63921568630000003" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -360,17 +361,19 @@
                             <constraint firstAttribute="centerX" secondItem="Xso-Xi-tPB" secondAttribute="centerX" id="9Ac-Y5-ism"/>
                             <constraint firstAttribute="centerX" secondItem="NC7-Qw-k8A" secondAttribute="centerX" id="Gka-aa-Wme"/>
                             <constraint firstItem="9Zq-9b-AH7" firstAttribute="top" secondItem="PZD-XC-wuA" secondAttribute="bottom" constant="20" id="Jir-3u-imP"/>
-                            <constraint firstItem="NC7-Qw-k8A" firstAttribute="top" secondItem="ilI-oT-NtT" secondAttribute="bottom" constant="20" id="KcJ-RN-qwI"/>
+                            <constraint firstItem="NC7-Qw-k8A" firstAttribute="top" secondItem="ilI-oT-NtT" secondAttribute="bottomMargin" constant="20" id="KcJ-RN-qwI"/>
                             <constraint firstAttribute="centerX" secondItem="urA-bN-MKh" secondAttribute="centerX" id="Rdu-14-KKh"/>
                             <constraint firstItem="Xso-Xi-tPB" firstAttribute="top" secondItem="urA-bN-MKh" secondAttribute="bottom" constant="34" id="S1U-I7-dQM"/>
                             <constraint firstAttribute="centerX" secondItem="igN-IJ-N86" secondAttribute="centerX" constant="-94" id="UCK-Zu-9cS"/>
                             <constraint firstItem="PZD-XC-wuA" firstAttribute="centerY" secondItem="igN-IJ-N86" secondAttribute="centerY" id="Uha-y1-9A7"/>
                             <constraint firstItem="igN-IJ-N86" firstAttribute="centerY" secondItem="PZD-XC-wuA" secondAttribute="centerY" id="Vco-lW-90U"/>
                             <constraint firstAttribute="centerY" secondItem="igN-IJ-N86" secondAttribute="centerY" constant="-275" id="WKU-uo-RB9"/>
-                            <constraint firstItem="ilI-oT-NtT" firstAttribute="top" secondItem="gre-5K-W8F" secondAttribute="bottom" constant="44" id="YRi-cy-GVi"/>
+                            <constraint firstItem="gre-5K-W8F" firstAttribute="top" secondItem="ilI-oT-NtT" secondAttribute="topMargin" constant="44" id="YRi-cy-GVi">
+                                <variation key="widthClass=compact" constant="-44"/>
+                            </constraint>
                             <constraint firstAttribute="centerY" secondItem="igN-IJ-N86" secondAttribute="centerY" constant="-247" id="cyO-EJ-LM9"/>
                             <constraint firstAttribute="centerX" secondItem="igN-IJ-N86" secondAttribute="centerX" constant="-100" id="d28-g7-5vP"/>
-                            <constraint firstItem="urA-bN-MKh" firstAttribute="top" secondItem="NC7-Qw-k8A" secondAttribute="bottom" constant="40" id="eNf-nj-SGO"/>
+                            <constraint firstItem="urA-bN-MKh" firstAttribute="top" secondItem="NC7-Qw-k8A" secondAttribute="bottomMargin" constant="40" id="eNf-nj-SGO"/>
                             <constraint firstItem="urA-bN-MKh" firstAttribute="top" secondItem="NC7-Qw-k8A" secondAttribute="bottom" constant="100" id="f0i-LV-sbk"/>
                             <constraint firstItem="igN-IJ-N86" firstAttribute="leading" secondItem="PZD-XC-wuA" secondAttribute="trailing" constant="8" id="fnJ-sf-fNG"/>
                             <constraint firstAttribute="centerY" secondItem="igN-IJ-N86" secondAttribute="centerY" constant="-247" id="kjN-Bn-3a6"/>
@@ -474,6 +477,10 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="accountTF" destination="urA-bN-MKh" id="hxM-Sx-kHj"/>
+                        <outlet property="passTF" destination="Xso-Xi-tPB" id="Rxa-IE-Whj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ak-CI-Jd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
