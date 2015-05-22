@@ -10,6 +10,16 @@
 #import "PCCapsule.h"
 
 @implementation PCXMLParser
++(instancetype)sharedXMLParser{
+    static PCXMLParser *kbXMLParser;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
+        kbXMLParser = [[self alloc] init];
+    });
+    return kbXMLParser;
+}
+
 
 -(NSMutableArray *)paserWithPath:(NSString *)path{
     self.elementToParse = @[@"title",@"account",@"pass",@"site",@"icon",@"category"];

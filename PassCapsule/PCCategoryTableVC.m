@@ -18,12 +18,11 @@
 @implementation PCCategoryTableVC
 
 -(void)viewDidLoad{
-    PCXMLParser *aPaser = [PCXMLParser new];
+    PCXMLParser *aPaser = [PCXMLParser sharedXMLParser];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
 
     self.cells = [aPaser paserWithPath:path];
-    
-    
+
     NSLog(@"%@",self.cells);
 }
 

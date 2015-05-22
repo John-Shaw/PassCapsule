@@ -8,12 +8,29 @@
 
 #import "PCAppDelegate.h"
 #import "IQKeyboardManager.h"
+#import <objc/runtime.h>
+
+@implementation UIView (testSwizzling)
+
+- (void)myAddSubview:(UIView *)view{
+//    NSLog(@"加了一个view了,%@",view);
+    [self myAddSubview:view];
+}
+
+@end
 
 @interface PCAppDelegate ()
 
 @end
 
 @implementation PCAppDelegate
++(void)load{
+    //!!!:尝试method swizzling，记得删掉
+    Method origin = class_getInstanceMethod([UIView class], @selector(addSubview:));
+    Method swizzling = class_getInstanceMethod([UIView class], @selector(myAddSubview:));
+    method_exchangeImplementations(origin, swizzling);
+}
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -34,9 +51,10 @@
 //        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
 //        [self.window makeKeyAndVisible];
 //    }
+    
 
     
-    [[IQKeyboardManager sharedManager] setEnable:YES];
+//    [[IQKeyboardManager sharedManager] setEnable:YES];
 
     
 //    [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:50];

@@ -64,6 +64,9 @@
     [self.view addGestureRecognizer:tap];
     // very important make delegate useful
     tap.delegate = self;
+    
+    self.passTF.delegate = self;
+    self.accountTF.delegate = self;
 }
 
 #pragma mark - textField delegate
@@ -72,11 +75,13 @@
     return YES;
 }
 
+
+
+#pragma mark - GestureRecognizer delegate
 //TODO:点击屏幕键盘自动收回功能实现
 // tap dismiss keyboard
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
-//    [self.passTF resignFirstResponder];
 }
 
 /*

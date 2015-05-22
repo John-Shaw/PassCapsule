@@ -261,7 +261,7 @@
                                     <constraint firstAttribute="width" constant="256" id="HB1-KD-sEA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <variation key="heightClass=regular">
                                     <mask key="constraints">
                                         <include reference="HB1-KD-sEA"/>
@@ -274,7 +274,7 @@
                                     <constraint firstAttribute="width" constant="256" id="7aL-5O-yMj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="join" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <variation key="heightClass=regular">
                                     <mask key="constraints">
                                         <include reference="7aL-5O-yMj"/>
@@ -389,7 +389,6 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="KcJ-RN-qwI"/>
-                                <exclude reference="eNf-nj-SGO"/>
                                 <exclude reference="0Sa-kF-DAn"/>
                                 <exclude reference="5by-v8-N5H"/>
                                 <exclude reference="Uha-y1-9A7"/>
@@ -402,6 +401,7 @@
                                 <exclude reference="kjN-Bn-3a6"/>
                                 <exclude reference="qjK-L2-ZhR"/>
                                 <exclude reference="v3w-18-nlV"/>
+                                <exclude reference="eNf-nj-SGO"/>
                                 <exclude reference="Jir-3u-imP"/>
                                 <exclude reference="tS2-je-c15"/>
                                 <exclude reference="ykS-XW-q8y"/>
@@ -414,14 +414,10 @@
                                 <include reference="NC7-Qw-k8A"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3hV-tt-qCP"/>
-                                <include reference="YRi-cy-GVi"/>
                                 <include reference="Gka-aa-Wme"/>
                                 <include reference="s15-iu-GIE"/>
-                                <include reference="Rdu-14-KKh"/>
-                                <include reference="f0i-LV-sbk"/>
-                                <include reference="9Ac-Y5-ism"/>
-                                <include reference="S1U-I7-dQM"/>
+                                <include reference="YRi-cy-GVi"/>
+                                <include reference="3hV-tt-qCP"/>
                                 <include reference="Uha-y1-9A7"/>
                                 <include reference="nW6-xd-gh0"/>
                                 <include reference="nmd-XU-GQh"/>
@@ -430,20 +426,24 @@
                                 <include reference="cyO-EJ-LM9"/>
                                 <include reference="d28-g7-5vP"/>
                                 <exclude reference="kjN-Bn-3a6"/>
+                                <include reference="9Ac-Y5-ism"/>
+                                <include reference="S1U-I7-dQM"/>
+                                <include reference="Rdu-14-KKh"/>
+                                <include reference="f0i-LV-sbk"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="constraints">
                                 <include reference="KcJ-RN-qwI"/>
                                 <exclude reference="s15-iu-GIE"/>
-                                <include reference="eNf-nj-SGO"/>
-                                <exclude reference="f0i-LV-sbk"/>
                                 <include reference="0Sa-kF-DAn"/>
                                 <exclude reference="nmd-XU-GQh"/>
                                 <exclude reference="Vco-lW-90U"/>
                                 <exclude reference="WKU-uo-RB9"/>
                                 <exclude reference="cyO-EJ-LM9"/>
                                 <include reference="fnJ-sf-fNG"/>
+                                <include reference="eNf-nj-SGO"/>
+                                <exclude reference="f0i-LV-sbk"/>
                                 <include reference="Jir-3u-imP"/>
                                 <exclude reference="tS2-je-c15"/>
                                 <include reference="ykS-XW-q8y"/>
