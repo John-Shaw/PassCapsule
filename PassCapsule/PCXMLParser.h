@@ -22,11 +22,11 @@
 /**
  Should create only one instance of class. Should not call init.
  */
-- (instancetype)init	__attribute__((unavailable("init is not available in IQKeyboardManager, Use sharedManager"))) NS_DESIGNATED_INITIALIZER;
+- (instancetype)init	__attribute__((unavailable("init is not available in PCXMLParser, Use sharedXMLParser"))) NS_DESIGNATED_INITIALIZER;
 
 /**
  Should create only one instance of class. Should not call new.
  */
-+ (instancetype)new	__attribute__((unavailable("new is not available in IQKeyboardManager, Use sharedManager")));
++ (instancetype)new	__attribute__((unavailable("new is not available in PCXMLParser, Use sharedXMLParser")));
 
 @end

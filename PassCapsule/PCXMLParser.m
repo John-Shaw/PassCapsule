@@ -35,10 +35,15 @@
     
     NSXMLParser *m_parser = [[NSXMLParser alloc] initWithData:data];
     //设置该类本身为代理类，即该类在声明时要实现NSXMLParserDelegate委托协议
-//    [m_parser setDelegate:self];  //设置代理为本地
-    m_parser.delegate = self;
-    BOOL flag = [m_parser parse]; //开始解析
     
+    m_parser.delegate = self;
+    
+    __block BOOL flag = NO;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        flag = [m_parser parse]; //开始解析
+//    });
+
+    flag = [m_parser parse]; //开始解析
     if(flag) {
         NSLog(@"解析指定路径的xml文件成功");
         return self.capsules;
@@ -57,13 +62,13 @@
     
     if([elementName isEqualToString:@"Capsules"]) {
         //Initialize the array.
-        //在这里初始化用于存储最终解析结果的数组变量,我们是在当遇到Books根元素时才开始初始化
+        //在这里初始化用于存储最终解析结果的数组变量
         self.capsules = [[NSMutableArray alloc] init];
     }
     else if([elementName isEqualToString:@"Capsule"]) {
         
         //Initialize the book.
-        //当碰到Book元素时，初始化用于存储Book信息的实例对象aBook
+        //初始化用于存储Book信息的实例对象aBook
         
         self.aCapusle = [[PCCapsule alloc] init];
         

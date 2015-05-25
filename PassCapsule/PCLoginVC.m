@@ -8,6 +8,7 @@
 
 #import "PCLoginVC.h"
 #import "EAIntroView.h"
+#import "PCXMLcmp.h"
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passTF;
@@ -20,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //FIXME:美化引导页
+    PCXMLcmp *test = [PCXMLcmp new];
+    [test pcxmlcmptteesstt];
     EAIntroPage *page1   = [EAIntroPage page];
     page1.title          = @"PassCapsule";
 //    page1.titleColor = [UIColor colorWithRed:0.502 green:1.000 blue:0.000 alpha:1.000];
