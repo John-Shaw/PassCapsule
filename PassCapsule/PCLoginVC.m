@@ -9,6 +9,7 @@
 #import "PCLoginVC.h"
 #import "EAIntroView.h"
 #import "PCXMLcmp.h"
+#import "AFNetworking.h"
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passTF;
@@ -21,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //FIXME:美化引导页
-    PCXMLcmp *test = [PCXMLcmp new];
-    [test pcxmlcmptteesstt];
+//    PCXMLcmp *test = [PCXMLcmp new];
+//    [test pcxmlcmptteesstt];
     EAIntroPage *page1   = [EAIntroPage page];
     page1.title          = @"PassCapsule";
 //    page1.titleColor = [UIColor colorWithRed:0.502 green:1.000 blue:0.000 alpha:1.000];
@@ -70,6 +71,25 @@
     
     self.passTF.delegate = self;
     self.accountTF.delegate = self;
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    
+//    NSDictionary *parameters = @{@"name":@"OopsMonk",@"password":@"adc",@"website":@"www.zhihu.com",@"group":@"ngil"};
+//    
+//    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+//    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+////    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    manager.requestSerializer = serializer;
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+//    
+////    NSLog(@"%@",parameters);
+//    [manager POST:@"http://10.16.23.25:5555/passdb/20" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSLog(@"JSON:%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+////        NSLog(@"ERROR: %@",error);
+//    }];
+    
 }
 
 #pragma mark - textField delegate
@@ -81,7 +101,6 @@
 
 
 #pragma mark - GestureRecognizer delegate
-//TODO:点击屏幕键盘自动收回功能实现
 // tap dismiss keyboard
 -(void)dismissKeyboard {
     [self.view endEditing:YES];
