@@ -17,11 +17,6 @@
 		52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C51ADFB0E700192404 /* Images.xcassets */; };
 		52B2B1D51ADFB0E700192404 /* PassCapsuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1D41ADFB0E700192404 /* PassCapsuleTests.m */; };
 		52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E127A31B0C9AB200B4AB3D /* PCLoginVC.m */; };
-		52E3D8371B12EDBE00C150FA /* errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D8281B12EDBE00C150FA /* errors.cpp */; };
-		52E3D8381B12EDBE00C150FA /* lx2_diff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D82B1B12EDBE00C150FA /* lx2_diff.cpp */; };
-		52E3D8391B12EDBE00C150FA /* lx2_ops.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D82D1B12EDBE00C150FA /* lx2_ops.cpp */; };
-		52E3D83A1B12EDBE00C150FA /* lx2_parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D82F1B12EDBE00C150FA /* lx2_parse.cpp */; };
-		52E3D83B1B12EDBE00C150FA /* lx2_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D8321B12EDBE00C150FA /* lx2_util.cpp */; };
 		52E3D8401B12EE0500C150FA /* PCXMLcmp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D83F1B12EE0500C150FA /* PCXMLcmp.mm */; };
 		52E3D8441B12F05700C150FA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E3D8431B12F05700C150FA /* libxml2.dylib */; };
 		52E3D8471B14792200C150FA /* PCRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D8461B14792200C150FA /* PCRegistVC.m */; };
@@ -63,19 +58,6 @@
 		52B2B1D41ADFB0E700192404 /* PassCapsuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PassCapsuleTests.m; sourceTree = "<group>"; };
 		52E127A21B0C9AB200B4AB3D /* PCLoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLoginVC.h; sourceTree = "<group>"; };
 		52E127A31B0C9AB200B4AB3D /* PCLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLoginVC.m; sourceTree = "<group>"; };
-		52E3D8281B12EDBE00C150FA /* errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = errors.cpp; sourceTree = "<group>"; };
-		52E3D8291B12EDBE00C150FA /* errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = errors.h; sourceTree = "<group>"; };
-		52E3D82A1B12EDBE00C150FA /* libxmldiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libxmldiff.h; sourceTree = "<group>"; };
-		52E3D82B1B12EDBE00C150FA /* lx2_diff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lx2_diff.cpp; sourceTree = "<group>"; };
-		52E3D82C1B12EDBE00C150FA /* lx2_diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lx2_diff.h; sourceTree = "<group>"; };
-		52E3D82D1B12EDBE00C150FA /* lx2_ops.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lx2_ops.cpp; sourceTree = "<group>"; };
-		52E3D82E1B12EDBE00C150FA /* lx2_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lx2_ops.h; sourceTree = "<group>"; };
-		52E3D82F1B12EDBE00C150FA /* lx2_parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lx2_parse.cpp; sourceTree = "<group>"; };
-		52E3D8301B12EDBE00C150FA /* lx2_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lx2_parse.h; sourceTree = "<group>"; };
-		52E3D8311B12EDBE00C150FA /* lx2_str.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lx2_str.h; sourceTree = "<group>"; };
-		52E3D8321B12EDBE00C150FA /* lx2_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lx2_util.cpp; sourceTree = "<group>"; };
-		52E3D8331B12EDBE00C150FA /* lx2_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lx2_util.h; sourceTree = "<group>"; };
-		52E3D8341B12EDBE00C150FA /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		52E3D83E1B12EE0500C150FA /* PCXMLcmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCXMLcmp.h; sourceTree = "<group>"; };
 		52E3D83F1B12EE0500C150FA /* PCXMLcmp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PCXMLcmp.mm; sourceTree = "<group>"; };
 		52E3D8431B12F05700C150FA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -202,19 +184,6 @@
 		52E3D8271B12EDBE00C150FA /* xmlCmp */ = {
 			isa = PBXGroup;
 			children = (
-				52E3D8281B12EDBE00C150FA /* errors.cpp */,
-				52E3D8291B12EDBE00C150FA /* errors.h */,
-				52E3D82A1B12EDBE00C150FA /* libxmldiff.h */,
-				52E3D82B1B12EDBE00C150FA /* lx2_diff.cpp */,
-				52E3D82C1B12EDBE00C150FA /* lx2_diff.h */,
-				52E3D82D1B12EDBE00C150FA /* lx2_ops.cpp */,
-				52E3D82E1B12EDBE00C150FA /* lx2_ops.h */,
-				52E3D82F1B12EDBE00C150FA /* lx2_parse.cpp */,
-				52E3D8301B12EDBE00C150FA /* lx2_parse.h */,
-				52E3D8311B12EDBE00C150FA /* lx2_str.h */,
-				52E3D8321B12EDBE00C150FA /* lx2_util.cpp */,
-				52E3D8331B12EDBE00C150FA /* lx2_util.h */,
-				52E3D8341B12EDBE00C150FA /* main.cpp */,
 			);
 			path = xmlCmp;
 			sourceTree = "<group>";
@@ -397,18 +366,13 @@
 				52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */,
 				5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */,
 				520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */,
-				52E3D83B1B12EDBE00C150FA /* lx2_util.cpp in Sources */,
-				52E3D8371B12EDBE00C150FA /* errors.cpp in Sources */,
 				5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */,
 				52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */,
 				52E3D8401B12EE0500C150FA /* PCXMLcmp.mm in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,
-				52E3D8381B12EDBE00C150FA /* lx2_diff.cpp in Sources */,
 				52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */,
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
 				52E3D8471B14792200C150FA /* PCRegistVC.m in Sources */,
-				52E3D83A1B12EDBE00C150FA /* lx2_parse.cpp in Sources */,
-				52E3D8391B12EDBE00C150FA /* lx2_ops.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

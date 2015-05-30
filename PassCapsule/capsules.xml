@@ -23,13 +23,13 @@
 <site>www.douban.com</site>
 <icon>douban.png</icon>
 <category>互联网账户</category>
-</Capsule>  
-<Capsule id="4">  
+</Capsule>
+<Capsule id="4">
 <title>visa信用卡</title>
 <account>2333333333333</account>
-<pass>i dont care</pass>  
+<pass>i dont care</pass>
 <site>www.douban.com</site>
 <icon></icon>
 <category>信用卡</category>
-</Capsule>  
+</Capsule>
 </Capsules>

@@ -7,7 +7,7 @@
 //
 
 #import "PCXMLcmp.h"
-#include "xmlCmp/main.cpp"
+
 
 
 
@@ -15,7 +15,6 @@
 
 -(void)pcxmlcmptteesstt{
 
-    tteesstt();
 }
 
 @end
