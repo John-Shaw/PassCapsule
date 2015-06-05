@@ -10,6 +10,7 @@
 #import "EAIntroView.h"
 #import "PCXMLcmp.h"
 #import "AFNetworking.h"
+#import "PCXMLManager.h"
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passTF;
@@ -25,7 +26,7 @@
 //    PCXMLcmp *test = [PCXMLcmp new];
 //    [test pcxmlcmptteesstt];
     EAIntroPage *page1   = [EAIntroPage page];
-    page1.title          = @"PassCapsule";
+    page1.title          = NSLocalizedString(@"PassCapsule", @"name title");
 //    page1.titleColor = [UIColor colorWithRed:0.502 green:1.000 blue:0.000 alpha:1.000];
     page1.titlePositionY = 400;
     page1.descFont       = [UIFont fontWithName:@"Georgia-Italic" size:18];
@@ -78,10 +79,10 @@
 //    
 //    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
 //    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-////    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 //    manager.requestSerializer = serializer;
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-//    
+//
 ////    NSLog(@"%@",parameters);
 //    [manager POST:@"http://10.16.23.25:5555/passdb/20" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        
@@ -89,6 +90,9 @@
 //    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 ////        NSLog(@"ERROR: %@",error);
 //    }];
+
+
+
     
 }
 

@@ -9,16 +9,17 @@
 /* Begin PBXBuildFile section */
 		5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */; };
 		520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */; };
+		5215414F1B20278100BD6838 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5215414E1B20278100BD6838 /* testImage.jpg */; };
+		523EC7911B207DAD00073FCE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 523EC7931B207DAD00073FCE /* Localizable.strings */; };
 		5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* PCLockVC.m */; };
+		5268CB021B1D80100090BC19 /* PCXMLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5268CB011B1D80100090BC19 /* PCXMLManager.m */; };
 		52A9395C1B06F3C900E1DC68 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 52A9395B1B06F3C900E1DC68 /* iTunesArtwork */; };
 		52B2B1B81ADFB0E700192404 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1B71ADFB0E700192404 /* main.m */; };
 		52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1BA1ADFB0E700192404 /* PCAppDelegate.m */; };
-		52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C51ADFB0E700192404 /* Images.xcassets */; };
 		52B2B1D51ADFB0E700192404 /* PassCapsuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B1D41ADFB0E700192404 /* PassCapsuleTests.m */; };
 		52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E127A31B0C9AB200B4AB3D /* PCLoginVC.m */; };
 		52E3D8401B12EE0500C150FA /* PCXMLcmp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D83F1B12EE0500C150FA /* PCXMLcmp.mm */; };
-		52E3D8441B12F05700C150FA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E3D8431B12F05700C150FA /* libxml2.dylib */; };
 		52E3D8471B14792200C150FA /* PCRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D8461B14792200C150FA /* PCRegistVC.m */; };
 		52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E9687A1AF9D03300E6E759 /* PCXMLParser.m */; };
 		52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E9687E1AF9D14C00E6E759 /* PCCapsule.m */; };
@@ -42,9 +43,18 @@
 		5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCategoryTableVC.m; sourceTree = "<group>"; usesTabs = 0; };
 		520E2F121AFB9E9B008FBC27 /* PCCapsuleDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCapsuleDetailVC.h; sourceTree = "<group>"; };
 		520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCapsuleDetailVC.m; sourceTree = "<group>"; };
+		5215414E1B20278100BD6838 /* testImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpg; sourceTree = "<group>"; };
+		523EC7921B207DAD00073FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		523EC7941B207DB200073FCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		523EC7951B207E3F00073FCE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		523EC7961B207E3F00073FCE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		523EC7981B207ED500073FCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		523EC79A1B207ED600073FCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		5263E84F1AE8FDE000D79116 /* PCLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCLockVC.h; sourceTree = "<group>"; };
 		5263E8501AE8FDE000D79116 /* PCLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCLockVC.m; sourceTree = "<group>"; };
-		5299B7AB1AE51B8B001DA01A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		5268CB001B1D80100090BC19 /* PCXMLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCXMLManager.h; sourceTree = "<group>"; };
+		5268CB011B1D80100090BC19 /* PCXMLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCXMLManager.m; sourceTree = "<group>"; };
+		528E9C451B20781C00A42913 /* PassCapsule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PassCapsule.entitlements; sourceTree = "<group>"; };
 		52A9395B1B06F3C900E1DC68 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		52B2B1B21ADFB0E700192404 /* PassCapsule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PassCapsule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B1B61ADFB0E700192404 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52E3D8441B12F05700C150FA /* libxml2.dylib in Frameworks */,
 				C92072574D5258FB9B062893 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +150,7 @@
 		52B2B1B41ADFB0E700192404 /* PassCapsule */ = {
 			isa = PBXGroup;
 			children = (
+				528E9C451B20781C00A42913 /* PassCapsule.entitlements */,
 				52E968801AF9D32700E6E759 /* test resource */,
 				52E9687C1AF9D10A00E6E759 /* Model */,
 				52E968781AF9CF9B00E6E759 /* Utilities */,
@@ -150,6 +160,7 @@
 				52B2B1C21ADFB0E700192404 /* Main.storyboard */,
 				52B2B1C51ADFB0E700192404 /* Images.xcassets */,
 				52B2B1B51ADFB0E700192404 /* Supporting Files */,
+				523EC7931B207DAD00073FCE /* Localizable.strings */,
 			);
 			path = PassCapsule;
 			sourceTree = "<group>";
@@ -181,21 +192,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		52E3D8271B12EDBE00C150FA /* xmlCmp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = xmlCmp;
-			sourceTree = "<group>";
-		};
 		52E968781AF9CF9B00E6E759 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5268CB001B1D80100090BC19 /* PCXMLManager.h */,
+				5268CB011B1D80100090BC19 /* PCXMLManager.m */,
 				52E968791AF9D03300E6E759 /* PCXMLParser.h */,
 				52E9687A1AF9D03300E6E759 /* PCXMLParser.m */,
 				52E3D83E1B12EE0500C150FA /* PCXMLcmp.h */,
 				52E3D83F1B12EE0500C150FA /* PCXMLcmp.mm */,
-				52E3D8271B12EDBE00C150FA /* xmlCmp */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				52E968811AF9D33E00E6E759 /* capsules.xml */,
+				5215414E1B20278100BD6838 /* testImage.jpg */,
 			);
 			name = "test resource";
 			sourceTree = "<group>";
@@ -278,6 +284,11 @@
 					52B2B1B11ADFB0E700192404 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = B5CC595BC4;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					52B2B1CD1ADFB0E700192404 = {
 						CreatedOnToolsVersion = 6.3;
@@ -292,6 +303,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				fr,
 			);
 			mainGroup = 52B2B1A91ADFB0E700192404;
 			productRefGroup = 52B2B1B31ADFB0E700192404 /* Products */;
@@ -309,10 +322,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B2B1C41ADFB0E700192404 /* Main.storyboard in Resources */,
+				523EC7911B207DAD00073FCE /* Localizable.strings in Resources */,
 				52B2B1C61ADFB0E700192404 /* Images.xcassets in Resources */,
 				52A9395C1B06F3C900E1DC68 /* iTunesArtwork in Resources */,
 				52E968821AF9D33E00E6E759 /* capsules.xml in Resources */,
+				5215414F1B20278100BD6838 /* testImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +382,7 @@
 				520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */,
 				5263E8511AE8FDE000D79116 /* PCLockVC.m in Sources */,
 				52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */,
+				5268CB021B1D80100090BC19 /* PCXMLManager.m in Sources */,
 				52E3D8401B12EE0500C150FA /* PCXMLcmp.mm in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,
 				52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */,
@@ -395,11 +410,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		523EC7931B207DAD00073FCE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				523EC7921B207DAD00073FCE /* Base */,
+				523EC7941B207DB200073FCE /* zh-Hans */,
+				523EC7951B207E3F00073FCE /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		52B2B1C21ADFB0E700192404 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				52B2B1C31ADFB0E700192404 /* Base */,
-				5299B7AB1AE51B8B001DA01A /* zh-Hans */,
+				523EC7961B207E3F00073FCE /* fr */,
+				523EC7981B207ED500073FCE /* zh-Hans */,
+				523EC79A1B207ED600073FCE /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -494,6 +521,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = PassCapsule/PassCapsule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -506,7 +534,6 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/EAIntroView\"",
 					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
-					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = PassCapsule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -514,7 +541,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -525,6 +552,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = PassCapsule/PassCapsule.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
@@ -532,7 +560,6 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/EAIntroView\"",
 					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
-					"${SDK_ROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = PassCapsule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -540,7 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "${SDK_ROOT}/usr/include/libxml2/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

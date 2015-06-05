@@ -37,10 +37,7 @@
 }
 
 
-#pragma mark - table view delegate
-
-
-
+#pragma mark - data source delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
 }
@@ -66,6 +63,13 @@
     }
     return cell;
 }
+
+#pragma mark - table view delagate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 
 
 

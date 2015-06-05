@@ -22,8 +22,26 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
 
     self.cells = [aPaser paserWithPath:path];
+   
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"test.xml"];
+    NSLog(@"filepath : %@",filePath);
+    BOOL fileExists = [fileManager fileExistsAtPath:filePath];
+    
+    NSData *xmlData = [NSData dataWithContentsOfFile:path];
+    if(!fileExists){
+        [xmlData writeToFile:filePath atomically:YES];
+    }else{
+        NSLog(@"file exits");
+        NSString* content = [NSString stringWithContentsOfFile:filePath
+                                                      encoding:NSUTF8StringEncoding
+                                                         error:NULL];
+        NSLog(@"%@",content);
+    }
 
-    NSLog(@"%@",self.cells);
+    
+//    NSLog(@"%@",self.cells);
 }
 
 

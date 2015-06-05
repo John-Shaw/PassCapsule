@@ -17,28 +17,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.txField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
-    self.txField.center = CGPointMake(self.view.bounds.size.width/2,
-                                      self.view.bounds.size.height/2);
-    self.txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
-    self.txField.delegate = self;
-    self.txField.layer.cornerRadius = 7;
-    [self.txField setSecureTextEntry:YES];
     
-    self.unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [self.unlockBtn setOpaque:NO];
-    self.unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
-    [self.unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
-    [self.unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
+    BOOL isCreateDB = YES;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:isCreateDB forKey:@"isCreateDB"];
+    isCreateDB = [userDefaults boolForKey:@"isCreateDB"];
     
+    if (isCreateDB) {
+        self.txField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
+        self.txField.center = CGPointMake(self.view.bounds.size.width/2,
+                                          self.view.bounds.size.height/2);
+        self.txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+        self.txField.delegate = self;
+        self.txField.layer.cornerRadius = 7;
+        [self.txField setSecureTextEntry:YES];
+        
+        self.unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [self.unlockBtn setOpaque:NO];
+        self.unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
+        [self.unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+        [self.unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        //    UITextField *backTx = [[UITextField alloc] initWithFrame:self.txField.frame];
+        //    backTx.layer.cornerRadius = 7;
+        //    backTx.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+        //    [self.view addSubview:backTx];
+        [self.view addSubview:self.txField];
+        [self.view addSubview:self.unlockBtn];
+        //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
+    } else {
+        [userDefaults setBool:YES forKey:@"isCreateDB"];
+    }
     
-    //    UITextField *backTx = [[UITextField alloc] initWithFrame:self.txField.frame];
-    //    backTx.layer.cornerRadius = 7;
-    //    backTx.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
-    //    [self.view addSubview:backTx];
-    [self.view addSubview:self.txField];
-    [self.view addSubview:self.unlockBtn];
-    //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
     
 }
 

@@ -22,15 +22,21 @@ PODS:
     - AFNetworking/NSURLSession
   - EAIntroView (2.6.4)
   - IQKeyboardManager (3.2.3)
+  - KissXML (5.0)
+  - XMLDictionary (1.4)
 
 DEPENDENCIES:
   - AFNetworking
   - EAIntroView
   - IQKeyboardManager
+  - KissXML
+  - XMLDictionary
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
   IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
+  KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
+  XMLDictionary: f9f51601ba76678b594ab485f2b00ec1fed23724
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2

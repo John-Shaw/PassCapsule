@@ -1,18 +1,66 @@
 
-/* Class = "UILabel"; text = "Loaded by FirstViewController"; ObjectID = "A5M-7J-77L"; */
-"A5M-7J-77L.text" = "Loaded by FirstViewController";
+/* Class = "UINavigationItem"; title = "概览"; ObjectID = "EfL-SS-Bdt"; */
+"EfL-SS-Bdt.title" = "概览";
 
-/* Class = "UILabel"; text = "First View"; ObjectID = "KQZ-1w-vlD"; */
-"KQZ-1w-vlD.text" = "First View";
+/* Class = "UILabel"; text = "网站"; ObjectID = "Fp1-C3-zgE"; */
+"Fp1-C3-zgE.text" = "网站";
 
-/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
-"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+/* Class = "UIViewController"; title = "注册界面"; ObjectID = "Gz6-7o-dBU"; */
+"Gz6-7o-dBU.title" = "注册界面";
 
-/* Class = "UITabBarItem"; title = "First"; ObjectID = "acW-dT-cKf"; */
-"acW-dT-cKf.title" = "First";
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Iox-Br-B5n"; */
+"Iox-Br-B5n.text" = "Detail";
 
-/* Class = "UITabBarItem"; title = "Second"; ObjectID = "cPa-gy-q4n"; */
-"cPa-gy-q4n.title" = "Second";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "KWk-dE-Uic"; */
+"KWk-dE-Uic.normalTitle" = "Cancel";
 
-/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
-"zEq-FU-wV5.text" = "Second View";
+/* Class = "UIViewController"; title = "解锁界面"; ObjectID = "PYc-Yq-Juc"; */
+"PYc-Yq-Juc.title" = "解锁界面";
+
+/* Class = "UIButton"; normalTitle = "Regist"; ObjectID = "PZD-XC-wuA"; */
+"PZD-XC-wuA.normalTitle" = "Regist";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Qsy-3W-X3i"; */
+"Qsy-3W-X3i.text" = "Title";
+
+/* Class = "UIViewController"; title = "详细界面"; ObjectID = "SgM-vg-3RY"; */
+"SgM-vg-3RY.title" = "详细界面";
+
+/* Class = "UITextField"; placeholder = "密码"; ObjectID = "Xso-Xi-tPB"; */
+"Xso-Xi-tPB.placeholder" = "密码";
+
+/* Class = "UIButton"; normalTitle = "Commit"; ObjectID = "ZYN-f8-9cs"; */
+"ZYN-f8-9cs.normalTitle" = "Commit";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "Zf0-nu-0f9"; */
+"Zf0-nu-0f9.text" = "Detail";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "bZm-MI-ib8"; */
+"bZm-MI-ib8.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "eRL-ty-ci2"; */
+"eRL-ty-ci2.text" = "Title";
+
+/* Class = "UIViewController"; title = "登陆界面"; ObjectID = "fLt-X2-kl0"; */
+"fLt-X2-kl0.title" = "登陆界面";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "igN-IJ-N86"; */
+"igN-IJ-N86.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "PASSCAPSULE"; ObjectID = "ilI-oT-NtT"; */
+"ilI-oT-NtT.text" = "PASSCAPSULE";
+
+/* Class = "UILabel"; text = "管理员"; ObjectID = "jEN-GA-Sq9"; */
+"jEN-GA-Sq9.text" = "管理员";
+
+/* Class = "UITextField"; placeholder = "账号"; ObjectID = "urA-bN-MKh"; */
+"urA-bN-MKh.placeholder" = "账号";
+
+/* Class = "UILabel"; text = "标题"; ObjectID = "wif-im-TH3"; */
+"wif-im-TH3.text" = "标题";
+
+/* Class = "UILabel"; text = "张三"; ObjectID = "wjY-nu-eDa"; */
+"wjY-nu-eDa.text" = "张三";
+
+/* Class = "UITableViewController"; title = "概览界面"; ObjectID = "yVi-B3-fCU"; */
+"yVi-B3-fCU.title" = "概览界面";
