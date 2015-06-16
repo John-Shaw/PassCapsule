@@ -55,7 +55,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhC-St-LIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650" y="-450"/>
+            <point key="canvasLocation" x="897" y="-474"/>
         </scene>
         <!--详细界面-->
         <scene sceneID="epg-UL-x3e">
@@ -201,7 +201,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b7O-lw-0mx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2683.5" y="-303"/>
+            <point key="canvasLocation" x="1651.5" y="-474"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -340,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2475" y="543"/>
+            <point key="canvasLocation" x="855" y="309"/>
         </scene>
         <!--登陆界面-->
         <scene sceneID="SzG-gF-ySj">
@@ -589,7 +589,7 @@
                         <outlet property="accountTF" destination="urA-bN-MKh" id="hxM-Sx-kHj"/>
                         <outlet property="passTF" destination="Xso-Xi-tPB" id="Rxa-IE-Whj"/>
                         <segue destination="PYc-Yq-Juc" kind="show" identifier="toUnLockView" id="Dlb-jj-R6Z"/>
-                        <segue destination="iKv-bt-lQH" kind="show" identifier="toNewDocumentView" id="fk0-EH-bxz"/>
+                        <segue destination="iKv-bt-lQH" kind="presentation" identifier="toNewDocumentView" id="fk0-EH-bxz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ak-CI-Jd5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -622,13 +622,14 @@
             <objects>
                 <tableViewController storyboardIdentifier="新建密码库" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zmQ-RW-yeI" customClass="PCNewDocumetTableVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="f0m-Gu-6wU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="zI8-Ic-RjR">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <rect key="frame" x="0.0" y="273" width="600" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="n2C-sD-RFF">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="n2C-sD-RFF">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="WtT-Dm-BDA"/>
@@ -636,12 +637,12 @@
                                     </constraints>
                                     <variation key="heightClass=regular">
                                         <mask key="constraints">
-                                            <include reference="Y7O-9C-ESt"/>
                                             <include reference="WtT-Dm-BDA"/>
+                                            <include reference="Y7O-9C-ESt"/>
                                         </mask>
                                     </variation>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PASSCAPSULE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGg-LI-iuf">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSCAPSULE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGg-LI-iuf">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="50"/>
                                     <color key="textColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -661,10 +662,10 @@
                                     <exclude reference="jGg-LI-iuf"/>
                                 </mask>
                                 <mask key="constraints">
-                                    <exclude reference="9az-hd-0Yd"/>
-                                    <exclude reference="qRk-mz-AIy"/>
                                     <exclude reference="EJj-es-8dq"/>
                                     <exclude reference="qwo-mu-wHg"/>
+                                    <exclude reference="9az-hd-0Yd"/>
+                                    <exclude reference="qRk-mz-AIy"/>
                                 </mask>
                             </variation>
                             <variation key="widthClass=compact">
@@ -673,10 +674,10 @@
                                     <include reference="jGg-LI-iuf"/>
                                 </mask>
                                 <mask key="constraints">
-                                    <include reference="9az-hd-0Yd"/>
-                                    <include reference="qRk-mz-AIy"/>
                                     <include reference="EJj-es-8dq"/>
                                     <include reference="qwo-mu-wHg"/>
+                                    <include reference="9az-hd-0Yd"/>
+                                    <include reference="qRk-mz-AIy"/>
                                 </mask>
                             </variation>
                         </view>
@@ -827,12 +828,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="confirmPasswordTextField" destination="gGY-bY-mdn" id="rtk-GN-jxc"/>
+                        <outlet property="nameTextField" destination="fGe-sk-rB9" id="tmh-hu-jzn"/>
+                        <outlet property="passwordTextField" destination="0xq-e8-PYI" id="zw4-Kg-glE"/>
                         <segue destination="PYc-Yq-Juc" kind="presentation" identifier="toUnLockView" id="shh-HD-gMn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCX-ra-2ag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1987.5" y="882.75"/>
+            <point key="canvasLocation" x="-2056.5" y="884"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -870,7 +874,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i7H-eq-rox" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-450"/>
+            <point key="canvasLocation" x="165" y="-474"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pKY-Gk-2HW">
@@ -889,7 +893,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89t-3M-4Xm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1740" y="549"/>
+            <point key="canvasLocation" x="189" y="309"/>
         </scene>
         <!--注册界面-->
         <scene sceneID="lu2-Ph-yjM">
@@ -1081,7 +1085,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWG-T7-7EB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2472" y="-627"/>
+            <point key="canvasLocation" x="-2685" y="-607"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fVh-Px-UwH">

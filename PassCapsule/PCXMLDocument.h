@@ -10,5 +10,6 @@
 #import "DDXML.h"
 
 @interface PCXMLDocument : NSObject
--(void)createWithMasterKey:(NSString *)masterKey;
+-(void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey;
+-(NSString *) randomStringWithLength: (int) len;
 @end

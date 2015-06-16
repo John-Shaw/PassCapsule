@@ -10,24 +10,42 @@
 
 @implementation PCXMLDocument
 
--(void)createWithMasterKey:(NSString *)masterKey{
-
+-(void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey{
     
-    DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:@"Capsules"];
-    DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterKey"];
-    [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
-    [masterKeyElement setStringValue:masterKey];
-    [rootElement addChild:masterKeyElement];
-    
-    
-    DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"JohnShaw.pcdb"];
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:documentName];
     
-    [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
-    NSLog(@"path = %@",filePath);
+    BOOL fileExists = [fileManager fileExistsAtPath:filePath];
+    if (fileExists) {
+        
+    }else{
+        DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:@"Capsules"];
+        DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterKey"];
+        [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
+        [masterKeyElement setStringValue:[masterKey base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [rootElement addChild:masterKeyElement];
+        
+        DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
+        
+        
+        [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
+    }
+    NSLog(@"file path = %@",filePath);
     
+}
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+-(NSString *) randomStringWithLength: (int) len{
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
 }
 
 

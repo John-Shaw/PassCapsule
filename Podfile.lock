@@ -23,6 +23,7 @@ PODS:
   - EAIntroView (2.6.4)
   - IQKeyboardManager (3.2.3)
   - KissXML (5.0)
+  - RNCryptor (2.2)
   - XMLDictionary (1.4)
 
 DEPENDENCIES:
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - EAIntroView
   - IQKeyboardManager
   - KissXML
+  - RNCryptor
   - XMLDictionary
 
 SPEC CHECKSUMS:
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
   IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
   KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
+  RNCryptor: c68678461a2c7474a55db9a6a98834c22d51f535
   XMLDictionary: f9f51601ba76678b594ab485f2b00ec1fed23724
 
 COCOAPODS: 0.37.2

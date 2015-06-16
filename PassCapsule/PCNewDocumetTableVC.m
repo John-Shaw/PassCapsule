@@ -8,6 +8,7 @@
 
 #import "PCNewDocumetTableVC.h"
 #import "PCXMLDocument.h"
+#import "RNEncryptor.h"
 
 @implementation PCNewDocumetTableVC
 
@@ -15,13 +16,42 @@
 
 }
 
+
+- (BOOL)validInput{
+    if ([self.nameTextField.text length] == 0
+        || [self.passwordTextField.text length] == 0
+        || [self.confirmPasswordTextField.text length] == 0) {
+        
+        return NO;
+    }
+    if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (IBAction)donePress:(UIBarButtonItem *)sender {
-    PCXMLDocument *new = [PCXMLDocument new];
-    [new createWithMasterKey:@"test key 123456"];
+    
+    
+    if ([self validInput]) {
+        PCXMLDocument *new = [PCXMLDocument new];
+        
+        NSData *data = [self.passwordTextField.text dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error;
+        NSData *encryptedData = [RNEncryptor encryptData:data
+                                            withSettings:kRNCryptorAES256Settings
+                                                password:[new randomStringWithLength:arc4random()%64+16]
+                                                   error:&error];
+        
+        
+        [new createDocument:[self.nameTextField.text stringByAppendingPathExtension:@"pcdb"] WithMasterKey:encryptedData];
+    }
+
 }
 
 
 - (IBAction)cancelPress:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

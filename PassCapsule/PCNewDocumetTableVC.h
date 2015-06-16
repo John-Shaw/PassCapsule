@@ -10,5 +10,8 @@
 
 @interface PCNewDocumetTableVC : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 
 @end
