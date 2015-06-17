@@ -13,7 +13,7 @@
 @implementation UIView (testSwizzling)
 
 - (void)myAddSubview:(UIView *)view{
-//    NSLog(@"加了一个view了,%@",view);
+    NSLog(@"加了一个view了,%@",view);
     [self myAddSubview:view];
 }
 
@@ -26,9 +26,9 @@
 @implementation PCAppDelegate
 +(void)load{
     //!!!:尝试method swizzling，记得删掉
-    Method origin = class_getInstanceMethod([UIView class], @selector(addSubview:));
-    Method swizzling = class_getInstanceMethod([UIView class], @selector(myAddSubview:));
-    method_exchangeImplementations(origin, swizzling);
+//    Method origin = class_getInstanceMethod([UIView class], @selector(addSubview:));
+//    Method swizzling = class_getInstanceMethod([UIView class], @selector(myAddSubview:));
+//    method_exchangeImplementations(origin, swizzling);
 }
 
 
@@ -36,8 +36,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
 //    
-//    NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
-//    [userDefault setObject:@YES forKey:@"isFirst"];
+
 //    
 //    BOOL isFirst = YES;
 //    BOOL isLogin = NO;
@@ -53,13 +52,20 @@
 //    }
     
 
-    
 //    [[IQKeyboardManager sharedManager] setEnable:YES];
-
-    
 //    [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:50];
-    
-    
+
+    NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
+    [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:@YES,@"isFirstLaunch", nil]];
+    NSString *lastVersion = [userDefault stringForKey:@"lastVersion"];
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    if (!lastVersion) {
+        [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:currentVersion,@"lastVersion", nil]];
+    } else if(![lastVersion isEqualToString:currentVersion]){
+        [userDefault setBool:YES forKey:@"isFirstLaunch"];
+        [userDefault setValue:currentVersion forKey:@"lastVersion"];
+    }
+
     return YES;
 }
 
@@ -82,7 +88,9 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
+    }
 }
 
 @end
