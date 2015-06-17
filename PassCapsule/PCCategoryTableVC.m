@@ -44,6 +44,11 @@
 //    NSLog(@"%@",self.cells);
 }
 
+- (IBAction)addCapsule:(UIBarButtonItem *)sender {
+    
+}
+
+
 
 -(NSMutableArray *)categories{
     if (!_categories) {
