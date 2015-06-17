@@ -36,15 +36,19 @@
     if ([self validInput]) {
         PCXMLDocument *new = [PCXMLDocument new];
         
+        NSString *randomString = [new randomStringWithLength:arc4random()%64+16];
+        
         NSData *data = [self.passwordTextField.text dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
         NSData *encryptedData = [RNEncryptor encryptData:data
                                             withSettings:kRNCryptorAES256Settings
-                                                password:[new randomStringWithLength:arc4random()%64+16]
+                                                password:@"test"
                                                    error:&error];
         
         
         [new createDocument:[self.nameTextField.text stringByAppendingPathExtension:@"pcdb"] WithMasterKey:encryptedData];
+        
+        
     }
 
 }

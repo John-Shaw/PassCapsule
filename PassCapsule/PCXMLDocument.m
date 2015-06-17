@@ -7,6 +7,13 @@
 //
 
 #import "PCXMLDocument.h"
+#import "RNDecryptor.h"
+
+@interface PCXMLDocument ()
+
+@property (nonatomic,strong) NSData *testEncryptData;
+
+@end
 
 @implementation PCXMLDocument
 
@@ -26,14 +33,24 @@
         [masterKeyElement setStringValue:[masterKey base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [rootElement addChild:masterKeyElement];
         
+
+        self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        
         DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
         
         
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
     }
     NSLog(@"file path = %@",filePath);
-    
+    [self testDecypyt];
 }
+
+-(void)testDecypyt{
+    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData withPassword:@"test" error:nil];
+    NSString *decryptString = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
+    NSLog(@"decrypt string is %@",decryptString);
+}
+
 
 NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -46,6 +63,22 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
     }
     
     return randomString;
+    
+//另一种方案
+//    char data[NUMBER_OF_CHARS];
+//    for (int x=0;x<NUMBER_OF_CHARS;data[x++] = (char)('A' + (arc4random_uniform(26))));
+//    return [[NSString alloc] initWithBytes:data length:NUMBER_OF_CHARS encoding:NSUTF8StringEncoding];
+//
+//
+
+    //第三种方案
+//    NSTimeInterval  today = [[NSDate date] timeIntervalSince1970];
+//    NSString *intervalString = [NSString stringWithFormat:@"%f", today];
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]];
+//    
+//    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+//    [formatter setDateFormat:@"yyyyMMddhhmm"];
+//    NSString *strdate=[formatter stringFromDate:date];
 }
 
 

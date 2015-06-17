@@ -68,7 +68,6 @@
     else if([elementName isEqualToString:@"Capsule"]) {
         
         //Initialize the book.
-        //初始化用于存储Book信息的实例对象aBook
         
         self.aCapusle = [[PCCapsule alloc] init];
         
