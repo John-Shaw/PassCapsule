@@ -17,7 +17,7 @@
 
 @implementation PCXMLDocument
 
--(void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey{
+- (void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey{
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -33,28 +33,27 @@
         [masterKeyElement setStringValue:[masterKey base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [rootElement addChild:masterKeyElement];
         
-
         self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:NSDataBase64DecodingIgnoreUnknownCharacters];
         
         DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
-        
-        
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
     }
     NSLog(@"file path = %@",filePath);
     [self testDecypyt];
 }
 
--(void)testDecypyt{
-    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData withPassword:@"test" error:nil];
+- (void)testDecypyt{
+    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData
+                                      withPassword:@"test"
+                                             error:nil];
     NSString *decryptString = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
     NSLog(@"decrypt string is %@",decryptString);
 }
 
 
-NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+`-=[]\\;',./{}|:\"<>?";
 
--(NSString *) randomStringWithLength: (int) len{
+- (NSString *) randomStringWithLength: (int)len{
     
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
