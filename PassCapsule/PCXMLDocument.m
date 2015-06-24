@@ -7,7 +7,10 @@
 //
 
 #import "PCXMLDocument.h"
+#import "RNENcryptor.h"
 #import "RNDecryptor.h"
+#import "DDXML.h"
+#import "PCKeyChainCapsule.h"
 
 @interface PCXMLDocument ()
 
@@ -17,7 +20,19 @@
 
 @implementation PCXMLDocument
 
-- (void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey{
+- (void)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
+    
+    NSString *randomKey = [self randomStringWithLength:arc4random()%48+16];
+    [PCKeyChainCapsule setString:randomKey forKey:@"masterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
+    
+    NSData *data = [masterPassword dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSData *encryptedData = [RNEncryptor encryptData:data
+                                        withSettings:kRNCryptorAES256Settings
+                                            password:randomKey
+                                               error:&error];
+    NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [PCKeyChainCapsule setString:encryptedPassword forKey:@"masterPassword" andServiceName:KEYCHAIN_PASSWORD_SERVICE];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -25,22 +40,29 @@
     
     BOOL fileExists = [fileManager fileExistsAtPath:filePath];
     if (fileExists) {
-        
+        NSLog(@"file is existed in path = %@",filePath);
     }else{
         DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:@"Capsules"];
         DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterKey"];
         [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
-        [masterKeyElement setStringValue:[masterKey base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [masterKeyElement setStringValue:encryptedPassword];
         [rootElement addChild:masterKeyElement];
         
-        self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:NSDataBase64DecodingIgnoreUnknownCharacters];
+//        self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:NSDataBase64DecodingIgnoreUnknownCharacters];
         
         DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
     }
-    NSLog(@"file path = %@",filePath);
-    [self testDecypyt];
+//    NSLog(@"file path = %@",filePath);
+//    [self testDecypyt];
 }
+
+//- (void)creatKey:(NSString *)encryptionText{
+//    NSString *randomKey = [self randomStringWithLength:32];
+//    [PCKeyChainCapsule setString:randomKey forKey:@"MasterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
+//    
+//}
+
 
 - (void)testDecypyt{
     NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData

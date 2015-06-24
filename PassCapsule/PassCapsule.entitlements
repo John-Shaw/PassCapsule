@@ -4,8 +4,8 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)cn.zerz.PassCapsule.MasterPass</string>
-		<string>$(AppIdentifierPrefix)cn.zerz.PassCapsule.fileName</string>
+		<string>$(AppIdentifierPrefix)cn.zerz.PassCapsule.Key</string>
+		<string>$(AppIdentifierPrefix)cn.zerz.PassCapsule.Password</string>
 	</array>
 </dict>
 </plist>

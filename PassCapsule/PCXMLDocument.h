@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DDXML.h"
+
 
 @interface PCXMLDocument : NSObject
--(void)createDocument:(NSString *)documentName WithMasterKey:(NSData *)masterKey;
+@property (nonatomic,strong) NSString *masterPassword;
+
+- (void)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword;
 -(NSString *) randomStringWithLength: (int) len;
 @end
