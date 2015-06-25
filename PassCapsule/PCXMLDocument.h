@@ -10,8 +10,12 @@
 
 
 @interface PCXMLDocument : NSObject
+
 @property (nonatomic,strong) NSString *masterPassword;
+@property (nonatomic,strong) NSString *documentPath;
 
 - (void)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword;
--(NSString *) randomStringWithLength: (int) len;
+- (NSString *)randomStringWithLength: (int) len;
+
+
 @end
