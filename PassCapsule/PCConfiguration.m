@@ -14,7 +14,6 @@
 
 + (void)setDocumentPath:(NSString *)documentPath{
     [[NSUserDefaults standardUserDefaults] setObject:documentPath forKey:@"documentPath"];
-
 }
 + (NSString *)documentPath{
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"documentPath"];

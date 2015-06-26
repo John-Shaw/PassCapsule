@@ -7,7 +7,7 @@
 //
 
 #import "PCNewDocumetTableVC.h"
-#import "PCXMLDocument.h"
+#import "PCDocumentManager.h"
 #import "RNEncryptor.h"
 
 @implementation PCNewDocumetTableVC
@@ -30,12 +30,18 @@
     return YES;
 }
 
+
+
 - (IBAction)donePress:(UIBarButtonItem *)sender {
     if ([self validInput]) {
-        PCXMLDocument *document = [PCXMLDocument new];
+        PCDocumentManager *document = [PCDocumentManager new];
         NSString *name = self.nameTextField.text;
         NSString *password = self.passwordTextField.text;
-        [document createDocument:[name stringByAppendingPathExtension:@"pcdb"] WithMasterPassword:password];
+        
+        BOOL createSuccess = [document createDocument:[name stringByAppendingPathExtension:@"pcdb"] WithMasterPassword:password];
+        if (createSuccess) {
+            [self performSegueWithIdentifier:@"toUnLockView" sender:self];
+        }
     }
 
 }

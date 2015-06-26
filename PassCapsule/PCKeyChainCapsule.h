@@ -34,6 +34,8 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * const KEYCHAIN_KEY = @"masterKey";
+static NSString * const KEYCHAIN_PASSWORD = @"masterPassword";
 static NSString * const KEYCHAIN_KEY_SERVICE = @"cn.zerz.PassCapsule.Key";
 static NSString * const KEYCHAIN_PASSWORD_SERVICE = @"cn.zerz.PassCapsule.Password";
 

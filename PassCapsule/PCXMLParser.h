@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class PCCapsule;
 
+//TODO:待重构
 //暂时废弃这个类，因为NSXML只支持解析不支持写入，所以放弃而使用KissXML
 
 @interface PCXMLParser : NSObject<NSXMLParserDelegate>

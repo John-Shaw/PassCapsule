@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PCLockVC : UIViewController
+@interface PCUnLockVC : UIViewController
 
 @end

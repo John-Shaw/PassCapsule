@@ -6,26 +6,30 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "PCXMLDocument.h"
-#import "RNENcryptor.h"
+#import "PCDocumentManager.h"
+#import "RNEncryptor.h"
 #import "RNDecryptor.h"
 #import "DDXML.h"
 #import "PCKeyChainCapsule.h"
 #import "PCConfiguration.h"
 
-@interface PCXMLDocument ()
+@interface PCDocumentManager ()
 
 @property (nonatomic,strong) NSData *testEncryptData;
 
 @end
 
-@implementation PCXMLDocument
+@implementation PCDocumentManager
 
-- (void)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
+- (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:@"documentName"];
     
     NSString *randomKey = [self randomStringWithLength:arc4random()%48+16];
     NSString *baseKey = [[randomKey dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [PCKeyChainCapsule setString:baseKey forKey:@"masterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
+    [PCKeyChainCapsule setString:baseKey forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+    NSLog(@"randomKey =  %@",randomKey);
+    NSLog(@"base64key  =  %@",baseKey);
     
     NSData *data = [masterPassword dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
@@ -34,7 +38,9 @@
                                             password:randomKey
                                                error:&error];
     NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [PCKeyChainCapsule setString:encryptedPassword forKey:@"masterPassword" andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    [PCKeyChainCapsule setString:encryptedPassword forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    NSLog(@"password  =  %@",masterPassword);
+    NSLog(@"encrypt  =  %@",encryptedPassword);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -45,6 +51,7 @@
     BOOL fileExists = [fileManager fileExistsAtPath:filePath];
     if (fileExists) {
         NSLog(@"file is existed in path = %@",filePath);
+        return NO;
     }else{
         DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:@"Capsules"];
         DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterPassword"];
@@ -55,8 +62,15 @@
 //        self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:0];
         
         DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isCreateDatabase"];
+        
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
+        
+        return YES;
+        
     }
+    return NO;
 //    NSLog(@"file path = %@",filePath);
 //    [self testDecypyt];
 }
@@ -114,7 +128,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 //
 //
 
-    //第三种方案
+//第三种方案
 //    NSTimeInterval  today = [[NSDate date] timeIntervalSince1970];
 //    NSString *intervalString = [NSString stringWithFormat:@"%f", today];
 //    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]];

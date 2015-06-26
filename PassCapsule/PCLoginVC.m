@@ -10,6 +10,7 @@
 #import "EAIntroView.h"
 #import "AFNetworking.h"
 #import "PCXMLManager.h"
+#import "PCKeyChainCapsule.h"
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passTF;
@@ -38,26 +39,7 @@
     
     self.passTF.delegate = self;
     self.accountTF.delegate = self;
-    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    
-//    NSDictionary *parameters = @{@"name":@"OopsMonk",@"password":@"adc",@"website":@"www.zhihu.com",@"group":@"ngil"};
-//    
-//    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-//    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    manager.requestSerializer = serializer;
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-//
-////    NSLog(@"%@",parameters);
-//    [manager POST:@"http://10.16.23.25:5555/passdb/20" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        
-//        NSLog(@"JSON:%@",responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-////        NSLog(@"ERROR: %@",error);
-//    }];
 
-    
 }
 
 
@@ -103,9 +85,15 @@
     [intro showInView:self.view animateDuration:0.0];
 }
 
+#pragma mark - action
 - (IBAction)login:(id)sender {
-    
-    NSString *segueID = @"toNewDocumentView";
+    BOOL isCreateDB = [[NSUserDefaults standardUserDefaults] boolForKey:@"isCreateDatabase"];
+    NSString *segueID = nil;
+    if(isCreateDB){
+        segueID = @"toUnLockView";
+    } else {
+        segueID = @"toNewDocumentView";
+    }
     [self performSegueWithIdentifier:segueID sender:self];
 }
 
@@ -116,7 +104,6 @@
     
     [self presentViewController:descViewController animated:YES completion:nil];
 }
-
 
 
 #pragma mark - textField delegate
@@ -143,7 +130,10 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toNewDocumentView"]) {
-       
+       //todo
+    }
+    if ([segue.identifier isEqualToString:@"toUnLockView"]) {
+        //todo
     }
 }
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+//TODO:待重构
+
 @interface PCXMLManager : NSObject
 -(void)xmlCreate;
 

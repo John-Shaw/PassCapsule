@@ -9,6 +9,7 @@
 #import "PCAppDelegate.h"
 #import "IQKeyboardManager.h"
 #import <objc/runtime.h>
+#import "PCKeyChainCapsule.h"
 
 @implementation UIView (testSwizzling)
 
@@ -55,18 +56,23 @@
 //    [[IQKeyboardManager sharedManager] setEnable:YES];
 //    [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:50];
 
+    [self setUserDefaults];
+
+    return YES;
+}
+
+- (void)setUserDefaults{
     NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
-    [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:@YES,@"isFirstLaunch", nil]];
+    [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:@YES,@"isFirstLaunch", @NO,@"isCreateDatabase" ,nil]];
+    
     NSString *lastVersion = [userDefault stringForKey:@"lastVersion"];
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     if (!lastVersion) {
         [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:currentVersion,@"lastVersion", nil]];
     } else if(![lastVersion isEqualToString:currentVersion]){
         [userDefault setBool:YES forKey:@"isFirstLaunch"];
-        [userDefault setValue:currentVersion forKey:@"lastVersion"];
+        [userDefault setObject:currentVersion forKey:@"lastVersion"];
     }
-
-    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -91,6 +97,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"]) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
     }
+//    [PCKeyChainCapsule deleteStringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
 }
 
 @end
