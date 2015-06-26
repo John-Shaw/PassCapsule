@@ -15,4 +15,13 @@
 + (NSString *)decryptedStringWithPassword:(NSString *)password;
 + (NSString *)masterKey;
 
+#pragma mark - from miniKeePass
+
++ (BOOL)validatePassword:(NSString *)password againstHash:(NSString *)hash;
+
++ (NSData *)generateSaltOfSize:(NSInteger)size;
++ (NSString *)hashPassword:(NSString *)password withSalt:(NSData *)salt andRounds:(NSUInteger)rounds andKeySize:(NSInteger)keySize;
++ (NSString *)hashPassword:(NSString *)password;
++ (NSData *)dataFromHexString:(NSString *)string;
++ (NSString *)hexStringFromData:(NSData *)data;
 @end

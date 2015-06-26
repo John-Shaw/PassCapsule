@@ -12,6 +12,7 @@
 #import "DDXML.h"
 #import "PCKeyChainCapsule.h"
 #import "PCConfiguration.h"
+#import "PCPassword.h"
 
 @interface PCDocumentManager ()
 
@@ -31,7 +32,8 @@
     NSLog(@"randomKey =  %@",randomKey);
     NSLog(@"base64key  =  %@",baseKey);
     
-    NSData *data = [masterPassword dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *hashPassword = [PCPassword hashPassword:masterPassword];
+    NSData *data = [hashPassword dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     NSData *encryptedData = [RNEncryptor encryptData:data
                                         withSettings:kRNCryptorAES256Settings
@@ -39,7 +41,7 @@
                                                error:&error];
     NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [PCKeyChainCapsule setString:encryptedPassword forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
-    NSLog(@"password  =  %@",masterPassword);
+    NSLog(@"hashPassword  =  %@",hashPassword);
     NSLog(@"encrypt  =  %@",encryptedPassword);
     
     NSFileManager *fileManager = [NSFileManager defaultManager];

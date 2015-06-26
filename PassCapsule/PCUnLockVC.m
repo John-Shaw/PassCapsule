@@ -71,8 +71,10 @@
     //valid password for test
 
     NSString *encryptedString = [PCKeyChainCapsule stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    NSString *hashPassword = [PCPassword decryptedStringWithPassword:encryptedString];
     NSLog(@"pass from keychain = %@",encryptedString);
-    if ([password isEqualToString:[PCPassword decryptedStringWithPassword:encryptedString]]) {
+    NSLog(@"hash pass = %@",hashPassword);
+    if ([PCPassword validatePassword:password againstHash:hashPassword]) {
         isTruePassword = YES;
     }
     [self unlockAnimation:isTruePassword WithDirctionToLef:YES WithBlock:^(BOOL isSuccess) {
