@@ -15,7 +15,5 @@
 @property (nonatomic,strong) NSString *documentPath;
 
 - (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword;
-- (NSString *)randomStringWithLength: (int) len;
-
 
 @end

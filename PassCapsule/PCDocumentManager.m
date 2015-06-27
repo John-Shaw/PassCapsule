@@ -26,10 +26,11 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:@"documentName"];
     
-    NSString *randomKey = [self randomStringWithLength:arc4random()%48+16];
-    NSString *baseKey = [[randomKey dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSData *randomData = [PCPassword generateSaltOfSize:64];
+    NSString *baseKey = [randomData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *masterKey = [[NSString alloc] initWithData:randomData encoding:NSUTF8StringEncoding];
     [PCKeyChainCapsule setString:baseKey forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
-    NSLog(@"randomKey =  %@",randomKey);
+    NSLog(@"randomKey =  %@",masterPassword);
     NSLog(@"base64key  =  %@",baseKey);
     
     NSString *hashPassword = [PCPassword hashPassword:masterPassword];
@@ -37,7 +38,7 @@
     NSError *error;
     NSData *encryptedData = [RNEncryptor encryptData:data
                                         withSettings:kRNCryptorAES256Settings
-                                            password:randomKey
+                                            password:masterKey
                                                error:&error];
     NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [PCKeyChainCapsule setString:encryptedPassword forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
@@ -100,45 +101,45 @@
 }
 
 
-
-- (void)testDecypyt{
-    NSString *key = [PCKeyChainCapsule stringForKey:@"masterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
-    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData
-                                      withPassword:key
-                                             error:nil];
-    NSString *decryptString = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
-    NSLog(@"decrypt string is %@",decryptString);
-}
-
-
-NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+`-=[]\\;',./{}|:\"<>?";
-
-- (NSString *) randomStringWithLength: (int)len{
-    
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
-    }
-    
-    return randomString;
-    
-//另一种方案
-//    char data[NUMBER_OF_CHARS];
-//    for (int x=0;x<NUMBER_OF_CHARS;data[x++] = (char)('A' + (arc4random_uniform(26))));
-//    return [[NSString alloc] initWithBytes:data length:NUMBER_OF_CHARS encoding:NSUTF8StringEncoding];
+//改用 apple security框架中的 SecRandom
+//- (void)testDecypyt{
+//    NSString *key = [PCKeyChainCapsule stringForKey:@"masterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
+//    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData
+//                                      withPassword:key
+//                                             error:nil];
+//    NSString *decryptString = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
+//    NSLog(@"decrypt string is %@",decryptString);
+//}
 //
 //
-
-//第三种方案
-//    NSTimeInterval  today = [[NSDate date] timeIntervalSince1970];
-//    NSString *intervalString = [NSString stringWithFormat:@"%f", today];
-//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]];
+//NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+`-=[]\\;',./{}|:\"<>?";
+//
+//- (NSString *) randomStringWithLength: (int)len{
 //    
-//    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-//    [formatter setDateFormat:@"yyyyMMddhhmm"];
-//    NSString *strdate=[formatter stringFromDate:date];
-}
+//    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+//    
+//    for (int i=0; i<len; i++) {
+//        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+//    }
+//    
+//    return randomString;
+//    
+////另一种方案
+////    char data[NUMBER_OF_CHARS];
+////    for (int x=0;x<NUMBER_OF_CHARS;data[x++] = (char)('A' + (arc4random_uniform(26))));
+////    return [[NSString alloc] initWithBytes:data length:NUMBER_OF_CHARS encoding:NSUTF8StringEncoding];
+////
+////
+//
+////第三种方案
+////    NSTimeInterval  today = [[NSDate date] timeIntervalSince1970];
+////    NSString *intervalString = [NSString stringWithFormat:@"%f", today];
+////    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]];
+////    
+////    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+////    [formatter setDateFormat:@"yyyyMMddhhmm"];
+////    NSString *strdate=[formatter stringFromDate:date];
+//}
 
 
 @end
