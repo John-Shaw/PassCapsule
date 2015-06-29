@@ -10,6 +10,11 @@
 #import "PCKeyChainCapsule.h"
 #import "PCPassword.h"
 
+#import "PCCategoryTableVC.h"
+#import "PCDocumentParser.h" //test
+#import "PCConfiguration.h"
+#import "PCDocumentDatabase.h"
+
 @interface PCUnLockVC ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *txField;
 @property (strong, nonatomic) UITextField *backTx;
@@ -70,16 +75,20 @@
     
     //valid password for test
 
-    NSString *encryptedString = [PCKeyChainCapsule stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
-    NSString *hashPassword = [PCPassword decryptedStringWithPassword:encryptedString];
-    NSLog(@"pass from keychain = %@",encryptedString);
-    NSLog(@"hash pass = %@",hashPassword);
-    if ([PCPassword validatePassword:password againstHash:hashPassword]) {
+    NSString *basePassowrd = [PCKeyChainCapsule stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    NSString *hashPasswprd = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:basePassowrd options:NSDataBase64DecodingIgnoreUnknownCharacters] encoding:NSUTF8StringEncoding];
+    NSLog(@"base pass = %@",basePassowrd);
+    NSLog(@"hash pass = %@",hashPasswprd);
+    
+    if ([PCPassword validatePassword:password againstHash:hashPasswprd]) {
         isTruePassword = YES;
     }
     [self unlockAnimation:isTruePassword WithDirctionToLef:YES WithBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            [PCKeyChainCapsule setString:self.txField.text forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+            
+
+            
+            
             [self performSegueWithIdentifier:@"showMainView" sender:self];
         } else {
             NSLog(@"password is wrong");
@@ -145,14 +154,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showMainView"]) {
+        PCDocumentParser *aParser = [PCDocumentParser new];
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        NSLog(@"path = %@",documentsPath);
+        NSString *path = [documentsPath stringByAppendingPathComponent:@"tttt.pcdb"];
+        NSLog(@"path = %@",path);
+        NSString *path1 = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
+        NSData *xmlData = [NSData dataWithContentsOfFile:path1];
+        [aParser parser:xmlData];
+        PCDocumentDatabase *datebase = [PCDocumentDatabase sharedDocumentDatabase];
+        UITabBarController *tabBarC = segue.destinationViewController;
+        UINavigationController *naviC = tabBarC.viewControllers[0];
+        
+        PCCategoryTableVC *tableVC = naviC.viewControllers[0];
+        
+        tableVC.entryArray = datebase.entries;
+    }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end

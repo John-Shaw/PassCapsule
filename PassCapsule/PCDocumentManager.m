@@ -28,22 +28,15 @@
     
     NSData *randomData = [PCPassword generateSaltOfSize:64];
     NSString *baseKey = [randomData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSString *masterKey = [[NSString alloc] initWithData:randomData encoding:NSUTF8StringEncoding];
     [PCKeyChainCapsule setString:baseKey forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
-    NSLog(@"randomKey =  %@",masterPassword);
     NSLog(@"base64key  =  %@",baseKey);
     
+    
     NSString *hashPassword = [PCPassword hashPassword:masterPassword];
-    NSData *data = [hashPassword dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error;
-    NSData *encryptedData = [RNEncryptor encryptData:data
-                                        withSettings:kRNCryptorAES256Settings
-                                            password:masterKey
-                                               error:&error];
-    NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [PCKeyChainCapsule setString:encryptedPassword forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
     NSLog(@"hashPassword  =  %@",hashPassword);
-    NSLog(@"encrypt  =  %@",encryptedPassword);
+    NSString *basePassowrd = [[hashPassword dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [PCKeyChainCapsule setString:basePassowrd forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -59,7 +52,7 @@
         DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:@"Capsules"];
         DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterPassword"];
         [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
-        [masterKeyElement setStringValue:encryptedPassword];
+        [masterKeyElement setStringValue:basePassowrd];
         [rootElement addChild:masterKeyElement];
         
 //        self.testEncryptData = [[NSData alloc] initWithBase64EncodedString:[masterKeyElement stringValue] options:0];

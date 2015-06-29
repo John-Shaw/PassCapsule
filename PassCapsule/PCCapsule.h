@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * const CAPSULE_ROOT     = @"Capsules";
+static NSString * const CAPSULE_ENTRY    = @"Capsule";
+static NSString * const CAPSULE_ID       = @"id";
+static NSString * const CAPSULE_TITLE    = @"title";
+static NSString * const CAPSULE_ACCOUNT  = @"account";
+static NSString * const CAPSULE_PASSWORD = @"pass";
+static NSString * const CAPSULE_SITE     = @"site";
+static NSString * const CAPSULE_GROUP    = @"category";
+static NSString * const CAPSULE_ICON     = @"icon";
+
+
 @interface PCCapsule : NSObject
 
 @property (nonatomic, readwrite) NSInteger capsuleID;
@@ -17,5 +28,6 @@
 @property (nonatomic, strong) NSString  *account;
 @property (nonatomic, strong) NSString  *iconName;
 @property (nonatomic, strong) NSString  *category;
+
 
 @end

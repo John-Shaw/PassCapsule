@@ -49,7 +49,7 @@
     NSString *key = [[NSString alloc] initWithData:datakey encoding:NSUTF8StringEncoding];
     NSLog(@"get key from keychain =  %@",base64key);
     NSLog(@"origin key =  %@",key);
-    return key;
+    return base64key;
 }
 
 #pragma mark - from miniKeePass

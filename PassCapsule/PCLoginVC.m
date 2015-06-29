@@ -8,13 +8,12 @@
 
 #import "PCLoginVC.h"
 #import "EAIntroView.h"
-#import "AFNetworking.h"
-#import "PCXMLManager.h"
 #import "PCKeyChainCapsule.h"
 
+
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *passTF;
-@property (weak, nonatomic) IBOutlet UITextField *accountTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
 
 @end
 
@@ -37,8 +36,8 @@
     // very important make delegate useful
     tap.delegate = self;
     
-    self.passTF.delegate = self;
-    self.accountTF.delegate = self;
+    self.passwordTextField.delegate = self;
+    self.accountTextField.delegate = self;
 
 }
 
@@ -108,9 +107,9 @@
 
 #pragma mark - textField delegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if([textField isEqual:self.accountTF]){
-        [self.passTF becomeFirstResponder];
-    } else if([textField isEqual:self.passTF]){
+    if([textField isEqual:self.accountTextField]){
+        [self.passwordTextField becomeFirstResponder];
+    } else if([textField isEqual:self.passwordTextField]){
         [textField resignFirstResponder];
     }
     return YES;

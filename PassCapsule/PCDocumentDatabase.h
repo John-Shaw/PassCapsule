@@ -10,4 +10,22 @@
 
 @interface PCDocumentDatabase : NSObject
 
++(instancetype)sharedDocumentDatabase;
++ (void)setDocumentName:(NSString *)documentName;
++ (NSString *)documentPath;
+
+@property (nonatomic, strong) NSMutableArray *entries;
+@property (nonatomic, strong) NSMutableArray *groups;
+
+/**
+ Should create only one instance of class. Should not call init.
+ */
+- (instancetype)init	__attribute__((unavailable("init is not available in PCXMLParser, Use sharedXMLParser"))) NS_DESIGNATED_INITIALIZER;
+
+/**
+ Should create only one instance of class. Should not call new.
+ */
++ (instancetype)new	__attribute__((unavailable("new is not available in PCXMLParser, Use sharedXMLParser")));
+
+
 @end

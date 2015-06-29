@@ -10,4 +10,36 @@
 
 @implementation PCDocumentDatabase
 
++(instancetype)sharedDocumentDatabase{
+    static PCDocumentDatabase *kDatabase;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
+        kDatabase = [[self alloc] init];
+    });
+    return kDatabase;
+}
+
+-(NSMutableArray *)entries{
+    if (!_entries) {
+        _entries = [[NSMutableArray alloc] init];
+    }
+    return _entries;
+}
+
+-(NSMutableArray *)groups{
+    if (!_groups) {
+        _groups = [[NSMutableArray alloc] init];
+    }
+    return _groups;
+}
+
++ (void)setDocumentName:(NSString *)documentName{
+    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:@"documentPath"];
+}
++ (NSString *)documentPath{
+    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:@"documentPath"];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    return [documentsPath stringByAppendingPathComponent:documentName];
+}
+
 @end

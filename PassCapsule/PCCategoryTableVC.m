@@ -11,46 +11,43 @@
 #import "PCCapsule.h"
 #import "PCCapsuleDetailVC.h"
 
+#import "PCDocumentParser.h"
+
+
 @interface PCCategoryTableVC()
-@property (nonatomic,strong) NSMutableArray *categories;
+
+
 @end
 
 @implementation PCCategoryTableVC
 
+
 -(void)viewDidLoad{
-    PCXMLParser *aPaser = [PCXMLParser sharedXMLParser];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
 
-    self.cells = [aPaser paserWithPath:path];
-   
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"test.xml"];
-    NSLog(@"filepath : %@",filePath);
-    BOOL fileExists = [fileManager fileExistsAtPath:filePath];
-    
-    NSData *xmlData = [NSData dataWithContentsOfFile:path];
-    if(!fileExists){
-        [xmlData writeToFile:filePath atomically:YES];
-    }else{
-        NSLog(@"file exits");
-        NSString* content = [NSString stringWithContentsOfFile:filePath
-                                                      encoding:NSUTF8StringEncoding
-                                                         error:NULL];
-        NSLog(@"%@",content);
-    }
-
-    
-//    NSLog(@"%@",self.cells);
+//    [self.tableView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:@"LoadCellData" object:nil];
 }
 
 - (IBAction)addCapsule:(UIBarButtonItem *)sender {
     
 }
 
+- (void)didloadCellDataSource: (NSNotification *)notification{
+
+    NSLog(@"%@",notification.name);
+}
+
+- (NSMutableArray *)entryArray{
+    if (!_entryArray) {
+        _entryArray = [[NSMutableArray alloc] init];
+    }
+    return _entryArray;
+}
 
 
--(NSMutableArray *)categories{
+
+
+- (NSMutableArray *)categories{
     if (!_categories) {
         _categories = [[NSMutableArray alloc] init];
         [_categories addObject:[self capsulesInCategory:@"互联网账户"]];
@@ -61,7 +58,7 @@
 
 -(NSArray *)capsulesInCategory:(NSString *)category{
     NSMutableArray *cells = [[NSMutableArray alloc] init];
-    for (PCCapsule *cell in self.cells) {
+    for (PCCapsule *cell in self.entryArray) {
         if ([cell.category isEqualToString:category]) {
             [cells addObject:cell];
         }

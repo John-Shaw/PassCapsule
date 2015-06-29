@@ -14,10 +14,12 @@
 		523EC7911B207DAD00073FCE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 523EC7931B207DAD00073FCE /* Localizable.strings */; };
 		52415B6B1B3B820700F911B3 /* PCConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 52415B6A1B3B820700F911B3 /* PCConfiguration.m */; };
 		52415B6F1B3C23AF00F911B3 /* PCDocumentDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 52415B6E1B3C23AF00F911B3 /* PCDocumentDatabase.m */; };
+		5241FCD61B410BF200B059FB /* PCCapsuleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5241FCD51B410BF200B059FB /* PCCapsuleGroup.m */; };
+		5241FCD91B410DDB00B059FB /* PCDocumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5241FCD81B410DDB00B059FB /* PCDocumentParser.m */; };
+		5241FCDC1B4159BB00B059FB /* PCDocumentWirter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5241FCDB1B4159BB00B059FB /* PCDocumentWirter.m */; };
 		525FBA841B2FE99F0072F534 /* PCRegistTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FBA831B2FE99F0072F534 /* PCRegistTableVC.m */; };
 		525FBA891B319F740072F534 /* PCKeyChainCapsule.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FBA881B319F740072F534 /* PCKeyChainCapsule.m */; };
 		5263E8511AE8FDE000D79116 /* PCUnLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* PCUnLockVC.m */; };
-		5268CB021B1D80100090BC19 /* PCXMLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5268CB011B1D80100090BC19 /* PCXMLManager.m */; };
 		526EEFDD1B2EFD0300B693CD /* PCDocumentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 526EEFDC1B2EFD0300B693CD /* PCDocumentManager.m */; };
 		526EEFE01B2F04EB00B693CD /* PCNewDocumetTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 526EEFDF1B2F04EB00B693CD /* PCNewDocumetTableVC.m */; };
 		5277F3951B3D4340007AEB4A /* PCPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 5277F3941B3D4340007AEB4A /* PCPassword.m */; };
@@ -61,14 +63,18 @@
 		52415B6A1B3B820700F911B3 /* PCConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCConfiguration.m; sourceTree = "<group>"; };
 		52415B6D1B3C23AF00F911B3 /* PCDocumentDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDocumentDatabase.h; sourceTree = "<group>"; };
 		52415B6E1B3C23AF00F911B3 /* PCDocumentDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDocumentDatabase.m; sourceTree = "<group>"; };
+		5241FCD41B410BF200B059FB /* PCCapsuleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCapsuleGroup.h; sourceTree = "<group>"; };
+		5241FCD51B410BF200B059FB /* PCCapsuleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCapsuleGroup.m; sourceTree = "<group>"; };
+		5241FCD71B410DDB00B059FB /* PCDocumentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDocumentParser.h; sourceTree = "<group>"; };
+		5241FCD81B410DDB00B059FB /* PCDocumentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDocumentParser.m; sourceTree = "<group>"; };
+		5241FCDA1B4159BB00B059FB /* PCDocumentWirter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDocumentWirter.h; sourceTree = "<group>"; };
+		5241FCDB1B4159BB00B059FB /* PCDocumentWirter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDocumentWirter.m; sourceTree = "<group>"; };
 		525FBA821B2FE99F0072F534 /* PCRegistTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRegistTableVC.h; sourceTree = "<group>"; };
 		525FBA831B2FE99F0072F534 /* PCRegistTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRegistTableVC.m; sourceTree = "<group>"; };
 		525FBA871B319F740072F534 /* PCKeyChainCapsule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKeyChainCapsule.h; sourceTree = "<group>"; };
 		525FBA881B319F740072F534 /* PCKeyChainCapsule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKeyChainCapsule.m; sourceTree = "<group>"; };
 		5263E84F1AE8FDE000D79116 /* PCUnLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUnLockVC.h; sourceTree = "<group>"; };
 		5263E8501AE8FDE000D79116 /* PCUnLockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCUnLockVC.m; sourceTree = "<group>"; };
-		5268CB001B1D80100090BC19 /* PCXMLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCXMLManager.h; sourceTree = "<group>"; };
-		5268CB011B1D80100090BC19 /* PCXMLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCXMLManager.m; sourceTree = "<group>"; };
 		526EEFDB1B2EFD0300B693CD /* PCDocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDocumentManager.h; sourceTree = "<group>"; };
 		526EEFDC1B2EFD0300B693CD /* PCDocumentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDocumentManager.m; sourceTree = "<group>"; };
 		526EEFDE1B2F04EB00B693CD /* PCNewDocumetTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCNewDocumetTableVC.h; sourceTree = "<group>"; };
@@ -217,14 +223,16 @@
 		52E968781AF9CF9B00E6E759 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				5268CB001B1D80100090BC19 /* PCXMLManager.h */,
-				5268CB011B1D80100090BC19 /* PCXMLManager.m */,
 				52E968791AF9D03300E6E759 /* PCXMLParser.h */,
 				52E9687A1AF9D03300E6E759 /* PCXMLParser.m */,
 				526EEFDB1B2EFD0300B693CD /* PCDocumentManager.h */,
 				526EEFDC1B2EFD0300B693CD /* PCDocumentManager.m */,
+				5241FCD71B410DDB00B059FB /* PCDocumentParser.h */,
+				5241FCD81B410DDB00B059FB /* PCDocumentParser.m */,
 				52415B691B3B820700F911B3 /* PCConfiguration.h */,
 				52415B6A1B3B820700F911B3 /* PCConfiguration.m */,
+				5241FCDA1B4159BB00B059FB /* PCDocumentWirter.h */,
+				5241FCDB1B4159BB00B059FB /* PCDocumentWirter.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -234,6 +242,8 @@
 			children = (
 				52E9687D1AF9D14C00E6E759 /* PCCapsule.h */,
 				52E9687E1AF9D14C00E6E759 /* PCCapsule.m */,
+				5241FCD41B410BF200B059FB /* PCCapsuleGroup.h */,
+				5241FCD51B410BF200B059FB /* PCCapsuleGroup.m */,
 				5277F3931B3D4340007AEB4A /* PCPassword.h */,
 				5277F3941B3D4340007AEB4A /* PCPassword.m */,
 				525FBA871B319F740072F534 /* PCKeyChainCapsule.h */,
@@ -431,12 +441,14 @@
 				5277F3951B3D4340007AEB4A /* PCPassword.m in Sources */,
 				52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */,
 				52415B6F1B3C23AF00F911B3 /* PCDocumentDatabase.m in Sources */,
+				5241FCD91B410DDB00B059FB /* PCDocumentParser.m in Sources */,
 				52415B6B1B3B820700F911B3 /* PCConfiguration.m in Sources */,
 				526EEFDD1B2EFD0300B693CD /* PCDocumentManager.m in Sources */,
-				5268CB021B1D80100090BC19 /* PCXMLManager.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,
+				5241FCD61B410BF200B059FB /* PCCapsuleGroup.m in Sources */,
 				52E9687B1AF9D03300E6E759 /* PCXMLParser.m in Sources */,
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
+				5241FCDC1B4159BB00B059FB /* PCDocumentWirter.m in Sources */,
 				526EEFE01B2F04EB00B693CD /* PCNewDocumetTableVC.m in Sources */,
 				525FBA841B2FE99F0072F534 /* PCRegistTableVC.m in Sources */,
 				52E3D8471B14792200C150FA /* PCRegistVC.m in Sources */,

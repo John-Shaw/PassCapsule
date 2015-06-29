@@ -16,7 +16,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:documentPath forKey:@"documentPath"];
 }
 + (NSString *)documentPath{
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"documentPath"];
+    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:@"documentPath"];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    return [documentsPath stringByAppendingPathComponent:documentName];
 }
 
 @end
