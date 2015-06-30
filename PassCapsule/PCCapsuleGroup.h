@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PCCapsule.h"
+
+static NSString * const CAPSULE_GROUP      = @"group";
+static NSString * const CAPSULE_GROUP_NAME = @"name";
+
 
 @interface PCCapsuleGroup : NSObject
+
+@property (nonatomic, readwrite) NSUInteger groupCount;
+@property (nonatomic, strong) NSString *groupName;
+@property (nonatomic, strong) NSMutableArray *groupEntries;
+
 
 @end

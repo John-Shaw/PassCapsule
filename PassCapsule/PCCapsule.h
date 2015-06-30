@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString * const CAPSULE_ROOT     = @"Capsules";
-static NSString * const CAPSULE_ENTRY    = @"Capsule";
-static NSString * const CAPSULE_ID       = @"id";
-static NSString * const CAPSULE_TITLE    = @"title";
-static NSString * const CAPSULE_ACCOUNT  = @"account";
-static NSString * const CAPSULE_PASSWORD = @"pass";
-static NSString * const CAPSULE_SITE     = @"site";
-static NSString * const CAPSULE_GROUP    = @"category";
-static NSString * const CAPSULE_ICON     = @"icon";
+static NSString * const CAPSULE_ROOT           = @"Capsules";
+static NSString * const CAPSULE_ENTRY          = @"entry";
+static NSString * const CAPSULE_ENTRY_ID       = @"id";
+static NSString * const CAPSULE_ENTRY_TITLE    = @"title";
+static NSString * const CAPSULE_ENTRY_ACCOUNT  = @"account";
+static NSString * const CAPSULE_ENTRY_PASSWORD = @"password";
+static NSString * const CAPSULE_ENTRY_SITE     = @"site";
+static NSString * const CAPSULE_ENTRY_GROUP    = @"entry_group";
+static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
 
 
 @interface PCCapsule : NSObject

@@ -19,6 +19,8 @@
     return kDatabase;
 }
 
+
+
 -(NSMutableArray *)entries{
     if (!_entries) {
         _entries = [[NSMutableArray alloc] init];
@@ -33,11 +35,12 @@
     return _groups;
 }
 
+
 + (void)setDocumentName:(NSString *)documentName{
-    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:@"documentPath"];
+    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:DOCUMENT_NAME];
 }
 + (NSString *)documentPath{
-    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:@"documentPath"];
+    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:DOCUMENT_NAME];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     return [documentsPath stringByAppendingPathComponent:documentName];
 }

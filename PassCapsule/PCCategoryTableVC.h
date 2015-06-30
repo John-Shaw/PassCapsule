@@ -10,7 +10,6 @@
 
 @interface PCCategoryTableVC : UITableViewController
 
-@property (nonatomic,strong) NSMutableArray *entryArray;
-@property (nonatomic,strong) NSMutableArray *categories;
+
 
 @end

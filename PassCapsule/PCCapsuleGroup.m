@@ -10,4 +10,11 @@
 
 @implementation PCCapsuleGroup
 
+- (NSMutableArray *)groupEntries{
+    if (!_groupEntries) {
+        _groupEntries = [[NSMutableArray alloc] init];
+    }
+    return _groupEntries;
+}
+
 @end

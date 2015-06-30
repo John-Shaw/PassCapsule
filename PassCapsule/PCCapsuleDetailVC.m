@@ -21,6 +21,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.titleView.text = self.capsule.title;
     self.detailVeiw.text = self.capsule.account;
@@ -36,6 +37,9 @@
 
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    
+}
 
 #pragma mark - data source delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

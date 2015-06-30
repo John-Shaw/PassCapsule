@@ -11,11 +11,14 @@
 #import "PCCapsule.h"
 #import "PCCapsuleDetailVC.h"
 
-#import "PCDocumentParser.h"
+#import "PCDocumentManager.h"
+#include "PCDocumentDatabase.h"
 
 
 @interface PCCategoryTableVC()
 
+@property (nonatomic,strong) NSMutableArray *groups;
+@property (nonatomic,strong) NSMutableArray *entries;
 
 @end
 
@@ -23,67 +26,69 @@
 
 
 -(void)viewDidLoad{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_PARSER_DONE object:nil];
+    
+    PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
 
-//    [self.tableView reloadData];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:@"LoadCellData" object:nil];
-}
-
-- (IBAction)addCapsule:(UIBarButtonItem *)sender {
+    NSString *path = [PCDocumentDatabase documentPath];
+    NSLog(@"path = %@",path);
+    
+//    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
+    
+    NSData *xmlData = [NSData dataWithContentsOfFile:path];
+    NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
+    [manager parserDocument:xmlData];
     
 }
 
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didloadCellDataSource: (NSNotification *)notification{
-
-    NSLog(@"%@",notification.name);
+    PCDocumentDatabase *database = [PCDocumentDatabase sharedDocumentDatabase];
+    self.groups = database.groups;
+    self.entries = database.entries;
+    [self.tableView reloadData];
+    NSLog(@"groups : %@",[self.groups description]);
+    NSLog(@"notifi name : %@",notification.name);
 }
 
-- (NSMutableArray *)entryArray{
-    if (!_entryArray) {
-        _entryArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)entries{
+    if (!_entries) {
+        _entries = [[NSMutableArray alloc] init];
     }
-    return _entryArray;
+    return _entries;
 }
 
-
-
-
-- (NSMutableArray *)categories{
-    if (!_categories) {
-        _categories = [[NSMutableArray alloc] init];
-        [_categories addObject:[self capsulesInCategory:@"互联网账户"]];
-        [_categories addObject:[self capsulesInCategory:@"信用卡"]];
+- (NSMutableArray *)groups{
+    if (!_groups) {
+        _groups = [[NSMutableArray alloc] init];
     }
-    return _categories;
+    return _groups;
 }
 
--(NSArray *)capsulesInCategory:(NSString *)category{
-    NSMutableArray *cells = [[NSMutableArray alloc] init];
-    for (PCCapsule *cell in self.entryArray) {
-        if ([cell.category isEqualToString:category]) {
-            [cells addObject:cell];
-        }
-    }
-    return cells;
-}
+
 
 #pragma mark - tableview date source delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.categories count];
+    return [self.groups count];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSArray *category = self.categories[section];
-    return [category count];
+    PCCapsuleGroup *group = self.groups[section];
+    return [group.groupEntries count];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return @"互联网账户";
+    PCCapsuleGroup *group = self.groups[section];
+    
+    if ([group.groupName length] > 0) {
+        return group.groupName;
     }
-    if (section == 1) {
-        return @"信用卡";
-    }
+    
     return @"unkonw";
 }
 
@@ -92,25 +97,22 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
-    NSArray *cells = self.categories[indexPath.section];
-    PCCapsule *capsule = [cells objectAtIndex:indexPath.row];
+    PCCapsuleGroup *group = self.groups[indexPath.section];
+    PCCapsule *capsule = [group.groupEntries objectAtIndex:indexPath.row];
+    
     cell.textLabel.text = capsule.title;
-
     return cell;
-
 }
 
 #pragma mark - segues
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     if(indexPath){
         if([segue.identifier isEqualToString:@"showCellDetail"]){
-            
             if ([segue.destinationViewController isKindOfClass:[PCCapsuleDetailVC class]]){
                 PCCapsuleDetailVC *cdvc = [segue destinationViewController];
-                NSArray *cells = self.categories[indexPath.section];
-                PCCapsule *capsule = [cells objectAtIndex:indexPath.row];
+                PCCapsuleGroup *group = self.groups[indexPath.section];
+                PCCapsule *capsule = [group.groupEntries objectAtIndex:indexPath.row];
                 cdvc.capsule = capsule;
             }
         }

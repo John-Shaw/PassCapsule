@@ -7,6 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PCCapsule.h"
+#import "PCCapsuleGroup.h"
+@class DDXMLDocument;
+
+static NSString * const DOCUMENT_NAME = @"documentName";
 
 @interface PCDocumentDatabase : NSObject
 
@@ -14,8 +19,10 @@
 + (void)setDocumentName:(NSString *)documentName;
 + (NSString *)documentPath;
 
+@property (nonatomic, strong) DDXMLDocument *document;
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, strong) NSMutableArray *groups;
+@property (nonatomic)   BOOL isLoadDatabase;
 
 /**
  Should create only one instance of class. Should not call init.

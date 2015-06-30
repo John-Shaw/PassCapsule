@@ -9,15 +9,12 @@
 #import "PCUnLockVC.h"
 #import "PCKeyChainCapsule.h"
 #import "PCPassword.h"
-
 #import "PCCategoryTableVC.h"
-#import "PCDocumentParser.h" //test
-#import "PCConfiguration.h"
 #import "PCDocumentDatabase.h"
 
 @interface PCUnLockVC ()<UITextFieldDelegate>
-@property (strong, nonatomic) UITextField *txField;
-@property (strong, nonatomic) UITextField *backTx;
+@property (strong, nonatomic) UITextField *passwordTextField;
+@property (strong, nonatomic) UITextField *backgroundTextField;
 @property (strong, nonatomic) UIButton *unlockBtn;
 @end
 
@@ -28,31 +25,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.txField                 = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
-    self.txField.center          = CGPointMake(self.view.bounds.size.width/2,
+    self.passwordTextField                 = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
+    self.passwordTextField.center          = CGPointMake(self.view.bounds.size.width/2,
                                       self.view.bounds.size.height/2);
-    self.txField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
-    self.txField.delegate        = self;
-    self.txField.layer.cornerRadius = 7;
-    [self.txField setSecureTextEntry:YES];
+    self.passwordTextField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
+    self.passwordTextField.delegate        = self;
+    self.passwordTextField.layer.cornerRadius = 7;
+    [self.passwordTextField setSecureTextEntry:YES];
 
     self.unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     [self.unlockBtn setOpaque:NO];
-    self.unlockBtn.center = CGPointMake(self.txField.center.x + self.txField.frame.size.width/2 + 0, self.txField.center.y);
+    self.unlockBtn.center = CGPointMake(self.passwordTextField.center.x + self.passwordTextField.frame.size.width/2 + 0, self.passwordTextField.center.y);
     [self.unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
     [self.unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.view addSubview:self.txField];
+    [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.unlockBtn];
     //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
 
-    self.backTx                     = [[UITextField alloc] initWithFrame:self.txField.frame];
-    self.backTx.layer.cornerRadius  = 7;
-    self.backTx.backgroundColor     = [UIColor whiteColor];
-    self.backTx.frame               = CGRectMake(self.backTx.frame.origin.x + self.backTx.frame.size.width, self.backTx.frame.origin.y, 0, self.backTx.frame.size.height);
+    self.backgroundTextField                     = [[UITextField alloc] initWithFrame:self.passwordTextField.frame];
+    self.backgroundTextField.layer.cornerRadius  = 7;
+    self.backgroundTextField.backgroundColor     = [UIColor whiteColor];
+    self.backgroundTextField.frame               = CGRectMake(self.backgroundTextField.frame.origin.x + self.backgroundTextField.frame.size.width, self.backgroundTextField.frame.origin.y, 0, self.backgroundTextField.frame.size.height);
 
     //关于view的位置，有空要学习。
-    [self.view insertSubview:self.backTx belowSubview:self.unlockBtn];
+    [self.view insertSubview:self.backgroundTextField belowSubview:self.unlockBtn];
 
 }
 
@@ -66,7 +63,7 @@
 }
 
 -(void)toMainView:(UIButton *)sender{
-    NSString *password  = self.txField.text;
+    NSString *password  = self.passwordTextField.text;
     BOOL isTruePassword = NO;
     if ([password length] == 0) {
         NSLog(@"password can't be empty");
@@ -112,16 +109,16 @@
     CGFloat backTextFieldNewWidth = 0;
     NSTimeInterval delay = 0;
     if (toLeft) {
-        unLockButtonNewCenterX  = self.unlockBtn.center.x - self.txField.frame.size.width;
-        backTextFieldNewOriginX = self.txField.frame.origin.x;
-        backTextFieldNewWidth   = self.txField.frame.size.width;
-        self.backTx.backgroundColor = [UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000];
+        unLockButtonNewCenterX  = self.unlockBtn.center.x - self.passwordTextField.frame.size.width;
+        backTextFieldNewOriginX = self.passwordTextField.frame.origin.x;
+        backTextFieldNewWidth   = self.passwordTextField.frame.size.width;
+        self.backgroundTextField.backgroundColor = [UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000];
     } else {
         delay = 0.25;
-        unLockButtonNewCenterX  = self.unlockBtn.center.x + self.txField.frame.size.width;
-        backTextFieldNewOriginX = self.txField.frame.origin.x + self.txField.frame.size.width;
+        unLockButtonNewCenterX  = self.unlockBtn.center.x + self.passwordTextField.frame.size.width;
+        backTextFieldNewOriginX = self.passwordTextField.frame.origin.x + self.passwordTextField.frame.size.width;
         backTextFieldNewWidth   = 0;
-        self.backTx.backgroundColor = [UIColor redColor];
+        self.backgroundTextField.backgroundColor = [UIColor redColor];
     }
     //FIXME:想复用代码，然后装逼失败，各种magic number和奇技淫巧，还是乖乖写两个动画的好，诶
     [UIView animateWithDuration:0.75
@@ -136,7 +133,7 @@
                                              options:UIViewAnimationOptionCurveEaseInOut
                                           animations:^{
                                               self.unlockBtn.center = CGPointMake(unLockButtonNewCenterX, self.unlockBtn.center.y);
-                                              self.backTx.frame     = CGRectMake(backTextFieldNewOriginX, self.txField.frame.origin.y, backTextFieldNewWidth, self.txField.frame.size.height);
+                                              self.backgroundTextField.frame     = CGRectMake(backTextFieldNewOriginX, self.passwordTextField.frame.origin.y, backTextFieldNewWidth, self.passwordTextField.frame.size.height);
                                               
                                           } completion:^(BOOL finished) {
                                               if(isSuccess){
@@ -156,21 +153,21 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"showMainView"]) {
-        PCDocumentParser *aParser = [PCDocumentParser new];
-        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-        NSLog(@"path = %@",documentsPath);
-        NSString *path = [documentsPath stringByAppendingPathComponent:@"tttt.pcdb"];
-        NSLog(@"path = %@",path);
-        NSString *path1 = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
-        NSData *xmlData = [NSData dataWithContentsOfFile:path1];
-        [aParser parser:xmlData];
-        PCDocumentDatabase *datebase = [PCDocumentDatabase sharedDocumentDatabase];
-        UITabBarController *tabBarC = segue.destinationViewController;
-        UINavigationController *naviC = tabBarC.viewControllers[0];
-        
-        PCCategoryTableVC *tableVC = naviC.viewControllers[0];
-        
-        tableVC.entryArray = datebase.entries;
+//        PCDocumentParser *aParser = [PCDocumentParser new];
+//        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+//        NSLog(@"path = %@",documentsPath);
+//        NSString *path = [documentsPath stringByAppendingPathComponent:@"tttt.pcdb"];
+//        NSLog(@"path = %@",path);
+//        NSString *path1 = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
+//        NSData *xmlData = [NSData dataWithContentsOfFile:path1];
+//        [aParser parser:xmlData];
+//        PCDocumentDatabase *datebase = [PCDocumentDatabase sharedDocumentDatabase];
+//        UITabBarController *tabBarC = segue.destinationViewController;
+//        UINavigationController *naviC = tabBarC.viewControllers[0];
+//        
+//        PCCategoryTableVC *tableVC = naviC.viewControllers[0];
+//        
+//        tableVC.entryArray = datebase.entries;
     }
 
 }

@@ -34,7 +34,7 @@
 
 - (IBAction)donePress:(UIBarButtonItem *)sender {
     if ([self validInput]) {
-        PCDocumentManager *document = [PCDocumentManager new];
+        PCDocumentManager *document = [PCDocumentManager sharedDocumentManager];
         NSString *name = self.nameTextField.text;
         NSString *password = self.passwordTextField.text;
         
