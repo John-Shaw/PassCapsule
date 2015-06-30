@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fLt-X2-kl0">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -188,21 +189,46 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="备注测试。 自定义条目的功能正在开发中。" translatesAutoresizingMaskIntoConstraints="NO" id="C72-Rh-WGY">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="365" id="7ad-7k-Isc"/>
+                                                        <constraint firstAttribute="height" constant="168" id="nSi-Ci-Kjz"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="15" y="8" width="365" height="168"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="7ad-7k-Isc"/>
+                                                            <exclude reference="nSi-Ci-Kjz"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="7ad-7k-Isc"/>
+                                                            <include reference="nSi-Ci-Kjz"/>
+                                                        </mask>
                                                     </variation>
                                                 </textView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="C72-Rh-WGY" secondAttribute="centerY" constant="7.5" id="Z2r-8p-9qh"/>
+                                                <constraint firstAttribute="centerX" secondItem="C72-Rh-WGY" secondAttribute="centerX" constant="2.5" id="kB8-XH-wdu"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="C72-Rh-WGY"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="Z2r-8p-9qh"/>
+                                                    <exclude reference="kB8-XH-wdu"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="C72-Rh-WGY"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="Z2r-8p-9qh"/>
+                                                    <include reference="kB8-XH-wdu"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -215,6 +241,12 @@
                             <outlet property="delegate" destination="WAi-Gy-2dX" id="4yj-Mi-p4h"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="accountTextField" destination="uNW-Sw-agx" id="H5j-mT-B80"/>
+                        <outlet property="passwordTextField" destination="jbb-4Q-Skn" id="Ok1-ek-lKF"/>
+                        <outlet property="siteTextField" destination="pbK-t9-jAA" id="WFT-mv-5lF"/>
+                        <outlet property="titleTextField" destination="GkD-co-bdG" id="XLL-X5-58e"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKq-b9-MmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -407,7 +439,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="account" textLabel="bZm-MI-ib8" detailTextLabel="Zf0-nu-0f9" style="IBUITableViewCellStyleValue1" id="1U2-wr-ArH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="undefined" textLabel="bZm-MI-ib8" detailTextLabel="Zf0-nu-0f9" style="IBUITableViewCellStyleValue1" id="1U2-wr-ArH">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1U2-wr-ArH" id="kjI-Va-tOd">
@@ -1099,7 +1131,7 @@
                             <rect key="frame" x="0.0" y="273" width="600" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="Hn0-0v-vwG"/>

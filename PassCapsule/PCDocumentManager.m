@@ -81,12 +81,12 @@
     [rootElement addChild:masterKeyElement];
     
     DDXMLElement *groupElement =  [DDXMLElement elementWithName:CAPSULE_GROUP];
-    [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:@"未分类"]];
+    [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:CAPSULE_GROUP_DEFAULT]];
     NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:@"zhihu"],
                           [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
                           [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
                           [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zhihu.com"],
-                          [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:@"未分类"]];
+                          [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:CAPSULE_GROUP_DEFAULT]];
     [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:nil]];
     
     [rootElement addChild:groupElement];
@@ -118,7 +118,9 @@
 - (void)parserDocument:(NSData *)xmlData{
     DDXMLDocument *document = nil;
     if (!self.documentDatabase.isLoadDatabase) {
-         document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
+        document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
+        self.documentDatabase.document = document;
+        self.documentDatabase.isLoadDatabase = YES;
     } else {
         document = self.documentDatabase.document;
     }
@@ -172,17 +174,22 @@
 
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.document) {
-        DDXMLElement *root = [self.documentDatabase.document rootElement];
+        DDXMLDocument *document = self.documentDatabase.document;
+        NSArray *results = [document nodesForXPath:[NSString stringWithFormat:@"//group[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT] error:nil];
+        DDXMLElement *groupElement = [results firstObject];
+        
         DDXMLElement *newEntry = [DDXMLElement elementWithName:CAPSULE_ENTRY];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:entry.title]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:entry.account]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.pass]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:entry.site]];
-        
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.category]];
         
-        [root addChild:newEntry];
+        [groupElement addChild:newEntry];
+        
         [self.documentDatabase.entries addObject:entry];
+        PCCapsuleGroup *group = self.documentDatabase.groups[0];
+        [group.groupEntries addObject:entry];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
     }
 }

@@ -51,7 +51,8 @@
     self.groups = database.groups;
     self.entries = database.entries;
     [self.tableView reloadData];
-    NSLog(@"groups : %@",[self.groups description]);
+    PCCapsuleGroup *group = [self.groups firstObject];
+    NSLog(@"groups : %@",[group.groupEntries description]);
     NSLog(@"notifi name : %@",notification.name);
 }
 

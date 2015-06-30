@@ -21,20 +21,38 @@
 - (void)editDone{
     if ([self validateTextFileds]) {
         PCCapsule *aCapsule = [[PCCapsule alloc] init];
-        aCapsule.title = @"testTitle";
-        aCapsule.account = @"fucker";
-        aCapsule.pass = @"hello,cracker";
-        aCapsule.site = @"www.apple.com";
-        aCapsule.category = @"互联网账户";
+        aCapsule.title = self.titleTextField.text;
+        aCapsule.account = self.accountTextField.text;
+        aCapsule.pass = self.passwordTextField.text;
+        aCapsule.site = self.siteTextField.text;
+        aCapsule.category = CAPSULE_GROUP_DEFAULT;
+        
         PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
         [manager addNewEntry:aCapsule];
-        NSLog(@"start addentry");
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
 - (BOOL)validateTextFileds{
-
-    
+    if ([self.titleTextField.text length] == 0) {
+        NSLog(@"title cant be empty");
+        return NO;
+    }
+    if ([self.accountTextField.text length] == 0) {
+        NSLog(@"account cant be empty");
+        return NO;
+    }
+    if ([self.passwordTextField.text length] == 0) {
+        NSLog(@"password cant be empty");
+        return NO;
+    }
+    if ([self.siteTextField.text length] == 0) {
+//        NSLog(@"site cant be empty");{
+//        return NO;
+        
+        self.siteTextField.text = @"";
+    }
     return YES;
 }
 

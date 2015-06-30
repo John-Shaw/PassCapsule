@@ -11,6 +11,7 @@
 
 static NSString * const CAPSULE_GROUP      = @"group";
 static NSString * const CAPSULE_GROUP_NAME = @"name";
+static NSString * const CAPSULE_GROUP_DEFAULT = @"未分类";
 
 
 @interface PCCapsuleGroup : NSObject

@@ -63,6 +63,8 @@
 }
 
 -(void)toMainView:(UIButton *)sender{
+    [self.passwordTextField resignFirstResponder];
+    
     NSString *password  = self.passwordTextField.text;
     BOOL isTruePassword = NO;
     if ([password length] == 0) {
@@ -107,14 +109,14 @@
     CGFloat unLockButtonNewCenterX = 0;
     CGFloat backTextFieldNewOriginX = 0;
     CGFloat backTextFieldNewWidth = 0;
-    NSTimeInterval delay = 0;
+    NSTimeInterval delay = 0.25;
     if (toLeft) {
         unLockButtonNewCenterX  = self.unlockBtn.center.x - self.passwordTextField.frame.size.width;
         backTextFieldNewOriginX = self.passwordTextField.frame.origin.x;
         backTextFieldNewWidth   = self.passwordTextField.frame.size.width;
         self.backgroundTextField.backgroundColor = [UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000];
     } else {
-        delay = 0.25;
+        delay = 0.5;
         unLockButtonNewCenterX  = self.unlockBtn.center.x + self.passwordTextField.frame.size.width;
         backTextFieldNewOriginX = self.passwordTextField.frame.origin.x + self.passwordTextField.frame.size.width;
         backTextFieldNewWidth   = 0;
