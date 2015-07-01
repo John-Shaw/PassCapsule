@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PCDocumentDatabase.h"
 
-static NSString * const NOTIFICATION_PARSER_DONE = @"didLoadData";
+
 
 @interface PCDocumentManager : NSObject
 
@@ -21,7 +21,7 @@ static NSString * const NOTIFICATION_PARSER_DONE = @"didLoadData";
 - (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword;
 - (void)parserDocument:(NSData *)xmlData;
 - (void)addNewEntry: (PCCapsule *)entry;
-
+- (void)saveDocument;
 
 +(instancetype)sharedDocumentManager;
 /**

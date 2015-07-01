@@ -93,7 +93,7 @@
     
     DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
     
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isCreateDatabase"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:USERDEFAULT_DATABASE_CREATE];
     
     self.documentDatabase.document = capsuleDocument;
     self.documentDatabase.isLoadDatabase = YES;

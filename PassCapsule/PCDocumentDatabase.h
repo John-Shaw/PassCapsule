@@ -11,7 +11,9 @@
 #import "PCCapsuleGroup.h"
 @class DDXMLDocument;
 
-static NSString * const DOCUMENT_NAME = @"documentName";
+static NSString * const NOTIFICATION_PARSER_DONE = @"didLoadData";
+static NSString * const USERDEFAULT_DATABASE_CREATE = @"isCreateDatabase";
+static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 
 @interface PCDocumentDatabase : NSObject
 

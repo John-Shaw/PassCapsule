@@ -9,6 +9,7 @@
 #import "PCLoginVC.h"
 #import "EAIntroView.h"
 #import "PCKeyChainCapsule.h"
+#import "PCDocumentDatabase.h"
 
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
@@ -24,7 +25,8 @@
 
     BOOL isFirstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"];
     if (isFirstLaunch) {
-        [self showIntroView];
+        //TODO:想想我这么丑的引导页还是干脆没有好了，以后弄个漂亮的
+//        [self showIntroView];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
     }
     
@@ -86,7 +88,7 @@
 
 #pragma mark - action
 - (IBAction)login:(id)sender {
-    BOOL isCreateDB = [[NSUserDefaults standardUserDefaults] boolForKey:@"isCreateDatabase"];
+    BOOL isCreateDB = [[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_DATABASE_CREATE];
     NSString *segueID = nil;
     if(isCreateDB){
         segueID = @"toUnLockView";

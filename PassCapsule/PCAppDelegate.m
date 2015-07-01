@@ -8,69 +8,39 @@
 
 #import "PCAppDelegate.h"
 #import "IQKeyboardManager.h"
-#import <objc/runtime.h>
 #import "PCKeyChainCapsule.h"
+#import "PCDocumentManager.h"
 
-@implementation UIView (testSwizzling)
-
-- (void)myAddSubview:(UIView *)view{
-    NSLog(@"加了一个view了,%@",view);
-    [self myAddSubview:view];
-}
-
-@end
-
-@interface PCAppDelegate ()
-
-@end
+static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 
 @implementation PCAppDelegate
-+(void)load{
-    //!!!:尝试method swizzling，记得删掉
-//    Method origin = class_getInstanceMethod([UIView class], @selector(addSubview:));
-//    Method swizzling = class_getInstanceMethod([UIView class], @selector(myAddSubview:));
-//    method_exchangeImplementations(origin, swizzling);
-}
-
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-//    
-
-//    
-//    BOOL isFirst = YES;
-//    BOOL isLogin = NO;
-//    
-//    if (isFirst) {
-//        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
-//        [self.window makeKeyAndVisible];
-//    } else if(!isLogin){
-//        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-//        [self.window makeKeyAndVisible];
-//    }
-    
-
-//    [[IQKeyboardManager sharedManager] setEnable:YES];
-//    [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:50];
-
     [self setUserDefaults];
+    
+    UIStoryboard *storyboard = self.window.rootViewController.storyboard;
 
+    BOOL isDataBaseCreate = [[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_DATABASE_CREATE];
+    if (isDataBaseCreate) {
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnlockViewController"];
+        [self.window makeKeyAndVisible];
+    }
+    
     return YES;
 }
 
 - (void)setUserDefaults{
     NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
-    [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:@YES,@"isFirstLaunch", @NO,@"isCreateDatabase" ,nil]];
-    
+    [userDefault registerDefaults:@{USERDEFAULT_LAUNCH_FIRST:@YES, USERDEFAULT_DATABASE_CREATE:@NO }];
+
     NSString *lastVersion = [userDefault stringForKey:@"lastVersion"];
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     if (!lastVersion) {
         [userDefault registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:currentVersion,@"lastVersion", nil]];
     } else if(![lastVersion isEqualToString:currentVersion]){
-        [userDefault setBool:YES forKey:@"isFirstLaunch"];
+        [userDefault setBool:YES forKey:USERDEFAULT_LAUNCH_FIRST];
         [userDefault setObject:currentVersion forKey:@"lastVersion"];
     }
 }
@@ -94,10 +64,11 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstLaunch"]) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_LAUNCH_FIRST]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:USERDEFAULT_LAUNCH_FIRST];
     }
 //    [PCKeyChainCapsule deleteStringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    [[PCDocumentManager sharedDocumentManager] saveDocument];
 }
 
 @end

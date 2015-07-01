@@ -37,10 +37,10 @@
 
 
 + (void)setDocumentName:(NSString *)documentName{
-    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:DOCUMENT_NAME];
+    [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:USERDEFAULT_DOCUMENT_NAME];
 }
 + (NSString *)documentPath{
-    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:DOCUMENT_NAME];
+    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_DOCUMENT_NAME];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     return [documentsPath stringByAppendingPathComponent:documentName];
 }
