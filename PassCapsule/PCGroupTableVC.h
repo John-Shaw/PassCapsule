@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PCCategoryTableVC : UITableViewController
+@interface PCGroupTableVC : UITableViewController
 
 
 

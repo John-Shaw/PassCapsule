@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "PCDocumentDatabase.h"
 
-
+static char * const LOAD_DOCUMENT_QUEUE = "cn.zerz.passcapsule.loadDocumentQueue";
 
 @interface PCDocumentManager : NSObject
 
 @property (nonatomic, strong) NSMutableArray *Capsules;
 @property (nonatomic, strong) NSString *masterPassword;
 @property (nonatomic, strong) PCDocumentDatabase *documentDatabase;
+
 
 
 - (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword;

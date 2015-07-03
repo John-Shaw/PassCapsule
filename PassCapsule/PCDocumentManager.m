@@ -15,6 +15,7 @@
 #import "PCCapsule.h"
 
 
+
 @interface PCDocumentManager ()
 
 @end
@@ -66,7 +67,6 @@
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
         [PCDocumentDatabase setDocumentName:documentName];
         return YES;
-        
     }
     return NO;
 
@@ -74,31 +74,37 @@
 
 - (DDXMLDocument *)baseTreeWithPassword:(NSString *) password{
     DDXMLElement *rootElement = [[DDXMLElement alloc] initWithName:CAPSULE_ROOT];
+    
     //!!!:测试用，把明文放到xml中，release时一定要记得删除这行
     DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterPassword"];
     [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
     [masterKeyElement setStringValue:password];
     [rootElement addChild:masterKeyElement];
     
-    DDXMLElement *groupElement =  [DDXMLElement elementWithName:CAPSULE_GROUP];
-    [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:CAPSULE_GROUP_DEFAULT]];
-    NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:@"zhihu"],
-                          [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
-                          [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
-                          [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zhihu.com"],
-                          [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:CAPSULE_GROUP_DEFAULT]];
-    [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:nil]];
-    
-    [rootElement addChild:groupElement];
+    NSArray *groups = @[CAPSULE_GROUP_DEFAULT,CAPSULE_GROUP_ACCOUNT,CAPSULE_GROUP_EMAIL,CAPSULE_GROUP_CARD];
+    for (NSString *groupName in groups) {
+        DDXMLElement *groupElement =  [DDXMLElement elementWithName:CAPSULE_GROUP];
+        
+        [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:groupName]];
+        
+        NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:[NSString stringWithFormat:@"测试 群组:%@",groupName]],
+                              [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
+                              [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
+                              [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
+                              [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
+        [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:nil]];
+        
+        [rootElement addChild:groupElement];
+    }
+
     
     DDXMLDocument *capsuleDocument = [[DDXMLDocument alloc] initWithXMLString:[rootElement XMLString] options:0 error:nil];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:USERDEFAULT_DATABASE_CREATE];
     
     self.documentDatabase.document = capsuleDocument;
-    self.documentDatabase.isLoadDatabase = YES;
+    self.documentDatabase.loadDocument = YES;
     return capsuleDocument;
-
 }
 
 - (BOOL)readDocument:(NSString *)documentPath withMasterPassword:(NSString *)masterPassword{
@@ -115,12 +121,29 @@
     return YES;
 }
 
+- (void)preLoadDocunent:(NSData *)xmlData{
+    dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, NULL);
+    dispatch_async(loadDocumentQueue, ^{
+        DDXMLDocument *document = nil;
+        if (!self.documentDatabase.isLoad) {
+            document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.documentDatabase.document = document;
+            self.documentDatabase.loadDocument = YES;
+        });
+
+    });
+    
+}
+
 - (void)parserDocument:(NSData *)xmlData{
     DDXMLDocument *document = nil;
-    if (!self.documentDatabase.isLoadDatabase) {
+    if (!self.documentDatabase.isLoad) {
         document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
         self.documentDatabase.document = document;
-        self.documentDatabase.isLoadDatabase = YES;
+        self.documentDatabase.loadDocument = YES;
     } else {
         document = self.documentDatabase.document;
     }
@@ -169,13 +192,15 @@
         [self.documentDatabase.groups addObject:aGroup];
 
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
 }
 
 - (void)addNewEntry: (PCCapsule *)entry{
-    if (self.documentDatabase.document) {
+    if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
         NSArray *results = [document nodesForXPath:[NSString stringWithFormat:@"//group[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT] error:nil];
+        
+        //TODO:判断results是否为空
         DDXMLElement *groupElement = [results firstObject];
         
         DDXMLElement *newEntry = [DDXMLElement elementWithName:CAPSULE_ENTRY];
@@ -190,25 +215,26 @@
         [self.documentDatabase.entries addObject:entry];
         PCCapsuleGroup *group = self.documentDatabase.groups[0];
         [group.groupEntries addObject:entry];
+        
+        self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
     }
 }
 
 - (void)saveDocument{
-    DDXMLElement *root = [self.documentDatabase.document rootElement];
-
-    NSString *path = [PCDocumentDatabase documentPath];
-    BOOL wirteSuccess = [[root XMLString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@" %@ ",[root XMLString]);
-    NSLog(@"documentPath = %@",path);
-    if (wirteSuccess) {
-        NSLog(@"write file success");
-    } else {
-        NSLog(@"write file fail");
+    if (self.documentDatabase.shouldRefresh) {
+        DDXMLElement *root = [self.documentDatabase.document rootElement];
+        NSString *path = [PCDocumentDatabase documentPath];
+        NSLog(@"documentPath = %@",path);
+        BOOL wirteSuccess = [[root XMLString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        NSLog(@" %@ ",[root XMLString]);
+        if (wirteSuccess) {
+            self.documentDatabase.refreshDocument = NO;
+            NSLog(@"write file success");
+        } else {
+            NSLog(@"write file fail");
+        }
     }
-
-
-
 }
 
 //改用 apple security框架中的 SecRandom

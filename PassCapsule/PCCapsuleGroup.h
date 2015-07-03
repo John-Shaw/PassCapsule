@@ -12,7 +12,9 @@
 static NSString * const CAPSULE_GROUP      = @"group";
 static NSString * const CAPSULE_GROUP_NAME = @"name";
 static NSString * const CAPSULE_GROUP_DEFAULT = @"未分类";
-
+static NSString * const CAPSULE_GROUP_ACCOUNT = @"网站账户";
+static NSString * const CAPSULE_GROUP_EMAIL = @"电子邮件";
+static NSString * const CAPSULE_GROUP_CARD= @"银行卡";
 
 @interface PCCapsuleGroup : NSObject
 

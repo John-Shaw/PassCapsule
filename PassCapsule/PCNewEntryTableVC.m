@@ -13,12 +13,11 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
-    self.navigationItem.title = @"新记录";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editDone)];
-}
 
-- (void)editDone{
+//    self.navigationItem.title = @"新记录";
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editDone)];
+}
+- (IBAction)editDone:(UIBarButtonItem *)sender {
     if ([self validateTextFileds]) {
         PCCapsule *aCapsule = [[PCCapsule alloc] init];
         aCapsule.title = self.titleTextField.text;
@@ -29,10 +28,14 @@
         
         PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
         [manager addNewEntry:aCapsule];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+- (IBAction)editCancel:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 - (BOOL)validateTextFileds{
     if ([self.titleTextField.text length] == 0) {

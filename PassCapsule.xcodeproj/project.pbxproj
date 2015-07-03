@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */; };
+		5200C4931AEC82EA00FF89C2 /* PCGroupTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200C4921AEC82EA00FF89C2 /* PCGroupTableVC.m */; };
 		520D854E1B241F46000AB9CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */; };
 		5215414F1B20278100BD6838 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5215414E1B20278100BD6838 /* testImage.jpg */; };
@@ -47,8 +47,8 @@
 
 /* Begin PBXFileReference section */
 		39E665E6408B1EFA20B09C2E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5200C4911AEC82EA00FF89C2 /* PCCategoryTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCategoryTableVC.h; sourceTree = "<group>"; usesTabs = 0; };
-		5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCategoryTableVC.m; sourceTree = "<group>"; usesTabs = 0; };
+		5200C4911AEC82EA00FF89C2 /* PCGroupTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCGroupTableVC.h; sourceTree = "<group>"; usesTabs = 0; };
+		5200C4921AEC82EA00FF89C2 /* PCGroupTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCGroupTableVC.m; sourceTree = "<group>"; usesTabs = 0; };
 		520D854D1B241EDA000AB9CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		520D854F1B241F56000AB9CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		520D85501B241F5D000AB9CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 				52E3D8461B14792200C150FA /* PCRegistVC.m */,
 				5263E84F1AE8FDE000D79116 /* PCUnLockVC.h */,
 				5263E8501AE8FDE000D79116 /* PCUnLockVC.m */,
-				5200C4911AEC82EA00FF89C2 /* PCCategoryTableVC.h */,
-				5200C4921AEC82EA00FF89C2 /* PCCategoryTableVC.m */,
+				5200C4911AEC82EA00FF89C2 /* PCGroupTableVC.h */,
+				5200C4921AEC82EA00FF89C2 /* PCGroupTableVC.m */,
 				520E2F121AFB9E9B008FBC27 /* PCCapsuleDetailVC.h */,
 				520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */,
 				526EEFDE1B2F04EB00B693CD /* PCNewDocumetTableVC.h */,
@@ -429,7 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */,
-				5200C4931AEC82EA00FF89C2 /* PCCategoryTableVC.m in Sources */,
+				5200C4931AEC82EA00FF89C2 /* PCGroupTableVC.m in Sources */,
 				5241FCE31B4237B800B059FB /* PCNewEntryTableVC.m in Sources */,
 				525FBA891B319F740072F534 /* PCKeyChainCapsule.m in Sources */,
 				520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */,

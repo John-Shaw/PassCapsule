@@ -9,7 +9,7 @@
 #import "PCUnLockVC.h"
 #import "PCKeyChainCapsule.h"
 #import "PCPassword.h"
-#import "PCCategoryTableVC.h"
+#import "PCGroupTableVC.h"
 #import "PCDocumentDatabase.h"
 
 @interface PCUnLockVC ()<UITextFieldDelegate>
@@ -50,6 +50,7 @@
 
     //关于view的位置，有空要学习。
     [self.view insertSubview:self.backgroundTextField belowSubview:self.unlockBtn];
+    
 
 }
 
@@ -84,9 +85,6 @@
     }
     [self unlockAnimation:isTruePassword WithDirctionToLef:YES WithBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            
-
-            
             
             [self performSegueWithIdentifier:@"showMainView" sender:self];
         } else {

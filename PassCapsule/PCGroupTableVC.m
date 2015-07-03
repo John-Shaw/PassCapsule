@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "PCCategoryTableVC.h"
+#import "PCGroupTableVC.h"
 #import "PCXMLParser.h"
 #import "PCCapsule.h"
 #import "PCCapsuleDetailVC.h"
@@ -15,29 +15,32 @@
 #include "PCDocumentDatabase.h"
 
 
-@interface PCCategoryTableVC()
+@interface PCGroupTableVC()
 
 @property (nonatomic,strong) NSMutableArray *groups;
 @property (nonatomic,strong) NSMutableArray *entries;
 
 @end
 
-@implementation PCCategoryTableVC
+@implementation PCGroupTableVC
 
 
 -(void)viewDidLoad{
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_PARSER_DONE object:nil];
     
-    PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
-
-    NSString *path = [PCDocumentDatabase documentPath];
-    NSLog(@"path = %@",path);
-    
-//    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"capsules" ofType:@"xml"];
-    
-    NSData *xmlData = [NSData dataWithContentsOfFile:path];
-    NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
-    [manager parserDocument:xmlData];
+    dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, NULL);
+    dispatch_async(loadDocumentQueue, ^{
+        PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
+        NSString *path = [PCDocumentDatabase documentPath];
+        NSLog(@"path = %@",path);
+        NSData *xmlData = [NSData dataWithContentsOfFile:path];
+        NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
+        [manager parserDocument:xmlData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+        });
+    });
     
 }
 
@@ -70,6 +73,13 @@
     return _groups;
 }
 
+
+#pragma mark - editing mode
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    [super setEditing:editing animated:animated];
+    
+    
+}
 
 
 #pragma mark - tableview date source delegate
@@ -107,6 +117,7 @@
 
 #pragma mark - segues
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     if(indexPath){
         if([segue.identifier isEqualToString:@"showCellDetail"]){

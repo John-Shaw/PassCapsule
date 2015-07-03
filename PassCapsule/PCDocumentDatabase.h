@@ -24,7 +24,8 @@ static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 @property (nonatomic, strong) DDXMLDocument *document;
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, strong) NSMutableArray *groups;
-@property (nonatomic)   BOOL isLoadDatabase;
+@property (nonatomic, getter=isLoad) BOOL loadDocument;
+@property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
 
 /**
  Should create only one instance of class. Should not call init.
