@@ -40,11 +40,8 @@
 - (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
     
     
-    
-    NSData *randomData = [PCPassword generateSaltOfSize:64];
-    NSString *baseKey = [randomData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [PCKeyChainCapsule setString:baseKey forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
-    NSLog(@"base64key  =  %@",baseKey);
+    //TODO:偷懒了
+    [PCPassword setPassword:masterPassword];
     
     
     NSString *hashPassword = [PCPassword hashPassword:masterPassword];
@@ -81,7 +78,7 @@
     [masterKeyElement setStringValue:password];
     [rootElement addChild:masterKeyElement];
     
-    NSArray *groups = @[CAPSULE_GROUP_DEFAULT,CAPSULE_GROUP_ACCOUNT,CAPSULE_GROUP_EMAIL,CAPSULE_GROUP_CARD];
+    NSArray *groups = @[CAPSULE_GROUP_DEFAULT,CAPSULE_GROUP_WEBACCOUNT,CAPSULE_GROUP_EMAIL,CAPSULE_GROUP_CARD];
     for (NSString *groupName in groups) {
         DDXMLElement *groupElement =  [DDXMLElement elementWithName:CAPSULE_GROUP];
         
@@ -92,6 +89,7 @@
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
+        
         [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:nil]];
         
         [rootElement addChild:groupElement];
@@ -118,6 +116,13 @@
         NSLog(@"password is empty");
         return NO;
     }
+    NSData *xmlData = [NSData dataWithContentsOfFile:documentPath];
+    DDXMLDocument *document = nil;
+    if (!self.documentDatabase.isLoad) {
+        document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
+    }
+    self.documentDatabase.document = document;
+    self.documentDatabase.loadDocument = YES;
     return YES;
 }
 
@@ -169,7 +174,7 @@
                     aCapsule.account = e.stringValue;
                 }
                 if ([e.name isEqualToString:CAPSULE_ENTRY_PASSWORD]) {
-                    aCapsule.pass = e.stringValue;
+                    aCapsule.password = e.stringValue;
                 }
                 if ([e.name isEqualToString:CAPSULE_ENTRY_SITE]) {
                     aCapsule.site = e.stringValue;
@@ -178,7 +183,7 @@
                     aCapsule.iconName = e.stringValue;
                 }
                 if ([e.name isEqualToString:CAPSULE_ENTRY_GROUP]) {
-                    aCapsule.category = e.stringValue;
+                    aCapsule.group = e.stringValue;
                 }
 
             }
@@ -198,17 +203,22 @@
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
-        NSArray *results = [document nodesForXPath:[NSString stringWithFormat:@"//group[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT] error:nil];
+        NSString *xpath = [NSString stringWithFormat:@"//group[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT];
+        NSArray *results = [document nodesForXPath:xpath error:nil];
         
-        //TODO:判断results是否为空
+        if ([results count] == 0) {
+            NSLog(@"group name error");
+            return;
+        }
+        
         DDXMLElement *groupElement = [results firstObject];
-        
         DDXMLElement *newEntry = [DDXMLElement elementWithName:CAPSULE_ENTRY];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:entry.title]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:entry.account]];
-        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.pass]];
+        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.password]];
+        
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:entry.site]];
-        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.category]];
+        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.group]];
         
         [groupElement addChild:newEntry];
         
@@ -218,6 +228,32 @@
         
         self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+    }
+}
+
+- (void)deleteEntry: (PCCapsule *)entry{
+    if (self.documentDatabase.isLoad) {
+        DDXMLDocument *document = self.documentDatabase.document;
+        NSString *idString = [@(entry.capsuleID) stringValue];
+        NSString *xpath = [NSString stringWithFormat:@"//group[@name=\"%@\"]/entry[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT,idString];
+        NSArray *results = [document nodesForXPath:xpath error:nil];
+        if ([results count] == 0) {
+            NSLog(@"group name error");
+            return;
+        }
+        DDXMLElement *deleteElement = [results firstObject];
+        DDXMLElement *groupElement = (DDXMLElement *)[deleteElement parent];
+        [groupElement removeChildAtIndex:[deleteElement index]];
+        
+        [self.documentDatabase.entries removeObject:entry];
+        PCCapsuleGroup *group = self.documentDatabase.groups[0];
+        [group.groupEntries removeObject:entry];
+        
+        self.documentDatabase.refreshDocument = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+    } else {
+        [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
+        [self deleteEntry:entry];
     }
 }
 

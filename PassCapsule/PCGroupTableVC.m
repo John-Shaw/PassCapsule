@@ -29,7 +29,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_PARSER_DONE object:nil];
     
-    dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, NULL);
+    dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, DISPATCH_QUEUE_SERIAL);
     dispatch_async(loadDocumentQueue, ^{
         PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
         NSString *path = [PCDocumentDatabase documentPath];
@@ -77,8 +77,7 @@
 #pragma mark - editing mode
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     [super setEditing:editing animated:animated];
-    
-    
+
 }
 
 

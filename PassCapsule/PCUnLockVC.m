@@ -12,6 +12,7 @@
 #import "PCGroupTableVC.h"
 #import "PCDocumentDatabase.h"
 
+
 @interface PCUnLockVC ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *passwordTextField;
 @property (strong, nonatomic) UITextField *backgroundTextField;
@@ -24,44 +25,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUI];
+    
+}
 
+
+- (void)setUI{
     self.passwordTextField                 = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 100, 44)];
     self.passwordTextField.center          = CGPointMake(self.view.bounds.size.width/2,
-                                      self.view.bounds.size.height/2);
+                                                         self.view.bounds.size.height/2);
     self.passwordTextField.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0];
     self.passwordTextField.delegate        = self;
     self.passwordTextField.layer.cornerRadius = 7;
     [self.passwordTextField setSecureTextEntry:YES];
-
+    
     self.unlockBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     [self.unlockBtn setOpaque:NO];
     self.unlockBtn.center = CGPointMake(self.passwordTextField.center.x + self.passwordTextField.frame.size.width/2 + 0, self.passwordTextField.center.y);
     [self.unlockBtn setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
     [self.unlockBtn addTarget:self action:@selector(toMainView:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.unlockBtn];
     //     NSLog(@"%@",[[self.view.subviews objectAtIndex:2] description]);
-
+    
     self.backgroundTextField                     = [[UITextField alloc] initWithFrame:self.passwordTextField.frame];
     self.backgroundTextField.layer.cornerRadius  = 7;
     self.backgroundTextField.backgroundColor     = [UIColor whiteColor];
     self.backgroundTextField.frame               = CGRectMake(self.backgroundTextField.frame.origin.x + self.backgroundTextField.frame.size.width, self.backgroundTextField.frame.origin.y, 0, self.backgroundTextField.frame.size.height);
-
+    
     //关于view的位置，有空要学习。
     [self.view insertSubview:self.backgroundTextField belowSubview:self.unlockBtn];
-    
-
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
 
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    [self toMainView:self.unlockBtn];
-}
 
 -(void)toMainView:(UIButton *)sender{
     [self.passwordTextField resignFirstResponder];
@@ -73,8 +70,7 @@
         return;
     }
     
-    //valid password for test
-
+    //valid password
     NSString *basePassowrd = [PCKeyChainCapsule stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
     NSString *hashPasswprd = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:basePassowrd options:NSDataBase64DecodingIgnoreUnknownCharacters] encoding:NSUTF8StringEncoding];
     NSLog(@"base pass = %@",basePassowrd);
@@ -85,7 +81,7 @@
     }
     [self unlockAnimation:isTruePassword WithDirctionToLef:YES WithBlock:^(BOOL isSuccess) {
         if (isSuccess) {
-            
+            [PCPassword setPassword:password];
             [self performSegueWithIdentifier:@"showMainView" sender:self];
         } else {
             NSLog(@"password is wrong");
@@ -171,5 +167,18 @@
     }
 
 }
+
+#pragma mark - UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    [self toMainView:self.unlockBtn];
+}
+
+
+
 
 @end

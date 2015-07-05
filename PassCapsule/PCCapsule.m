@@ -7,8 +7,20 @@
 //
 
 #import "PCCapsule.h"
+#import "PCPassword.h"
 
 @implementation PCCapsule
 
+- (void)setPassword:(NSString *)password{
+    if ([password length] == 0) {
+        _password = nil;
+    } else {
+        _password = [PCPassword encryptedString:password];
+    }
+}
+
+- (NSString *)decrptedPassword{
+    return [PCPassword decryptedString:self.password];
+}
 
 @end

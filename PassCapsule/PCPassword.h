@@ -10,10 +10,14 @@
 
 @interface PCPassword : NSObject
 
-+ (NSData *)encryptedDataWithPassword:(NSString *)password;
-+ (NSString *)encryptedStringWithPassword:(NSString *)password;
-+ (NSString *)decryptedStringWithPassword:(NSString *)password;
-+ (NSString *)masterKey;
++ (NSString *)password;
++ (void)setPassword:(NSString *)password;
++ (NSData *)encryptedData:(NSString *)password;
++ (NSData *)encryptedData:(NSString *)password WithKey:(NSString *)key;
++ (NSString *)encryptedString:(NSString *)password;
++ (NSString *)decryptedString:(NSString *)encryptedString;
++ (NSString *)decryptedString:(NSString *)encryptedString  WithKey:(NSString *)key;
+//+ (NSString *)masterKey;
 
 #pragma mark - from miniKeePass
 

@@ -27,6 +27,8 @@ static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 @property (nonatomic, getter=isLoad) BOOL loadDocument;
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
 
+@property (nonatomic, readwrite) NSUInteger currentID;
+
 /**
  Should create only one instance of class. Should not call init.
  */

@@ -117,8 +117,8 @@
             NSLog(@"account :%@",self.aCapusle.account);
         }
         if ([elementName isEqualToString:@"pass"]) {
-            self.aCapusle.pass = trimmedString;
-            NSLog(@"pass :%@",self.aCapusle.pass);
+            self.aCapusle.password = trimmedString;
+            NSLog(@"pass :%@",self.aCapusle.password);
         }
         if ([elementName isEqualToString:@"site"]) {
             self.aCapusle.site = trimmedString;
@@ -129,8 +129,8 @@
             NSLog(@"iconName :%@",self.aCapusle.iconName);
         }
         if ([elementName isEqualToString:@"category"]) {
-            self.aCapusle.category = trimmedString;
-            NSLog(@"category :%@",self.aCapusle.category);
+            self.aCapusle.group = trimmedString;
+            NSLog(@"category :%@",self.aCapusle.group);
         }
     }
 }

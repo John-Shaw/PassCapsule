@@ -39,7 +39,6 @@ typedef enum : NSUInteger {
     else{
         self.iconView.image = [UIImage imageNamed:@"lock"];
     }
-    
 
 }
 
@@ -78,6 +77,29 @@ typedef enum : NSUInteger {
     return cell;
 }
 
+
+
+#pragma mark - table view delagate
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == CELL_PASSWORD) {
+        return NO;
+    }
+    return YES;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender{
+//    if (action == @selector(copy:)) {
+//        return YES;
+//    }
+//    return NO;
+    return (action == @selector(copy:));
+}
+
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender{
     if (action == @selector(copy:)) {
         NSString *copyString = @"";
@@ -86,7 +108,7 @@ typedef enum : NSUInteger {
                 copyString = self.capsule.account;
                 break;
             case CELL_PASSWORD:
-                copyString = self.capsule.pass;
+                copyString = [self.capsule decrptedPassword];
                 break;
             case CELL_SITE:
                 copyString = self.capsule.site;
@@ -99,7 +121,6 @@ typedef enum : NSUInteger {
 }
 
 
-#pragma mark - table view delagate
 
 
 

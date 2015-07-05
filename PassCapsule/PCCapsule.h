@@ -23,11 +23,12 @@ static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
 
 @property (nonatomic, readwrite) NSInteger capsuleID;
 @property (nonatomic, strong) NSString  *title;
-@property (nonatomic, strong) NSString  *pass;
+@property (nonatomic, strong) NSString  *password;
 @property (nonatomic, strong) NSString  *site;
 @property (nonatomic, strong) NSString  *account;
 @property (nonatomic, strong) NSString  *iconName;
-@property (nonatomic, strong) NSString  *category;
+@property (nonatomic, strong) NSString  *group;
 
+- (NSString *)decrptedPassword;
 
 @end

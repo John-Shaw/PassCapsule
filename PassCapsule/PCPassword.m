@@ -13,29 +13,48 @@
 
 @implementation PCPassword
 
+//为了方便，先存用户输入的明文，因为反正程序结束也会删除KeyChain，当然为了更安全还是hash一下好，我只是偷个懒
++ (void)setPassword:(NSString *)password{
+    [PCKeyChainCapsule setString:password forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+}
 
++ (NSString *)password{
+    return [PCKeyChainCapsule stringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+}
 
-+ (NSData *)encryptedDataWithPassword:(NSString *)password{
++ (NSData *)encryptedData:(NSString *)plain{
+    NSString *key = [self password];
+    return [self encryptedData:plain WithKey:key];
+}
 
-    NSData *data = [password dataUsingEncoding:NSUTF8StringEncoding];
++ (NSData *)encryptedData:(NSString *)plain WithKey:(NSString *)key{
+    NSData *data = [plain dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     NSData *encryptedData = [RNEncryptor encryptData:data
                                         withSettings:kRNCryptorAES256Settings
-                                            password:[self masterKey]
+                                            password:key
                                                error:&error];
     return encryptedData;
 }
 
-+ (NSString *)encryptedStringWithPassword:(NSString *)password{
-    NSData *encryptedData = [self encryptedDataWithPassword:password];
-    NSString* encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSLog(@"user encrpyt pass  =  %@",encryptedPassword);
++ (NSString *)encryptedString:(NSString *)plain{
+    NSString *key = [self password];
+    return [self encryptedString:plain WithKey:key];
+}
+
++ (NSString *)encryptedString:(NSString *)plain WithKey:(NSString *)key{
+    NSData *encryptedData = [self encryptedData:plain WithKey:key];
+    NSString *encryptedPassword = [encryptedData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     return encryptedPassword;
 }
 
-+ (NSString *)decryptedStringWithPassword:(NSString *)password{
-    NSString *key = [self masterKey];
-    NSData *encryptedData = [[NSData alloc] initWithBase64EncodedString:password options:NSDataBase64DecodingIgnoreUnknownCharacters];
++ (NSString *)decryptedString:(NSString *)encryptedString{
+    NSString *key = [self password];
+    return [self decryptedString:encryptedString WithKey:key];
+}
+
++ (NSString *)decryptedString:(NSString *)encryptedString  WithKey:(NSString *)key{
+    NSData *encryptedData = [[NSData alloc] initWithBase64EncodedString:encryptedString options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSData *decryptData = [RNDecryptor decryptData:encryptedData
                                       withPassword:key
                                              error:nil];
@@ -43,14 +62,17 @@
     return decryptString;
 }
 
-+ (NSString *)masterKey{
-    NSString *base64key = [PCKeyChainCapsule stringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
-    NSData *datakey = [[NSData alloc] initWithBase64EncodedString:base64key options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSString *key = [[NSString alloc] initWithData:datakey encoding:NSUTF8StringEncoding];
-    NSLog(@"get key from keychain =  %@",base64key);
-    NSLog(@"origin key =  %@",key);
-    return base64key;
-}
+//!!!:暂时废弃保存一个随机生成的master key，因为有key chain被破解（越狱就可以）的风险，改用用户输入密码的固定hash（不能加盐，否则不一样不能解密，囧，我太笨了），
+//每次退出都会删除key chain里的master key 数据，除非cracker在运行期破解了keychain获得解密的密匙，然而这好像几乎不可能。
+//如果真能，只有考虑内存混淆加密了。
+//+ (NSString *)masterKey{
+//    NSString *base64key = [PCKeyChainCapsule stringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+//    NSData *datakey = [[NSData alloc] initWithBase64EncodedString:base64key options:NSDataBase64DecodingIgnoreUnknownCharacters];
+//    NSString *key = [[NSString alloc] initWithData:datakey encoding:NSUTF8StringEncoding];
+//    NSLog(@"get key from keychain =  %@",base64key);
+//    NSLog(@"origin key =  %@",key);
+//    return base64key;
+//}
 
 #pragma mark - from miniKeePass
 

@@ -12,9 +12,16 @@
 static NSString * const CAPSULE_GROUP      = @"group";
 static NSString * const CAPSULE_GROUP_NAME = @"name";
 static NSString * const CAPSULE_GROUP_DEFAULT = @"未分类";
-static NSString * const CAPSULE_GROUP_ACCOUNT = @"网站账户";
+static NSString * const CAPSULE_GROUP_WEBACCOUNT = @"网站账户";
 static NSString * const CAPSULE_GROUP_EMAIL = @"电子邮件";
 static NSString * const CAPSULE_GROUP_CARD= @"银行卡";
+
+typedef NS_ENUM(NSUInteger, GROUP_TYPE) {
+    GROUP_TYPE_DEFAULT,
+    GROUP_TYPE_WEBACCOUNT,
+    GROUP_TYPE_EMAIL,
+    GROUP_TYPE_CARD
+};
 
 @interface PCCapsuleGroup : NSObject
 

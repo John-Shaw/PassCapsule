@@ -22,9 +22,9 @@
         PCCapsule *aCapsule = [[PCCapsule alloc] init];
         aCapsule.title = self.titleTextField.text;
         aCapsule.account = self.accountTextField.text;
-        aCapsule.pass = self.passwordTextField.text;
+        aCapsule.password = self.passwordTextField.text;
         aCapsule.site = self.siteTextField.text;
-        aCapsule.category = CAPSULE_GROUP_DEFAULT;
+        aCapsule.group = CAPSULE_GROUP_DEFAULT;
         
         PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
         [manager addNewEntry:aCapsule];
@@ -51,8 +51,6 @@
         return NO;
     }
     if ([self.siteTextField.text length] == 0) {
-//        NSLog(@"site cant be empty");{
-//        return NO;
         
         self.siteTextField.text = @"";
     }

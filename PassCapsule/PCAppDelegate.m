@@ -51,7 +51,9 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-        [[PCDocumentManager sharedDocumentManager] saveDocument];
+    [[PCDocumentManager sharedDocumentManager] saveDocument];
+    
+    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -68,8 +70,9 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
     if ([[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_LAUNCH_FIRST]) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:USERDEFAULT_LAUNCH_FIRST];
     }
-//    [PCKeyChainCapsule deleteStringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    
     [[PCDocumentManager sharedDocumentManager] saveDocument];
+    [PCKeyChainCapsule deleteStringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
 }
 
 @end
