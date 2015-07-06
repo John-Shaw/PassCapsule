@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5200C4931AEC82EA00FF89C2 /* PCGroupTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5200C4921AEC82EA00FF89C2 /* PCGroupTableVC.m */; };
 		520D854E1B241F46000AB9CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
-		520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */; };
+		520E2F141AFB9E9B008FBC27 /* PCEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */; };
 		5215414F1B20278100BD6838 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5215414E1B20278100BD6838 /* testImage.jpg */; };
 		523EC7911B207DAD00073FCE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 523EC7931B207DAD00073FCE /* Localizable.strings */; };
 		52415B6F1B3C23AF00F911B3 /* PCDocumentDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 52415B6E1B3C23AF00F911B3 /* PCDocumentDatabase.m */; };
@@ -52,8 +52,8 @@
 		520D854D1B241EDA000AB9CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		520D854F1B241F56000AB9CF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		520D85501B241F5D000AB9CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		520E2F121AFB9E9B008FBC27 /* PCCapsuleDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCapsuleDetailVC.h; sourceTree = "<group>"; };
-		520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCapsuleDetailVC.m; sourceTree = "<group>"; };
+		520E2F121AFB9E9B008FBC27 /* PCEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCEntryViewController.h; sourceTree = "<group>"; };
+		520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCEntryViewController.m; sourceTree = "<group>"; };
 		5215414E1B20278100BD6838 /* testImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpg; sourceTree = "<group>"; };
 		523EC7921B207DAD00073FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		523EC7941B207DB200073FCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 				5263E8501AE8FDE000D79116 /* PCUnLockVC.m */,
 				5200C4911AEC82EA00FF89C2 /* PCGroupTableVC.h */,
 				5200C4921AEC82EA00FF89C2 /* PCGroupTableVC.m */,
-				520E2F121AFB9E9B008FBC27 /* PCCapsuleDetailVC.h */,
-				520E2F131AFB9E9B008FBC27 /* PCCapsuleDetailVC.m */,
+				520E2F121AFB9E9B008FBC27 /* PCEntryViewController.h */,
+				520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */,
 				526EEFDE1B2F04EB00B693CD /* PCNewDocumetTableVC.h */,
 				526EEFDF1B2F04EB00B693CD /* PCNewDocumetTableVC.m */,
 				525FBA821B2FE99F0072F534 /* PCRegistTableVC.h */,
@@ -432,7 +432,7 @@
 				5200C4931AEC82EA00FF89C2 /* PCGroupTableVC.m in Sources */,
 				5241FCE31B4237B800B059FB /* PCNewEntryTableVC.m in Sources */,
 				525FBA891B319F740072F534 /* PCKeyChainCapsule.m in Sources */,
-				520E2F141AFB9E9B008FBC27 /* PCCapsuleDetailVC.m in Sources */,
+				520E2F141AFB9E9B008FBC27 /* PCEntryViewController.m in Sources */,
 				5263E8511AE8FDE000D79116 /* PCUnLockVC.m in Sources */,
 				5277F3951B3D4340007AEB4A /* PCPassword.m in Sources */,
 				52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */,

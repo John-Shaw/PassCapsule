@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PCCapsule;
-@interface PCCapsuleDetailVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface PCEntryViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) PCCapsule *capsule;

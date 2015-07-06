@@ -13,7 +13,8 @@
 @implementation PCNewDocumetTableVC
 
 -(void)viewDidLoad{
-
+    [super viewDidLoad];
+    
 }
 
 
@@ -37,7 +38,6 @@
         PCDocumentManager *document = [PCDocumentManager sharedDocumentManager];
         NSString *name = self.nameTextField.text;
         NSString *password = self.passwordTextField.text;
-        
         BOOL createSuccess = [document createDocument:[name stringByAppendingPathExtension:@"pcdb"] WithMasterPassword:password];
         if (createSuccess) {
             [self performSegueWithIdentifier:@"toUnLockView" sender:self];

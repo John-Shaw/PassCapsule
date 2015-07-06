@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4n9-dn-zzk">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -263,7 +262,7 @@
         <!--详细界面-->
         <scene sceneID="epg-UL-x3e">
             <objects>
-                <viewController storyboardIdentifier="CapsuleDetail" title="详细界面" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SgM-vg-3RY" customClass="PCCapsuleDetailVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CapsuleDetail" title="详细界面" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SgM-vg-3RY" customClass="PCEntryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qzb-3z-1r4"/>
                         <viewControllerLayoutGuide type="bottom" id="sm5-Ss-3L6"/>
@@ -664,8 +663,8 @@
                             <constraint firstItem="aC8-Oq-lD6" firstAttribute="top" secondItem="A7T-ex-ilA" secondAttribute="bottom" constant="37" id="GfC-4S-bcP"/>
                             <constraint firstItem="A7T-ex-ilA" firstAttribute="trailing" secondItem="aC8-Oq-lD6" secondAttribute="trailing" id="I3m-CR-8lh"/>
                             <constraint firstItem="6Ks-qF-onR" firstAttribute="top" secondItem="yvv-pp-dO7" secondAttribute="bottom" constant="36" id="IVy-gh-dzG"/>
+                            <constraint firstAttribute="centerX" secondItem="A7T-ex-ilA" secondAttribute="centerX" id="dHx-gY-KwH"/>
                             <constraint firstItem="A7T-ex-ilA" firstAttribute="top" secondItem="dIV-ef-abp" secondAttribute="bottom" constant="80" id="meu-aN-ub1"/>
-                            <constraint firstItem="A7T-ex-ilA" firstAttribute="leading" secondItem="sby-xS-hjQ" secondAttribute="leadingMargin" constant="94" id="pPE-5c-keZ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -675,12 +674,12 @@
                                 <exclude reference="6Ks-qF-onR"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="DtM-g7-DeB"/>
-                                <exclude reference="FOF-ji-ksN"/>
-                                <exclude reference="I3m-CR-8lh"/>
-                                <exclude reference="pPE-5c-keZ"/>
                                 <exclude reference="CI1-MA-RCS"/>
                                 <exclude reference="GfC-4S-bcP"/>
+                                <exclude reference="DtM-g7-DeB"/>
+                                <exclude reference="I3m-CR-8lh"/>
+                                <exclude reference="dHx-gY-KwH"/>
+                                <exclude reference="FOF-ji-ksN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -691,21 +690,21 @@
                                 <include reference="6Ks-qF-onR"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="DtM-g7-DeB"/>
-                                <include reference="IVy-gh-dzG"/>
-                                <include reference="FOF-ji-ksN"/>
-                                <include reference="G4P-Z2-tZp"/>
-                                <include reference="I3m-CR-8lh"/>
-                                <include reference="pPE-5c-keZ"/>
                                 <include reference="CI1-MA-RCS"/>
                                 <include reference="GfC-4S-bcP"/>
+                                <include reference="DtM-g7-DeB"/>
+                                <include reference="IVy-gh-dzG"/>
+                                <include reference="I3m-CR-8lh"/>
+                                <include reference="dHx-gY-KwH"/>
+                                <include reference="FOF-ji-ksN"/>
+                                <include reference="G4P-Z2-tZp"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
                                 <include reference="IVy-gh-dzG"/>
-                                <include reference="G4P-Z2-tZp"/>
                                 <include reference="meu-aN-ub1"/>
+                                <include reference="G4P-Z2-tZp"/>
                             </mask>
                         </variation>
                     </view>
@@ -1335,7 +1334,7 @@
                             <rect key="frame" x="0.0" y="273" width="600" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="Hn0-0v-vwG"/>

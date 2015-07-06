@@ -6,23 +6,25 @@
 //  Copyright (c) 2015年 John Shaw. All rights reserved.
 //
 
-#import "PCCapsuleDetailVC.h"
+#import "PCEntryViewController.h"
 #import "PCCapsule.h"
 
 typedef enum : NSUInteger {
-    CELL_ACCOUNT,
-    CELL_PASSWORD,
-    CELL_SITE,
-    CELL_GROUP,
-} CELL_TYPE;
+    PCEntryCellTypeAccount,
+    PCEntryCellTypePassword,
+    PCEntryCellTypeSite,
+    PCEntryCellTypeGroup,
+} PCEntryCellType;
 
-@interface PCCapsuleDetailVC() 
+
+
+@interface PCEntryViewController() 
 @property (weak, nonatomic) IBOutlet UILabel *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *detailVeiw;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @end
 
-@implementation PCCapsuleDetailVC
+@implementation PCEntryViewController
 
 
 -(void)viewDidLoad{
@@ -57,20 +59,20 @@ typedef enum : NSUInteger {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:common];
 
-    if (indexPath.row == CELL_ACCOUNT) {
+    if (indexPath.row == PCEntryCellTypeAccount) {
         cell.textLabel.text = @"用户名";
         cell.detailTextLabel.text = self.capsule.account;
     }
-    if (indexPath.row == CELL_PASSWORD) {
+    if (indexPath.row == PCEntryCellTypePassword) {
         cell.textLabel.text = @"密码";
         cell.detailTextLabel.text = @"*********";
         
     }
-    if (indexPath.row == CELL_SITE) {
+    if (indexPath.row == PCEntryCellTypeSite) {
         cell.textLabel.text = @"网站";
         cell.detailTextLabel.text = self.capsule.site;
     }
-    if (indexPath.row == CELL_GROUP) {
+    if (indexPath.row == PCEntryCellTypeGroup) {
         cell = [tableView dequeueReusableCellWithIdentifier:group];
         cell.textLabel.text = @"群组";
     }
@@ -81,7 +83,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - table view delagate
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == CELL_PASSWORD) {
+    if (indexPath.row == PCEntryCellTypePassword) {
         return NO;
     }
     return YES;
@@ -104,13 +106,13 @@ typedef enum : NSUInteger {
     if (action == @selector(copy:)) {
         NSString *copyString = @"";
         switch (indexPath.row) {
-            case CELL_ACCOUNT:
+            case PCEntryCellTypeAccount:
                 copyString = self.capsule.account;
                 break;
-            case CELL_PASSWORD:
+            case PCEntryCellTypePassword:
                 copyString = [self.capsule decrptedPassword];
                 break;
-            case CELL_SITE:
+            case PCEntryCellTypeSite:
                 copyString = self.capsule.site;
                 break;
             default:

@@ -9,7 +9,7 @@
 #import "PCGroupTableVC.h"
 #import "PCXMLParser.h"
 #import "PCCapsule.h"
-#import "PCCapsuleDetailVC.h"
+#import "PCEntryViewController.h"
 
 #import "PCDocumentManager.h"
 #include "PCDocumentDatabase.h"
@@ -42,11 +42,17 @@
         });
     });
     
+//    //kvo
+//    [[PCDocumentDatabase sharedDocumentDatabase]  addObserver:self
+//                                                  forKeyPath:@"entries"
+//                                                     options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
+//                                                     context:@"this is a context"];
 }
 
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[PCDocumentDatabase sharedDocumentDatabase] removeObserver:self forKeyPath:@"entries"];
 }
 
 - (void)didloadCellDataSource: (NSNotification *)notification{
@@ -54,9 +60,9 @@
     self.groups = database.groups;
     self.entries = database.entries;
     [self.tableView reloadData];
-    PCCapsuleGroup *group = [self.groups firstObject];
-    NSLog(@"groups : %@",[group.groupEntries description]);
-    NSLog(@"notifi name : %@",notification.name);
+//    PCCapsuleGroup *group = [self.groups firstObject];
+//    NSLog(@"groups : %@",[group.groupEntries description]);
+//    NSLog(@"notifi name : %@",notification.name);
 }
 
 - (NSMutableArray *)entries{
@@ -74,10 +80,44 @@
 }
 
 
-#pragma mark - editing mode
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
-    [super setEditing:editing animated:animated];
+//暂时用 Notification 足够
+//#pragma mark - kvo
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//    NSLog(@"object is :%@",[object description]);
+//    NSLog(@"old: %@", [change objectForKey:NSKeyValueChangeOldKey]);
+//    NSLog(@"new: %@", [change objectForKey:NSKeyValueChangeNewKey]);
+//    NSLog(@"context: %@", context);
+//    [self.tableView reloadData];
+//}
 
+//#pragma mark - editing mode
+//- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
+//    [super setEditing:editing animated:animated];
+//
+//}
+
+#pragma mark - tableview delegate
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
+    if ([tableView isEqual:self.tableView]) {
+        style = UITableViewCellEditingStyleDelete;
+    }
+    return style;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        PCCapsuleGroup *group = self.groups[indexPath.section];
+        PCCapsule *entry = group.groupEntries[indexPath.row];
+        [group.groupEntries removeObjectAtIndex:indexPath.row];
+        [[PCDocumentManager sharedDocumentManager] deleteEntry:entry];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 
@@ -120,8 +160,8 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     if(indexPath){
         if([segue.identifier isEqualToString:@"showCellDetail"]){
-            if ([segue.destinationViewController isKindOfClass:[PCCapsuleDetailVC class]]){
-                PCCapsuleDetailVC *cdvc = [segue destinationViewController];
+            if ([segue.destinationViewController isKindOfClass:[PCEntryViewController class]]){
+                PCEntryViewController *cdvc = [segue destinationViewController];
                 PCCapsuleGroup *group = self.groups[indexPath.section];
                 PCCapsule *capsule = [group.groupEntries objectAtIndex:indexPath.row];
                 cdvc.capsule = capsule;

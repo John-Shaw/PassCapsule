@@ -10,7 +10,7 @@
 
 @implementation PCDocumentDatabase
 
-+(instancetype)sharedDocumentDatabase{
++ (instancetype)sharedDocumentDatabase{
     static PCDocumentDatabase *kDatabase;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken,^{
@@ -19,20 +19,42 @@
     return kDatabase;
 }
 
+- (NSUInteger)autoIncreaseID{
+    NSUInteger increaseID = self.currentID;
+    [self setCurrentID:increaseID+1];
+    return increaseID;
+}
 
-
--(NSMutableArray *)entries{
+#pragma mark - getter and setter
+- (NSMutableArray *)entries{
     if (!_entries) {
         _entries = [[NSMutableArray alloc] init];
     }
     return _entries;
 }
 
--(NSMutableArray *)groups{
+- (NSMutableArray *)groups{
     if (!_groups) {
         _groups = [[NSMutableArray alloc] init];
     }
     return _groups;
+}
+
+//readwrite 的属性如果同时重写了getter和setter，必须手动 @synthesize
+//readonly 的属性如果重写了getter，必须手动 @synthesize
+@synthesize currentID=_currentID;
+- (NSUInteger)currentID{
+    NSUInteger temp = [[[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_CURRENT_ID] integerValue];
+    if (!temp) {
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{USERDEFAULT_CURRENT_ID:@1}];
+        _currentID = 1;
+    }
+    return temp;
+}
+
+- (void)setCurrentID:(NSUInteger)currentID{
+    [[NSUserDefaults standardUserDefaults] setInteger:currentID forKey:USERDEFAULT_CURRENT_ID];
+    _currentID = currentID;
 }
 
 

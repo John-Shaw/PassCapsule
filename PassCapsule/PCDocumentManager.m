@@ -74,7 +74,7 @@
     
     //!!!:测试用，把明文放到xml中，release时一定要记得删除这行
     DDXMLElement *masterKeyElement = [[DDXMLElement alloc] initWithName:@"MasterPassword"];
-    [masterKeyElement addAttribute:[DDXMLNode attributeWithName:@"id" stringValue:@"0"]];
+    [masterKeyElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:@"0"]];
     [masterKeyElement setStringValue:password];
     [rootElement addChild:masterKeyElement];
     
@@ -90,7 +90,9 @@
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
         
-        [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:nil]];
+        NSString *entryID = [@([[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseID]) stringValue];
+        NSArray *attributes = @[[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entryID]];
+        [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:attributes]];
         
         [rootElement addChild:groupElement];
     }

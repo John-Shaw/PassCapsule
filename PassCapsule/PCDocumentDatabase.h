@@ -14,6 +14,7 @@
 static NSString * const NOTIFICATION_PARSER_DONE = @"didLoadData";
 static NSString * const USERDEFAULT_DATABASE_CREATE = @"isCreateDatabase";
 static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
+static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 
 @interface PCDocumentDatabase : NSObject
 
@@ -28,6 +29,8 @@ static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
 
 @property (nonatomic, readwrite) NSUInteger currentID;
+
+- (NSUInteger)autoIncreaseID;
 
 /**
  Should create only one instance of class. Should not call init.
