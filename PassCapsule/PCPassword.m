@@ -7,7 +7,7 @@
 //
 
 #import "PCPassword.h"
-#import "PCKeyChainCapsule.h"
+#import "PCKeyChainUtils.h"
 #import "RNEncryptor.h"
 #import "RNDecryptor.h"
 
@@ -15,11 +15,11 @@
 
 //为了方便，先存用户输入的明文，因为反正程序结束也会删除KeyChain，当然为了更安全还是hash一下好，我只是偷个懒
 + (void)setPassword:(NSString *)password{
-    [PCKeyChainCapsule setString:password forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+    [PCKeyChainUtils setString:password forKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
 }
 
 + (NSString *)password{
-    return [PCKeyChainCapsule stringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+    return [PCKeyChainUtils stringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
 }
 
 + (NSData *)encryptedData:(NSString *)plain{

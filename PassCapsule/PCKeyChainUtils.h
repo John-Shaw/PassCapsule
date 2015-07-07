@@ -39,7 +39,7 @@ static NSString * const KEYCHAIN_PASSWORD = @"masterPassword";
 static NSString * const KEYCHAIN_KEY_SERVICE = @"cn.zerz.PassCapsule.Key";
 static NSString * const KEYCHAIN_PASSWORD_SERVICE = @"cn.zerz.PassCapsule.Password";
 
-@interface PCKeyChainCapsule : NSObject
+@interface PCKeyChainUtils : NSObject
 
 + (NSString *)stringForKey:(NSString *)key andServiceName:(NSString *)serviceName;
 + (BOOL)setString:(NSString *)string forKey:(NSString *)key andServiceName:(NSString *)serviceName;

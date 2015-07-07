@@ -22,14 +22,15 @@ static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
 @interface PCCapsule : NSObject
 
 @property (nonatomic, readwrite) NSUInteger capsuleID;
-@property (nonatomic, strong) NSString  *title;
-@property (nonatomic, strong) NSString  *password;
-@property (nonatomic, strong) NSString  *site;
-@property (nonatomic, strong) NSString  *account;
-@property (nonatomic, strong) NSString  *iconName;
-@property (nonatomic, strong) NSString  *group;
+@property (nonatomic, copy) NSString  *title;
+@property (nonatomic, copy) NSString  *password;
+@property (nonatomic, copy) NSString  *site;
+@property (nonatomic, copy) NSString  *account;
+@property (nonatomic, copy) NSString  *iconName;
+@property (nonatomic, copy) NSString  *group;
 
 - (NSString *)decrptedPassword;
+- (NSString *)idString;
 
 
 @end

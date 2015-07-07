@@ -27,7 +27,7 @@
 
 -(void)viewDidLoad{
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_PARSER_DONE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_SHOULD_RELOAD object:nil];
     
     dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, DISPATCH_QUEUE_SERIAL);
     dispatch_async(loadDocumentQueue, ^{
@@ -38,7 +38,7 @@
         NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
         [manager parserDocument:xmlData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
         });
     });
     

@@ -23,4 +23,8 @@
     return [PCPassword decryptedString:self.password];
 }
 
+- (NSString *)idString{
+    return [@(self.capsuleID) stringValue];
+}
+
 @end

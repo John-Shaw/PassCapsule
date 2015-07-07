@@ -10,7 +10,7 @@
 #import "PCCapsule.h"
 
 static NSString * const CAPSULE_GROUP      = @"group";
-static NSString * const CAPSULE_GROUP_NAME = @"name";
+static NSString * const CAPSULE_GROUP_NAME = @"group_name";
 static NSString * const CAPSULE_GROUP_DEFAULT = @"未分类";
 static NSString * const CAPSULE_GROUP_WEBACCOUNT = @"网站账户";
 static NSString * const CAPSULE_GROUP_EMAIL = @"电子邮件";
@@ -25,8 +25,7 @@ typedef NS_ENUM(NSUInteger, PCGroupType) {
 
 @interface PCCapsuleGroup : NSObject
 
-@property (nonatomic, readwrite) NSUInteger groupCount;
-@property (nonatomic, strong) NSString *groupName;
+@property (nonatomic, copy) NSString *groupName;
 @property (nonatomic, strong) NSMutableArray *groupEntries;
 
 

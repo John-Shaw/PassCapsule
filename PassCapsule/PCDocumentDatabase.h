@@ -11,7 +11,7 @@
 #import "PCCapsuleGroup.h"
 @class DDXMLDocument;
 
-static NSString * const NOTIFICATION_PARSER_DONE = @"didLoadData";
+static NSString * const NOTIFICATION_SHOULD_RELOAD = @"didLoadData";
 static NSString * const USERDEFAULT_DATABASE_CREATE = @"isCreateDatabase";
 static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
@@ -27,7 +27,6 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (nonatomic, getter=isLoad) BOOL loadDocument;
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
-
 @property (nonatomic, readwrite) NSUInteger currentID;
 
 - (NSUInteger)autoIncreaseID;

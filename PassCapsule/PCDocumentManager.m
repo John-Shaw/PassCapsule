@@ -10,7 +10,7 @@
 #import "RNEncryptor.h"
 #import "RNDecryptor.h"
 #import "DDXML.h"
-#import "PCKeyChainCapsule.h"
+#import "PCKeyChainUtils.h"
 #import "PCPassword.h"
 #import "PCCapsule.h"
 
@@ -37,9 +37,15 @@
     return _documentDatabase;
 }
 
+/**
+ *  创建密码库文件
+ *
+ *  @param documentName   文件名
+ *  @param masterPassword 主密码
+ *
+ *  @return 创建是否成功
+ */
 - (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
-    
-    
     //TODO:偷懒了
     [PCPassword setPassword:masterPassword];
     
@@ -47,7 +53,7 @@
     NSString *hashPassword = [PCPassword hashPassword:masterPassword];
     NSLog(@"hashPassword  =  %@",hashPassword);
     NSString *basePassowrd = [[hashPassword dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    [PCKeyChainCapsule setString:basePassowrd forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    [PCKeyChainUtils setString:basePassowrd forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
 
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -167,6 +173,11 @@
         for (DDXMLElement *entry in entries) {
             NSArray *aEntry = [entry children];
             PCCapsule *aCapsule = [PCCapsule new];
+            
+            //entry 的标志符
+            NSUInteger capsuleID = [[[entry attributeForName:CAPSULE_ENTRY_ID] stringValue] integerValue];
+            aCapsule.capsuleID = capsuleID;
+            
             //遍历entry中的每个详细记录
             for (DDXMLNode *e in aEntry) {
                 if ([e.name isEqualToString:CAPSULE_ENTRY_TITLE]) {
@@ -195,7 +206,6 @@
         }
         
         //保存group
-        aGroup.groupCount = [aGroup.groupEntries count];
         [self.documentDatabase.groups addObject:aGroup];
 
     }
@@ -205,7 +215,8 @@
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
-        NSString *xpath = [NSString stringWithFormat:@"//group[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT];
+        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]",
+                           CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT];
         NSArray *results = [document nodesForXPath:xpath error:nil];
         
         if ([results count] == 0) {
@@ -213,12 +224,15 @@
             return;
         }
         
+        //TODO:entry id 的设置与获取 － 通过 getter setter 还是 documentDatabase 的 currentID
         DDXMLElement *groupElement = [results firstObject];
         DDXMLElement *newEntry = [DDXMLElement elementWithName:CAPSULE_ENTRY];
+        
+        [newEntry addAttribute:[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entry.idString]];
+        
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:entry.title]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:entry.account]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.password]];
-        
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:entry.site]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.group]];
         
@@ -229,7 +243,7 @@
         [group.groupEntries addObject:entry];
         
         self.documentDatabase.refreshDocument = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     }
 }
 
@@ -237,7 +251,8 @@
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *idString = [@(entry.capsuleID) stringValue];
-        NSString *xpath = [NSString stringWithFormat:@"//group[@name=\"%@\"]/entry[@name=\"%@\"]",CAPSULE_GROUP_DEFAULT,idString];
+        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]/entry[\"%@\"=\"%@\"]"
+                           ,CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT,CAPSULE_ENTRY_ID,idString];
         NSArray *results = [document nodesForXPath:xpath error:nil];
         if ([results count] == 0) {
             NSLog(@"group name error");
@@ -252,7 +267,54 @@
         [group.groupEntries removeObject:entry];
         
         self.documentDatabase.refreshDocument = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
+    } else {
+        [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
+        [self deleteEntry:entry];
+    }
+}
+
+- (void)modifyEntry: (PCCapsule *)entry{
+    if (self.documentDatabase.isLoad) {
+        DDXMLDocument *document = self.documentDatabase.document;
+        NSString *idString = [@(entry.capsuleID) stringValue];
+        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]/entry[\"%@\"=\"%@\"]"
+                           ,CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT,CAPSULE_ENTRY_ID,idString];
+        NSArray *results = [document nodesForXPath:xpath error:nil];
+        if ([results count] == 0) {
+            NSLog(@"entry id error");
+            return;
+        }
+        DDXMLElement *modifyEntry = [results firstObject];
+        //修改记录id
+        [[modifyEntry attributeForName:CAPSULE_ENTRY_ID] setStringValue:entry.idString];
+        
+        //修改记录内容
+        NSArray *aEntry = [modifyEntry children];
+        for (DDXMLNode *e in aEntry) {
+            if ([e.name isEqualToString:CAPSULE_ENTRY_TITLE]) {
+                [e setStringValue:entry.title];
+            }
+            if ([e.name isEqualToString:CAPSULE_ENTRY_ACCOUNT]) {
+                [e setStringValue:entry.account];
+            }
+            if ([e.name isEqualToString:CAPSULE_ENTRY_PASSWORD]) {
+                [e setStringValue:entry.password];
+            }
+            if ([e.name isEqualToString:CAPSULE_ENTRY_SITE]) {
+                [e setStringValue:entry.site];
+            }
+            if ([e.name isEqualToString:CAPSULE_ENTRY_ICON]) {
+                [e setStringValue:entry.iconName];
+            }
+            if ([e.name isEqualToString:CAPSULE_ENTRY_GROUP]) {
+                [e setStringValue:entry.group];
+            }
+            
+        }
+        
+        self.documentDatabase.refreshDocument = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
         [self deleteEntry:entry];

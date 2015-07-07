@@ -19,6 +19,11 @@
     return kDatabase;
 }
 
+/**
+ *  自动增长的ID，每次取得后会自动增长并存入NSUserDefault，主要是为了给每个记录一个不重复的标志符
+ *
+ *  @return 标志符,是一个非负整数
+ */
 - (NSUInteger)autoIncreaseID{
     NSUInteger increaseID = self.currentID;
     [self setCurrentID:increaseID+1];
@@ -42,7 +47,7 @@
 
 //readwrite 的属性如果同时重写了getter和setter，必须手动 @synthesize
 //readonly 的属性如果重写了getter，必须手动 @synthesize
-@synthesize currentID=_currentID;
+@synthesize currentID = _currentID;
 - (NSUInteger)currentID{
     NSUInteger temp = [[[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_CURRENT_ID] integerValue];
     if (!temp) {
@@ -54,6 +59,7 @@
 
 - (void)setCurrentID:(NSUInteger)currentID{
     [[NSUserDefaults standardUserDefaults] setInteger:currentID forKey:USERDEFAULT_CURRENT_ID];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     _currentID = currentID;
 }
 

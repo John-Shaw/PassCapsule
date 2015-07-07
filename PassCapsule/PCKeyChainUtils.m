@@ -33,9 +33,9 @@
 //
 
 
-#import "PCKeyChainCapsule.h"
+#import "PCKeyChainUtils.h"
 
-@implementation PCKeyChainCapsule
+@implementation PCKeyChainUtils
 
 + (NSString *)stringForKey:(NSString *)key andServiceName:(NSString *)serviceName {
     CFTypeRef result_data = NULL;

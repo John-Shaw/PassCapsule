@@ -8,7 +8,7 @@
 
 #import "PCAppDelegate.h"
 #import "IQKeyboardManager.h"
-#import "PCKeyChainCapsule.h"
+#import "PCKeyChainUtils.h"
 #import "PCDocumentManager.h"
 
 static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
@@ -72,7 +72,7 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
     }
     
     [[PCDocumentManager sharedDocumentManager] saveDocument];
-    [PCKeyChainCapsule deleteStringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
+    [PCKeyChainUtils deleteStringForKey:KEYCHAIN_KEY andServiceName:KEYCHAIN_KEY_SERVICE];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "PCUnLockVC.h"
-#import "PCKeyChainCapsule.h"
+#import "PCKeyChainUtils.h"
 #import "PCPassword.h"
 #import "PCGroupTableVC.h"
 #import "PCDocumentDatabase.h"
@@ -71,7 +71,7 @@
     }
     
     //valid password
-    NSString *basePassowrd = [PCKeyChainCapsule stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+    NSString *basePassowrd = [PCKeyChainUtils stringForKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
     NSString *hashPasswprd = [[NSString alloc] initWithData:[[NSData alloc] initWithBase64EncodedString:basePassowrd options:NSDataBase64DecodingIgnoreUnknownCharacters] encoding:NSUTF8StringEncoding];
     NSLog(@"base pass = %@",basePassowrd);
     NSLog(@"hash pass = %@",hashPasswprd);
