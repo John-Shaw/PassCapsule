@@ -30,6 +30,7 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 @property (nonatomic, readwrite) NSUInteger currentID;
 
 - (NSUInteger)autoIncreaseID;
+- (NSString *)autoIncreaseIDString;
 
 /**
  Should create only one instance of class. Should not call init.

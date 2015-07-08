@@ -96,7 +96,8 @@
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
         
-        NSString *entryID = [@([[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseID]) stringValue];
+        NSString *entryID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseIDString];
+        
         NSArray *attributes = @[[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entryID]];
         [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:attributes]];
         
@@ -215,7 +216,7 @@
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
-        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]",
+        NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']",
                            CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT];
         NSArray *results = [document nodesForXPath:xpath error:nil];
         
@@ -228,7 +229,10 @@
         DDXMLElement *groupElement = [results firstObject];
         DDXMLElement *newEntry = [DDXMLElement elementWithName:CAPSULE_ENTRY];
         
+        //id应该通过documentDatabase 的自动增长方法获取
+        entry.capsuleID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseID];
         [newEntry addAttribute:[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entry.idString]];
+
         
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:entry.title]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:entry.account]];
@@ -251,8 +255,9 @@
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *idString = [@(entry.capsuleID) stringValue];
-        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]/entry[\"%@\"=\"%@\"]"
+        NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']/entry[@%@='%@']"
                            ,CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT,CAPSULE_ENTRY_ID,idString];
+        
         NSArray *results = [document nodesForXPath:xpath error:nil];
         if ([results count] == 0) {
             NSLog(@"group name error");
@@ -267,7 +272,7 @@
         [group.groupEntries removeObject:entry];
         
         self.documentDatabase.refreshDocument = YES;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
         [self deleteEntry:entry];

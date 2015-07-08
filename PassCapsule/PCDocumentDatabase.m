@@ -30,6 +30,10 @@
     return increaseID;
 }
 
+- (NSString *)autoIncreaseIDString{
+    return [@(self.autoIncreaseID) stringValue];
+}
+
 #pragma mark - getter and setter
 - (NSMutableArray *)entries{
     if (!_entries) {
@@ -49,11 +53,13 @@
 //readonly 的属性如果重写了getter，必须手动 @synthesize
 @synthesize currentID = _currentID;
 - (NSUInteger)currentID{
-    NSUInteger temp = [[[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_CURRENT_ID] integerValue];
-    if (!temp) {
+    NSString *stringValue = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_CURRENT_ID];
+    NSUInteger temp = [stringValue integerValue];
+    if (!stringValue) {
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{USERDEFAULT_CURRENT_ID:@1}];
-        _currentID = 1;
+        temp = self.currentID;
     }
+
     return temp;
 }
 

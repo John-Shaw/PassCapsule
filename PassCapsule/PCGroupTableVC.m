@@ -19,6 +19,7 @@
 
 @property (nonatomic,strong) NSMutableArray *groups;
 @property (nonatomic,strong) NSMutableArray *entries;
+@property (nonatomic,strong) UIActivityIndicatorView *aSpinner;
 
 @end
 
@@ -28,6 +29,12 @@
 -(void)viewDidLoad{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_SHOULD_RELOAD object:nil];
+    
+    UIActivityIndicatorView *tempSpinner = [[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.aSpinner = tempSpinner;
+    
+    [self.view addSubview:self.aSpinner];
+    [self.aSpinner startAnimating];
     
     dispatch_queue_t loadDocumentQueue = dispatch_queue_create(LOAD_DOCUMENT_QUEUE, DISPATCH_QUEUE_SERIAL);
     dispatch_async(loadDocumentQueue, ^{
@@ -59,10 +66,9 @@
     PCDocumentDatabase *database = [PCDocumentDatabase sharedDocumentDatabase];
     self.groups = database.groups;
     self.entries = database.entries;
+    
     [self.tableView reloadData];
-//    PCCapsuleGroup *group = [self.groups firstObject];
-//    NSLog(@"groups : %@",[group.groupEntries description]);
-//    NSLog(@"notifi name : %@",notification.name);
+    [self.aSpinner stopAnimating];
 }
 
 - (NSMutableArray *)entries{
@@ -113,7 +119,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         PCCapsuleGroup *group = self.groups[indexPath.section];
         PCCapsule *entry = group.groupEntries[indexPath.row];
-        [group.groupEntries removeObjectAtIndex:indexPath.row];
         [[PCDocumentManager sharedDocumentManager] deleteEntry:entry];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
