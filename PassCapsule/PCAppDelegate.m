@@ -28,6 +28,9 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
         [self.window makeKeyAndVisible];
     }
     
+    NSString *path = [PCDocumentDatabase documentPath];
+    NSData *xmlData = [NSData dataWithContentsOfFile:path];
+    [[PCDocumentManager sharedDocumentManager] preLoadDocunent:xmlData];
     return YES;
 }
 

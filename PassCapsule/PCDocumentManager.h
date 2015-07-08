@@ -24,6 +24,7 @@ static char * const LOAD_DOCUMENT_QUEUE = "cn.zerz.passcapsule.loadDocumentQueue
 - (void)addNewEntry: (PCCapsule *)entry;
 - (void)deleteEntry: (PCCapsule *)entry;
 - (void)saveDocument;
+- (void)preLoadDocunent:(NSData *)xmlData;
 
 +(instancetype)sharedDocumentManager;
 /**

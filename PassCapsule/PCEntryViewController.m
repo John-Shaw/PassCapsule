@@ -16,8 +16,6 @@ typedef enum : NSUInteger {
     PCEntryCellTypeGroup,
 } PCEntryCellType;
 
-
-
 @interface PCEntryViewController() 
 @property (weak, nonatomic) IBOutlet UILabel *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *detailVeiw;
@@ -31,6 +29,7 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    NSArray *randomIcons = @[@"google_plus",@"zhihu",@"douban",@"passcapsule"];
     
     self.titleView.text = self.capsule.title;
     self.detailVeiw.text = self.capsule.account;
@@ -39,7 +38,8 @@ typedef enum : NSUInteger {
         self.iconView.image = image;
     }
     else{
-        self.iconView.image = [UIImage imageNamed:@"lock"];
+        NSString *iconName = randomIcons[arc4random()%4];
+        self.iconView.image = [UIImage imageNamed:iconName];
     }
 
 }

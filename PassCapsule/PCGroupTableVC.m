@@ -30,8 +30,11 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didloadCellDataSource:) name:NOTIFICATION_SHOULD_RELOAD object:nil];
     
-    UIActivityIndicatorView *tempSpinner = [[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    UIActivityIndicatorView *tempSpinner = [[UIActivityIndicatorView alloc]  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.aSpinner = tempSpinner;
+    
+    //!!!:magic number,UI不知道该设计位置多少好，先这样
+    self.aSpinner.center = CGPointMake(self.view.center.x, self.view.center.y - 100);
     
     [self.view addSubview:self.aSpinner];
     [self.aSpinner startAnimating];
@@ -45,6 +48,7 @@
         NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
         [manager parserDocument:xmlData];
         dispatch_async(dispatch_get_main_queue(), ^{
+                [self.aSpinner stopAnimating];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
         });
     });
@@ -63,12 +67,11 @@
 }
 
 - (void)didloadCellDataSource: (NSNotification *)notification{
+    
     PCDocumentDatabase *database = [PCDocumentDatabase sharedDocumentDatabase];
     self.groups = database.groups;
     self.entries = database.entries;
-    
     [self.tableView reloadData];
-    [self.aSpinner stopAnimating];
 }
 
 - (NSMutableArray *)entries{
