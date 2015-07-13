@@ -29,6 +29,8 @@ static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
 @property (nonatomic, copy) NSString  *iconName;
 @property (nonatomic, copy) NSString  *group;
 
+@property (nonatomic, copy) NSString  *cloudID;
+
 - (NSString *)decrptedPassword;
 - (NSString *)idString;
 

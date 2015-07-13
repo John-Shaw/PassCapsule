@@ -10,6 +10,8 @@
 #import "IQKeyboardManager.h"
 #import "PCKeyChainUtils.h"
 #import "PCDocumentManager.h"
+#import <AVOSCloud/AVOSCloud.h>
+
 
 static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 
@@ -18,6 +20,12 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setUserDefaults];
+    
+    // leanCloud 服务
+    [AVOSCloud setApplicationId:@"o50yd5db8ue6a14o5hl1ct5x97htfpo4n7tkeblp4nenv9w3"
+                      clientKey:@"qlo1yfui14w8pcdpynu2ja4sqejq4no7ekxxkw9efcskwu0w"];
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
 
@@ -28,9 +36,17 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
         [self.window makeKeyAndVisible];
     }
     
+    AVUser *currentUser = [AVUser currentUser];
+    if (currentUser != nil) {
+        
+    } else {
+        //
+    }
+    
     NSString *path = [PCDocumentDatabase documentPath];
     NSData *xmlData = [NSData dataWithContentsOfFile:path];
     [[PCDocumentManager sharedDocumentManager] preLoadDocunent:xmlData];
+    
     return YES;
 }
 

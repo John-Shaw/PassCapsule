@@ -30,6 +30,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFirstLaunch"];
     }
     
+    
     // tap for dismissing keyboard
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

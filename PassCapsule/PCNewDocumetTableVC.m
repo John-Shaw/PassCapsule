@@ -23,6 +23,13 @@
         || [self.passwordTextField.text length] == 0
         || [self.confirmPasswordTextField.text length] == 0) {
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"创建密码库"
+                                                        message:@"该项不能为空"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"好"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
         return NO;
     }
     if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text]) {
@@ -38,7 +45,7 @@
         PCDocumentManager *document = [PCDocumentManager sharedDocumentManager];
         NSString *name = self.nameTextField.text;
         NSString *password = self.passwordTextField.text;
-        BOOL createSuccess = [document createDocument:[name stringByAppendingPathExtension:@"pcdb"] WithMasterPassword:password];
+        BOOL createSuccess = [document createDocument:name WithMasterPassword:password];
         if (createSuccess) {
             [self performSegueWithIdentifier:@"toUnLockView" sender:self];
         }

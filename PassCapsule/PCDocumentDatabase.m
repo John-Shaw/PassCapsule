@@ -73,9 +73,19 @@
 + (void)setDocumentName:(NSString *)documentName{
     [[NSUserDefaults standardUserDefaults] setObject:documentName forKey:USERDEFAULT_DOCUMENT_NAME];
 }
+
++ (NSString *)databaseName{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_DOCUMENT_NAME];
+}
+
++ (NSString *)documentName{
+    NSString *databaseName = [PCDocumentDatabase databaseName];
+    return [databaseName stringByAppendingPathExtension:@"pcdb"];
+}
 + (NSString *)documentPath{
-    NSString *documentName = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULT_DOCUMENT_NAME];
+    NSString *documentName = [PCDocumentDatabase documentName];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    
     return [documentsPath stringByAppendingPathComponent:documentName];
 }
 

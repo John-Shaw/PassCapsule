@@ -18,8 +18,10 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 
 @interface PCDocumentDatabase : NSObject
 
-+(instancetype)sharedDocumentDatabase;
++ (instancetype)sharedDocumentDatabase;
 + (void)setDocumentName:(NSString *)documentName;
++ (NSString *)databaseName;
++ (NSString *)documentName;
 + (NSString *)documentPath;
 
 @property (nonatomic, strong) DDXMLDocument *document;
@@ -28,6 +30,8 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 @property (nonatomic, getter=isLoad) BOOL loadDocument;
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
 @property (nonatomic, readwrite) NSUInteger currentID;
+
+@property (nonatomic, copy) NSString  *cloudID;
 
 - (NSUInteger)autoIncreaseID;
 - (NSString *)autoIncreaseIDString;

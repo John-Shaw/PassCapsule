@@ -11,6 +11,9 @@
 		520D854E1B241F46000AB9CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B1C21ADFB0E700192404 /* Main.storyboard */; };
 		520E2F141AFB9E9B008FBC27 /* PCEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */; };
 		5215414F1B20278100BD6838 /* testImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5215414E1B20278100BD6838 /* testImage.jpg */; };
+		5216B1F21B53B13300B93115 /* PCCloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216B1F11B53B13300B93115 /* PCCloudManager.m */; };
+		5216B1F51B53B72E00B93115 /* PCCloudUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216B1F41B53B72E00B93115 /* PCCloudUser.m */; };
+		5216B1F81B53E80B00B93115 /* PCCloudModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5216B1F71B53E80B00B93115 /* PCCloudModel.m */; };
 		523EC7911B207DAD00073FCE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 523EC7931B207DAD00073FCE /* Localizable.strings */; };
 		52415B6F1B3C23AF00F911B3 /* PCDocumentDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 52415B6E1B3C23AF00F911B3 /* PCDocumentDatabase.m */; };
 		5241FCD61B410BF200B059FB /* PCCapsuleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 5241FCD51B410BF200B059FB /* PCCapsuleGroup.m */; };
@@ -55,6 +58,12 @@
 		520E2F121AFB9E9B008FBC27 /* PCEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCEntryViewController.h; sourceTree = "<group>"; };
 		520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCEntryViewController.m; sourceTree = "<group>"; };
 		5215414E1B20278100BD6838 /* testImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testImage.jpg; sourceTree = "<group>"; };
+		5216B1F01B53B13300B93115 /* PCCloudManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudManager.h; sourceTree = "<group>"; };
+		5216B1F11B53B13300B93115 /* PCCloudManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudManager.m; sourceTree = "<group>"; };
+		5216B1F31B53B72E00B93115 /* PCCloudUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudUser.h; sourceTree = "<group>"; };
+		5216B1F41B53B72E00B93115 /* PCCloudUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudUser.m; sourceTree = "<group>"; };
+		5216B1F61B53E80B00B93115 /* PCCloudModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudModel.h; sourceTree = "<group>"; };
+		5216B1F71B53E80B00B93115 /* PCCloudModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudModel.m; sourceTree = "<group>"; };
 		523EC7921B207DAD00073FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		523EC7941B207DB200073FCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		523EC7951B207E3F00073FCE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -131,6 +140,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5216B1EF1B53B10800B93115 /* leanCloud */ = {
+			isa = PBXGroup;
+			children = (
+				5216B1F01B53B13300B93115 /* PCCloudManager.h */,
+				5216B1F11B53B13300B93115 /* PCCloudManager.m */,
+				5216B1F31B53B72E00B93115 /* PCCloudUser.h */,
+				5216B1F41B53B72E00B93115 /* PCCloudUser.m */,
+				5216B1F61B53E80B00B93115 /* PCCloudModel.h */,
+				5216B1F71B53E80B00B93115 /* PCCloudModel.m */,
+			);
+			name = leanCloud;
+			sourceTree = "<group>";
+		};
 		527513201AEB961D000462CB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +201,7 @@
 			children = (
 				528E9C451B20781C00A42913 /* PassCapsule.entitlements */,
 				52E968801AF9D32700E6E759 /* test resource */,
+				5216B1EF1B53B10800B93115 /* leanCloud */,
 				52E9687C1AF9D10A00E6E759 /* Model */,
 				52E968781AF9CF9B00E6E759 /* Utilities */,
 				527513201AEB961D000462CB /* Controllers */,
@@ -429,6 +452,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52E9687F1AF9D14C00E6E759 /* PCCapsule.m in Sources */,
+				5216B1F21B53B13300B93115 /* PCCloudManager.m in Sources */,
+				5216B1F81B53E80B00B93115 /* PCCloudModel.m in Sources */,
 				5200C4931AEC82EA00FF89C2 /* PCGroupTableVC.m in Sources */,
 				5241FCE31B4237B800B059FB /* PCNewEntryTableVC.m in Sources */,
 				525FBA891B319F740072F534 /* PCKeyChainUtils.m in Sources */,
@@ -436,6 +461,7 @@
 				5263E8511AE8FDE000D79116 /* PCUnLockVC.m in Sources */,
 				5277F3951B3D4340007AEB4A /* PCPassword.m in Sources */,
 				52E127A41B0C9AB200B4AB3D /* PCLoginVC.m in Sources */,
+				5216B1F51B53B72E00B93115 /* PCCloudUser.m in Sources */,
 				52415B6F1B3C23AF00F911B3 /* PCDocumentDatabase.m in Sources */,
 				526EEFDD1B2EFD0300B693CD /* PCDocumentManager.m in Sources */,
 				52B2B1BB1ADFB0E700192404 /* PCAppDelegate.m in Sources */,

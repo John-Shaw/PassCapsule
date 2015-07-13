@@ -11,6 +11,7 @@
 #import "PCPassword.h"
 #import "PCGroupTableVC.h"
 #import "PCDocumentDatabase.h"
+#import <AVOSCloud/AVOSCloud.h>
 
 
 @interface PCUnLockVC ()<UITextFieldDelegate>
@@ -26,6 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+    
+    AVObject *testObject = [AVObject objectWithClassName:@"TestObject"];
+    [testObject setObject:@"bar" forKey:@"foo"];
+    [testObject addObjectsFromArray:@[@"123",@"johnShaw",@"qweewq"] forKey:@"aCapsule"];
+    [testObject save];
     
 }
 
@@ -84,7 +90,12 @@
             [PCPassword setPassword:password];
             [self performSegueWithIdentifier:@"showMainView" sender:self];
         } else {
-            NSLog(@"password is wrong");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"输入密码"
+                                                            message:@"输入密码错误"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"好"
+                                                  otherButtonTitles:nil];
+            [alert show];
         }
     }];
     

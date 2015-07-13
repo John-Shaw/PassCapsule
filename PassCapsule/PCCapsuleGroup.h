@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, PCGroupType) {
 
 @interface PCCapsuleGroup : NSObject
 
+@property (nonatomic, copy) NSString *cloudID;
 @property (nonatomic, copy) NSString *groupName;
 @property (nonatomic, strong) NSMutableArray *groupEntries;
 

@@ -45,10 +45,10 @@
  *
  *  @return 创建是否成功
  */
-- (BOOL)createDocument:(NSString *)documentName WithMasterPassword:(NSString *)masterPassword{
-    //TODO:偷懒了
+- (BOOL)createDocument:(NSString *)databaseName WithMasterPassword:(NSString *)masterPassword{
+
     [PCPassword setPassword:masterPassword];
-    
+    [PCDocumentDatabase setDocumentName:databaseName];
     
     NSString *hashPassword = [PCPassword hashPassword:masterPassword];
     NSLog(@"hashPassword  =  %@",hashPassword);
@@ -58,6 +58,7 @@
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *documentName = [PCDocumentDatabase documentName];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:documentName];
     BOOL fileExists = [fileManager fileExistsAtPath:filePath];
     
@@ -68,7 +69,6 @@
         DDXMLDocument *capsuleDocument = [self baseTreeWithPassword:masterPassword];
     
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
-        [PCDocumentDatabase setDocumentName:documentName];
         return YES;
     }
     return NO;
