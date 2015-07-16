@@ -31,7 +31,8 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
 @property (nonatomic, readwrite) NSUInteger currentID;
 
-@property (nonatomic, copy) NSString  *cloudID;
+@property (nonatomic,strong)   NSString *cloudID;
+
 
 - (NSUInteger)autoIncreaseID;
 - (NSString *)autoIncreaseIDString;

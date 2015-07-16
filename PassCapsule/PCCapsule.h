@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 static NSString * const CAPSULE_ROOT           = @"Capsules";
+static NSString * const CAPSULE_CLOUD_ID       = @"cloudID";
 static NSString * const CAPSULE_ENTRY          = @"entry";
 static NSString * const CAPSULE_ENTRY_ID       = @"entry_id";
 static NSString * const CAPSULE_ENTRY_TITLE    = @"title";
@@ -17,6 +18,7 @@ static NSString * const CAPSULE_ENTRY_PASSWORD = @"password";
 static NSString * const CAPSULE_ENTRY_SITE     = @"site";
 static NSString * const CAPSULE_ENTRY_GROUP    = @"entry_group";
 static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
+
 
 
 @interface PCCapsule : NSObject
@@ -29,7 +31,7 @@ static NSString * const CAPSULE_ENTRY_ICON     = @"icon";
 @property (nonatomic, copy) NSString  *iconName;
 @property (nonatomic, copy) NSString  *group;
 
-@property (nonatomic, copy) NSString  *cloudID;
+@property (nonatomic, strong) NSString  *cloudID;
 
 - (NSString *)decrptedPassword;
 - (NSString *)idString;

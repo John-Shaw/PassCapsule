@@ -15,6 +15,7 @@
 #import "PCCapsule.h"
 
 
+#import "PCCloudManager.h"
 
 @interface PCDocumentManager ()
 
@@ -67,7 +68,7 @@
         return NO;
     }else{
         DDXMLDocument *capsuleDocument = [self baseTreeWithPassword:masterPassword];
-    
+
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
         return YES;
     }
@@ -166,8 +167,9 @@
     for (DDXMLElement *group in groups) {
         PCCapsuleGroup *aGroup = [PCCapsuleGroup new];
         NSString *name = [[group attributeForName:CAPSULE_GROUP_NAME] stringValue];
+        NSString *groupCloudID = [[group attributeForName:CAPSULE_CLOUD_ID] stringValue];
         aGroup.groupName = name;
-
+        aGroup.cloudID = groupCloudID;
 
         NSArray *entries = [group children];
         //遍历group中的每个entry
@@ -199,6 +201,9 @@
                 if ([e.name isEqualToString:CAPSULE_ENTRY_GROUP]) {
                     aCapsule.group = e.stringValue;
                 }
+                if ([e.name isEqualToString:CAPSULE_CLOUD_ID]) {
+                    aCapsule.cloudID = e.stringValue;
+                }
 
             }
             //将entry反序列化到capsule对象后，保存到相关集合中
@@ -208,13 +213,19 @@
         
         //保存group
         [self.documentDatabase.groups addObject:aGroup];
-
+        
     }
+    
+    AVObject *database = [[PCCloudManager sharedCloudManager] createCloudDatabase:self.documentDatabase];
+    NSLog(@"avobjet id %@",[database objectId]);
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
 }
 
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.isLoad) {
+        
+        
+        
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']",
                            CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT];
@@ -239,7 +250,7 @@
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.password]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:entry.site]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.group]];
-        
+        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_CLOUD_ID stringValue:entry.cloudID]];
         [groupElement addChild:newEntry];
         
         [self.documentDatabase.entries addObject:entry];

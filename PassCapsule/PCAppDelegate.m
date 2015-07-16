@@ -10,7 +10,7 @@
 #import "IQKeyboardManager.h"
 #import "PCKeyChainUtils.h"
 #import "PCDocumentManager.h"
-#import <AVOSCloud/AVOSCloud.h>
+#import "PCCloudManager.h"
 
 
 static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
@@ -20,6 +20,12 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setUserDefaults];
+    
+    
+    //!!!: leanCloud 需要注册子类，才能自动生成setter，getter
+    [PCCloudDatabase registerSubclass];
+    [PCCloudEntry registerSubclass];
+    [PCCloudGroup registerSubclass];
     
     // leanCloud 服务
     [AVOSCloud setApplicationId:@"o50yd5db8ue6a14o5hl1ct5x97htfpo4n7tkeblp4nenv9w3"

@@ -9,6 +9,7 @@
 #import "PCNewEntryTableVC.h"
 #import "PCDocumentManager.h"
 
+
 @implementation PCNewEntryTableVC
 
 - (void)viewDidLoad{
@@ -27,6 +28,8 @@
         aCapsule.group = CAPSULE_GROUP_DEFAULT;
         
         PCDocumentManager *manager = [PCDocumentManager sharedDocumentManager];
+
+
         [manager addNewEntry:aCapsule];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

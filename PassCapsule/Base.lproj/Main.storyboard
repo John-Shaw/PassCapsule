@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4n9-dn-zzk">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -80,19 +81,38 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="9" y="0.0" width="381" height="43"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="GkD-co-bdG" secondAttribute="trailing" constant="-5" id="9DA-Sw-X5x">
+                                                    <variation key="widthClass=compact" constant="2"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="GkD-co-bdG" secondAttribute="bottom" id="9gS-nH-e5M"/>
+                                                <constraint firstItem="GkD-co-bdG" firstAttribute="leading" secondItem="ZXv-qr-8v3" secondAttribute="leadingMargin" constant="-6" id="D8G-1f-mPe">
+                                                    <variation key="widthClass=compact" constant="1"/>
+                                                </constraint>
+                                                <constraint firstItem="GkD-co-bdG" firstAttribute="top" secondItem="ZXv-qr-8v3" secondAttribute="top" id="Odh-3n-stY"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="GkD-co-bdG"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="9DA-Sw-X5x"/>
+                                                    <exclude reference="9gS-nH-e5M"/>
+                                                    <exclude reference="D8G-1f-mPe"/>
+                                                    <exclude reference="Odh-3n-stY"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="GkD-co-bdG"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="9DA-Sw-X5x"/>
+                                                    <include reference="9gS-nH-e5M"/>
+                                                    <include reference="D8G-1f-mPe"/>
+                                                    <include reference="Odh-3n-stY"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -106,19 +126,38 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="11" y="0.0" width="381" height="43"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uNW-Sw-agx" secondAttribute="trailing" constant="-7" id="Nw8-N1-1ER">
+                                                    <variation key="widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="uNW-Sw-agx" secondAttribute="bottom" id="iog-Pa-I9q"/>
+                                                <constraint firstItem="uNW-Sw-agx" firstAttribute="top" secondItem="zJT-9h-cEl" secondAttribute="top" id="nFN-TV-7Hs"/>
+                                                <constraint firstItem="uNW-Sw-agx" firstAttribute="leading" secondItem="zJT-9h-cEl" secondAttribute="leadingMargin" constant="-4" id="uua-YY-hYv">
+                                                    <variation key="widthClass=compact" constant="3"/>
+                                                </constraint>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="uNW-Sw-agx"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="Nw8-N1-1ER"/>
+                                                    <exclude reference="iog-Pa-I9q"/>
+                                                    <exclude reference="nFN-TV-7Hs"/>
+                                                    <exclude reference="uua-YY-hYv"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="uNW-Sw-agx"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="Nw8-N1-1ER"/>
+                                                    <include reference="iog-Pa-I9q"/>
+                                                    <include reference="nFN-TV-7Hs"/>
+                                                    <include reference="uua-YY-hYv"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -132,19 +171,36 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="0.0" width="384" height="43"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jbb-4Q-Skn" firstAttribute="leading" secondItem="qBQ-tQ-tMU" secondAttribute="leadingMargin" constant="-7" id="8CO-nE-mEx">
+                                                    <variation key="widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                                <constraint firstItem="jbb-4Q-Skn" firstAttribute="centerX" secondItem="qBQ-tQ-tMU" secondAttribute="centerX" id="Mvx-AK-fEC"/>
+                                                <constraint firstAttribute="bottom" secondItem="jbb-4Q-Skn" secondAttribute="bottom" id="Q6W-Xk-fb8"/>
+                                                <constraint firstItem="jbb-4Q-Skn" firstAttribute="top" secondItem="qBQ-tQ-tMU" secondAttribute="top" id="mU4-A1-5Q2"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="jbb-4Q-Skn"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="8CO-nE-mEx"/>
+                                                    <exclude reference="Mvx-AK-fEC"/>
+                                                    <exclude reference="Q6W-Xk-fb8"/>
+                                                    <exclude reference="mU4-A1-5Q2"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="jbb-4Q-Skn"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="8CO-nE-mEx"/>
+                                                    <include reference="Mvx-AK-fEC"/>
+                                                    <include reference="Q6W-Xk-fb8"/>
+                                                    <include reference="mU4-A1-5Q2"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -159,19 +215,36 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="0.0" width="384" height="43"/>
-                                                    </variation>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pbK-t9-jAA" firstAttribute="top" secondItem="8xQ-4J-IwW" secondAttribute="top" id="5Wu-qP-shW"/>
+                                                <constraint firstAttribute="bottom" secondItem="pbK-t9-jAA" secondAttribute="bottom" id="TLK-Yq-5Ce"/>
+                                                <constraint firstItem="pbK-t9-jAA" firstAttribute="leading" secondItem="8xQ-4J-IwW" secondAttribute="leadingMargin" constant="-7" id="m5Y-M8-cPn">
+                                                    <variation key="widthClass=compact" constant="0.0"/>
+                                                </constraint>
+                                                <constraint firstItem="pbK-t9-jAA" firstAttribute="centerX" secondItem="8xQ-4J-IwW" secondAttribute="centerX" id="wW4-en-bha"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="pbK-t9-jAA"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="5Wu-qP-shW"/>
+                                                    <exclude reference="TLK-Yq-5Ce"/>
+                                                    <exclude reference="m5Y-M8-cPn"/>
+                                                    <exclude reference="wW4-en-bha"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="pbK-t9-jAA"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="5Wu-qP-shW"/>
+                                                    <include reference="TLK-Yq-5Ce"/>
+                                                    <include reference="m5Y-M8-cPn"/>
+                                                    <include reference="wW4-en-bha"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1334,7 +1407,7 @@
                             <rect key="frame" x="0.0" y="273" width="600" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="passcapsule" translatesAutoresizingMaskIntoConstraints="NO" id="sRf-qG-h3R">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="128" id="Hn0-0v-vwG"/>

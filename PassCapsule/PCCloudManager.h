@@ -10,9 +10,32 @@
 #import "PCDocumentDatabase.h"
 #import <AVOSCloud/AVOSCloud.h>
 
+#import "PCCloudDatabase.h"
+#import "PCCloudGroup.h"
+#import "PCCloudEntry.h"
+
 @interface PCCloudManager : NSObject
 
 - (void)syncEntry: (PCCapsule *)entry andGroup: (PCCapsuleGroup *)group;
 - (void)syncDatabase: (NSString *)databaseID;
 - (void)saveDatabase: (NSData *)xmlData;
+
+- (AVObject *)createCloudDatabase:(PCDocumentDatabase *)database;
+
+- (AVObject *)cloudEntryWithEntry: (PCCapsule *)entry andSync: (BOOL)shouldSync;
+- (AVObject *)cloudGroupWithGroup: (PCCapsuleGroup *)group andSync: (BOOL)shouldSync;
+- (AVObject *)cloudDatabaseWithDatabase: (PCDocumentDatabase *)database andSync: (BOOL)shouldSync;
+
+- (void)setCloudDatabaseWithDatabase: (PCDocumentDatabase *)database;
+
++(instancetype)sharedCloudManager;
+/**
+ Should create only one instance of class. Should not call init.
+ */
+- (instancetype)init	__attribute__((unavailable("init is not available in PCCloudManager, Use sharedCloudManager"))) NS_DESIGNATED_INITIALIZER;
+
+/**
+ Should create only one instance of class. Should not call new.
+ */
++ (instancetype)new	__attribute__((unavailable("new is not available in PCCloudManager, Use sharedCloudManager")));
 @end
