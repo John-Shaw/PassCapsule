@@ -10,4 +10,7 @@
 
 @implementation PCCloudGroup
 @dynamic groupEntries,groupName;
++ (NSString *)parseClassName {
+    return @"PCCloudGroup";
+}
 @end

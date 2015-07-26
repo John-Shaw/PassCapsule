@@ -9,5 +9,8 @@
 #import "PCCloudEntry.h"
 
 @implementation PCCloudEntry
-@dynamic capsuleID,title,password,site,account,iconName,group;
+@dynamic entry_id,title,password,site,account,iconName,group;
++ (NSString *)parseClassName {
+    return @"PCCloudEntry";
+}
 @end

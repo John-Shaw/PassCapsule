@@ -10,7 +10,8 @@
 #import "DDXML.h"
 
 @implementation PCCloudManager
-+(instancetype)sharedCloudManager{
+
++ (instancetype)sharedCloudManager{
     static PCCloudManager *kManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken,^{
@@ -45,8 +46,8 @@
     
 }
 
-- (AVObject *)cloudEntryWithEntry:(PCCapsule *)entry  andSync: (BOOL)shouldSync{
-    AVObject *cloudEntry = [[AVObject alloc] initWithClassName:entry.title];
+- (PCCloudEntry *)cloudEntryWithEntry:(PCCapsule *)entry  andSync: (BOOL)shouldSync{
+    PCCloudEntry *cloudEntry = [[PCCloudEntry alloc] init];
     
     [cloudEntry setObject:entry.title forKey:CAPSULE_ENTRY_TITLE];
     [cloudEntry setObject:entry.account forKey:CAPSULE_ENTRY_ACCOUNT];
@@ -67,8 +68,9 @@
     return cloudEntry;
 }
 
-- (AVObject *)cloudGroupWithGroup:(PCCapsuleGroup *)group andSync: (BOOL)shouldSync{
-    AVObject *cloudGroup = [[AVObject alloc] initWithClassName:group.groupName];
+- (PCCloudGroup *)cloudGroupWithGroup:(PCCapsuleGroup *)group andSync: (BOOL)shouldSync{
+    
+    PCCloudGroup *cloudGroup = [[PCCloudGroup alloc] init];
     NSMutableArray *cloudEntries = [[NSMutableArray alloc] init];
     for (PCCapsule *entry in group.groupEntries) {
         AVObject *cloudEntry = [self cloudEntryWithEntry:entry andSync:NO];
@@ -86,35 +88,61 @@
     return cloudGroup;
 }
 
-- (AVObject *)cloudDatabaseWithDatabase:(PCDocumentDatabase *)database andSync: (BOOL)shouldSync{
+- (PCCloudDatabase *)cloudDatabaseWithDatabase:(PCDocumentDatabase *)database andSync: (BOOL)shouldSync{
+    PCCloudDatabase *cloudDatabase = [[PCCloudDatabase alloc] init];
+    AVQuery *query = [AVQuery queryWithClassName:[PCCloudDatabase parseClassName]];
+    AVObject *resultObject = [query getObjectWithId:[PCCloudUser cloudDatabaseID]];
+    if (resultObject) {
+        cloudDatabase = (PCCloudDatabase *)resultObject;
+        return cloudDatabase;
+    }
+    
     NSString *databaseName = [PCDocumentDatabase databaseName];
     NSString *documentName = [PCDocumentDatabase documentName];
-
-    AVObject *cloudDatabase = [[AVObject alloc] initWithClassName:@"johnshaw"];
+    
+    cloudDatabase.name = databaseName;
     NSData *xmldata = [database.document XMLData];
-    AVFile *xmlFile = [AVFile fileWithName:@"acsdassd.pcdb" data:xmldata];
-    [cloudDatabase setObject:xmlFile forKey:@"CloudFile"];
+    AVFile *xmlFile = [AVFile fileWithName:documentName data:xmldata];
     [xmlFile saveInBackground];
-    //    NSMutableArray *cloudGroupes = [[NSMutableArray alloc] init];
-//    for (PCCapsuleGroup *gourp in database.groups) {
-//        AVObject *cloudGroup = [self cloudGroupWithGroup:gourp andSync:NO];
-//        [cloudDatabase addObject:cloudGroup forKey:kDatabaseGroups];
-//    }
+    cloudDatabase.file = xmlFile;
+    
+    
+    for (PCCapsuleGroup *group in database.groups) {
+        PCCloudGroup *cloudGroup = [self cloudGroupWithGroup:group andSync:NO];
+        [cloudDatabase addObject:cloudGroup forKey:kDatabaseGroups];
+        for (PCCapsule *entry in group.groupEntries) {
+            PCCloudEntry *cloudEntry = [self cloudEntryWithEntry:entry andSync:NO];
+            [cloudGroup addObject:cloudEntry forKey:kGroupEntries];
+        }
+    }
     
     if (shouldSync) {
         [cloudDatabase saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            NSLog(@"database save in leanCloud");
+            if (succeeded) {
+                NSLog(@"save cloud database succeeded");
+
+                [PCCloudUser saveCloudDatabaseID:[cloudDatabase objectId]];
+                //FIXME:写到xml里
+                NSString *cloudDatabaseID = [cloudDatabase objectId];
+                database.cloudID = cloudDatabaseID;
+                cloudDatabase.fileID = [xmlFile objectId];
+                NSLog(@"file objectID = %@",cloudDatabase.fileID);
+                NSLog(@"object objectID = %@",cloudDatabase.fileID);
+                
+                AVUser *user = [AVUser currentUser];
+                [user setObject:cloudDatabaseID forKey:CLOUD_DATABASE_ID];
+                
+            }
         }];
     }
-    
-    database.cloudID = [cloudDatabase objectId];
+
     return cloudDatabase;
 }
 
 - (AVObject *)createCloudDatabase:(PCDocumentDatabase *)database{
     //    AVObject *cloudDatabase = [[AVObject alloc] initWithClassName:@"Database"];
     PCCloudDatabase *cloudDatabase = [[PCCloudDatabase alloc] init];
-    //FIXME:未知bug
+    //FIXME:未知bug //需要在程序开始初期注册子类，才能自动生成setter，getter
     cloudDatabase.name = [PCDocumentDatabase databaseName];
     AVFile *file = [AVFile fileWithName:[cloudDatabase.name stringByAppendingPathExtension:@"xml"] data:[database.document XMLData]];
     cloudDatabase.file = file;

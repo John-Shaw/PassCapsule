@@ -14,6 +14,7 @@
 - (void)registerUserWithUserName: (NSString *)username
                         Password:(NSString *)password
                  andOtherOptions: (NSDictionary *)otherOptions{
+    
     AVUser *aUser = [AVUser user];
     aUser.username = username;
     aUser.password = password;
@@ -31,14 +32,30 @@
     }];
 }
 
-- (void)validUserWithUserName:(NSString *)username andPassword:(NSString *)password{
+- (AVUser *)validUserWithUserName:(NSString *)username andPassword:(NSString *)password{
+    __block AVUser *aUser = [[AVUser alloc] init];
     [AVUser logInWithUsernameInBackground:username password:password block:^(AVUser *user, NSError *error) {
         if (user != nil) {
             
         } else {
+            NSLog(@"the user %@ not exites",username);
             
         }
+        aUser = user;
     }];
+    return aUser;
+}
+
+- (AVUser *)currentUser{
+    return [AVUser currentUser];
+}
+
++ (void)saveCloudDatabaseID:(NSString *)cloudDatabaseID{
+    [[NSUserDefaults standardUserDefaults] setObject:cloudDatabaseID forKey:CLOUD_DATABASE_ID];
+}
+
++ (NSString *)cloudDatabaseID{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:CLOUD_DATABASE_ID];
 }
 
 @end

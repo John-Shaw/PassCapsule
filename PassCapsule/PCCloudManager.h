@@ -13,6 +13,7 @@
 #import "PCCloudDatabase.h"
 #import "PCCloudGroup.h"
 #import "PCCloudEntry.h"
+#import "PCCloudUser.h"
 
 @interface PCCloudManager : NSObject
 
@@ -20,11 +21,10 @@
 - (void)syncDatabase: (NSString *)databaseID;
 - (void)saveDatabase: (NSData *)xmlData;
 
-- (AVObject *)createCloudDatabase:(PCDocumentDatabase *)database;
 
-- (AVObject *)cloudEntryWithEntry: (PCCapsule *)entry andSync: (BOOL)shouldSync;
-- (AVObject *)cloudGroupWithGroup: (PCCapsuleGroup *)group andSync: (BOOL)shouldSync;
-- (AVObject *)cloudDatabaseWithDatabase: (PCDocumentDatabase *)database andSync: (BOOL)shouldSync;
+- (PCCloudEntry *)cloudEntryWithEntry: (PCCapsule *)entry andSync: (BOOL)shouldSync;
+- (PCCloudGroup *)cloudGroupWithGroup: (PCCapsuleGroup *)group andSync: (BOOL)shouldSync;
+- (PCCloudDatabase *)cloudDatabaseWithDatabase: (PCDocumentDatabase *)database andSync: (BOOL)shouldSync;
 
 - (void)setCloudDatabaseWithDatabase: (PCDocumentDatabase *)database;
 

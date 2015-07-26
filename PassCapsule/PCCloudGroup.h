@@ -8,7 +8,11 @@
 
 #import <AVOSCloud/AVOSCloud.h>
 
+static NSString *const kGroupEntries = @"groupEntries";
+
 @interface PCCloudGroup : AVObject<AVSubclassing>
 @property (nonatomic, copy) NSString *groupName;
 @property (nonatomic, strong) NSMutableArray *groupEntries;
+
++ (NSString *)parseClassName;
 @end

@@ -13,10 +13,11 @@ static NSString *const kDatabaseGroups = @"cloudGroups";
 
 @interface PCCloudDatabase : AVObject<AVSubclassing>
 
-@property (nonatomic, strong) NSArray  *cloudGroups;
+@property (nonatomic, strong) NSMutableArray  *cloudGroups;
 @property (nonatomic, strong) AVFile   *file;
 @property (nonatomic, copy  ) NSString *name;
 @property (nonatomic, copy  ) NSString *fileID;
 
++ (NSString *)parseClassName;
 
 @end
