@@ -46,20 +46,43 @@
     
 }
 
-- (PCCloudEntry *)cloudEntryWithEntry:(PCCapsule *)entry  andSync: (BOOL)shouldSync{
-    PCCloudEntry *cloudEntry = [[PCCloudEntry alloc] init];
+- (PCCloudEntry *)queryCloudEntryByID:(NSString *)cloudID{
+    PCCloudEntry *cloudEntry = nil;
     
-    [cloudEntry setObject:entry.title forKey:CAPSULE_ENTRY_TITLE];
-    [cloudEntry setObject:entry.account forKey:CAPSULE_ENTRY_ACCOUNT];
-    [cloudEntry setObject:entry.password forKey:CAPSULE_ENTRY_PASSWORD];
-    [cloudEntry setObject:entry.site forKey:CAPSULE_ENTRY_SITE];
-    [cloudEntry setObject:entry.group forKey:CAPSULE_ENTRY_GROUP];
-    [cloudEntry setObject:entry.idString forKey:CAPSULE_ENTRY_ID];
+    AVQuery *query = [PCCloudEntry query];
+    cloudEntry = (PCCloudEntry *)[query getObjectWithId:cloudID];
+    
+    return cloudEntry;
+}
+
+- (PCCloudEntry *)cloudEntryWithEntry:(PCCapsule *)entry  andSync: (BOOL)shouldSync{
+    PCCloudEntry *cloudEntry = [self queryCloudEntryByID:entry.cloudID];
+    if (cloudEntry) {
+        return cloudEntry;
+    } else {
+        cloudEntry = [PCCloudEntry object];
+    }
+    
+    cloudEntry.title = entry.title;
+    cloudEntry.account = entry.account;
+    cloudEntry.password = entry.password;
+    cloudEntry.site = entry.site;
+    cloudEntry.group = entry.group;
+    cloudEntry.entry_id = entry.idString;
+    
+//    [cloudEntry setObject:entry.title forKey:CAPSULE_ENTRY_TITLE];
+//    [cloudEntry setObject:entry.account forKey:CAPSULE_ENTRY_ACCOUNT];
+//    [cloudEntry setObject:entry.password forKey:CAPSULE_ENTRY_PASSWORD];
+//    [cloudEntry setObject:entry.site forKey:CAPSULE_ENTRY_SITE];
+//    [cloudEntry setObject:entry.group forKey:CAPSULE_ENTRY_GROUP];
+//    [cloudEntry setObject:entry.idString forKey:CAPSULE_ENTRY_ID];
     
     if (shouldSync) {
         [cloudEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 NSLog(@"create entry succeeded!");
+                entry.cloudID = [cloudEntry objectId];
+                
             }
         }];
     }
@@ -68,11 +91,24 @@
     return cloudEntry;
 }
 
-- (PCCloudGroup *)cloudGroupWithGroup:(PCCapsuleGroup *)group andSync: (BOOL)shouldSync{
+- (PCCloudGroup *)queryCloudGroupByID:(NSString *)cloudID{
+    PCCloudGroup *cloudGroup = nil;
     
-    PCCloudGroup *cloudGroup = [[PCCloudGroup alloc] init];
+    AVQuery *query = [PCCloudGroup query];
+    cloudGroup = (PCCloudGroup *)[query getObjectWithId:cloudID];
+    
+    return cloudGroup;
+}
+
+
+- (PCCloudGroup *)cloudGroupWithGroup:(PCCapsuleGroup *)group andSync: (BOOL)shouldSync{
+    PCCloudGroup *cloudGroup = [self queryCloudGroupByID:group.cloudID];
+    if (cloudGroup) {
+        return cloudGroup;
+    }
+    
     NSMutableArray *cloudEntries = [[NSMutableArray alloc] init];
-    for (PCCapsule *entry in group.groupEntries) {
+    for (PCCapsule *entry in group.entries) {
         AVObject *cloudEntry = [self cloudEntryWithEntry:entry andSync:NO];
         [cloudEntries addObject:cloudEntry];
     }
@@ -80,20 +116,26 @@
     
     if (shouldSync) {
         [cloudGroup saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            
+            group.cloudID = [cloudGroup objectId];
         }];
     }
     
-    group.cloudID = [cloudGroup objectId];
+
     return cloudGroup;
 }
 
+- (PCCloudDatabase *)queryCloudDatabaseByID:(NSString *)cloudID{
+    PCCloudDatabase *cloudDatabase = nil;
+    
+    AVQuery *query = [PCCloudDatabase query];
+    cloudDatabase = (PCCloudDatabase *)[query getObjectWithId:cloudID];
+    
+    return cloudDatabase;
+}
+
 - (PCCloudDatabase *)cloudDatabaseWithDatabase:(PCDocumentDatabase *)database andSync: (BOOL)shouldSync{
-    PCCloudDatabase *cloudDatabase = [[PCCloudDatabase alloc] init];
-    AVQuery *query = [AVQuery queryWithClassName:[PCCloudDatabase parseClassName]];
-    AVObject *resultObject = [query getObjectWithId:[PCCloudUser cloudDatabaseID]];
-    if (resultObject) {
-        cloudDatabase = (PCCloudDatabase *)resultObject;
+    PCCloudDatabase *cloudDatabase = [self queryCloudDatabaseByID:database.cloudID];
+    if (cloudDatabase) {
         return cloudDatabase;
     }
     
@@ -110,7 +152,7 @@
     for (PCCapsuleGroup *group in database.groups) {
         PCCloudGroup *cloudGroup = [self cloudGroupWithGroup:group andSync:NO];
         [cloudDatabase addObject:cloudGroup forKey:kDatabaseGroups];
-        for (PCCapsule *entry in group.groupEntries) {
+        for (PCCapsule *entry in group.entries) {
             PCCloudEntry *cloudEntry = [self cloudEntryWithEntry:entry andSync:NO];
             [cloudGroup addObject:cloudEntry forKey:kGroupEntries];
         }
@@ -128,9 +170,11 @@
                 cloudDatabase.fileID = [xmlFile objectId];
                 NSLog(@"file objectID = %@",cloudDatabase.fileID);
                 NSLog(@"object objectID = %@",cloudDatabase.fileID);
+                [cloudDatabase saveInBackground];
                 
                 AVUser *user = [AVUser currentUser];
                 [user setObject:cloudDatabaseID forKey:CLOUD_DATABASE_ID];
+                [user saveInBackground];
                 
             }
         }];

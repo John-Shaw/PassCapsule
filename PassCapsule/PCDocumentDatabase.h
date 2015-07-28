@@ -29,8 +29,8 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 @property (nonatomic, strong) NSMutableArray *groups;
 @property (nonatomic, getter=isLoad) BOOL loadDocument;
 @property (nonatomic, getter=shouldRefresh) BOOL refreshDocument;
-@property (nonatomic, readwrite) NSUInteger currentID;
 
+@property (nonatomic, readwrite) NSUInteger currentID;
 @property (nonatomic,strong)   NSString *cloudID;
 
 

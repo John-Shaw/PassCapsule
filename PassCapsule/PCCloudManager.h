@@ -26,7 +26,6 @@
 - (PCCloudGroup *)cloudGroupWithGroup: (PCCapsuleGroup *)group andSync: (BOOL)shouldSync;
 - (PCCloudDatabase *)cloudDatabaseWithDatabase: (PCDocumentDatabase *)database andSync: (BOOL)shouldSync;
 
-- (void)setCloudDatabaseWithDatabase: (PCDocumentDatabase *)database;
 
 +(instancetype)sharedCloudManager;
 /**

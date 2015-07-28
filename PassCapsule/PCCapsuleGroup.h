@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "PCCapsule.h"
 
-static NSString * const CAPSULE_GROUP      = @"group";
-static NSString * const CAPSULE_GROUP_NAME = @"group_name";
-static NSString * const CAPSULE_GROUP_DEFAULT = @"未分类";
+static NSString * const CAPSULE_GROUP            = @"group";
+static NSString * const CAPSULE_GROUP_ID         = @"group_id";
+static NSString * const CAPSULE_GROUP_NAME       = @"group_name";
+static NSString * const CAPSULE_GROUP_DEFAULT    = @"未分类";
 static NSString * const CAPSULE_GROUP_WEBACCOUNT = @"网站账户";
-static NSString * const CAPSULE_GROUP_EMAIL = @"电子邮件";
-static NSString * const CAPSULE_GROUP_CARD= @"银行卡";
+static NSString * const CAPSULE_GROUP_EMAIL      = @"电子邮件";
+static NSString * const CAPSULE_GROUP_CARD       = @"银行卡";
 
 typedef NS_ENUM(NSUInteger, PCGroupType) {
     PCGroupTypeDefault,
@@ -25,9 +26,9 @@ typedef NS_ENUM(NSUInteger, PCGroupType) {
 
 @interface PCCapsuleGroup : NSObject
 
-@property (nonatomic, copy) NSString *groupName;
-@property (nonatomic, strong) NSMutableArray *groupEntries;
-
-@property (nonatomic, strong) NSString *cloudID;
+@property (nonatomic, readwrite) NSUInteger     groupID;
+@property (nonatomic, copy     ) NSString       *name;
+@property (nonatomic, strong   ) NSMutableArray *entries;
+@property (nonatomic, strong   ) NSString       *cloudID;
 
 @end

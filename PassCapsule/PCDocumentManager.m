@@ -85,13 +85,21 @@
     [masterKeyElement setStringValue:password];
     [rootElement addChild:masterKeyElement];
     
+    DDXMLElement *databaseConfig = [[DDXMLElement alloc] initWithName:@"database"];
+    [databaseConfig addAttribute:[DDXMLNode attributeWithName:@"database_cloud_id" stringValue:@""]];
+    [databaseConfig setStringValue:@"config xxxxxx"];
+    [rootElement addChild:databaseConfig];
+    
     NSArray *groups = @[CAPSULE_GROUP_DEFAULT,CAPSULE_GROUP_WEBACCOUNT,CAPSULE_GROUP_EMAIL,CAPSULE_GROUP_CARD];
     for (NSString *groupName in groups) {
         DDXMLElement *groupElement =  [DDXMLElement elementWithName:CAPSULE_GROUP];
         
+        NSString *groupID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseIDString];
+        [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_ID stringValue:groupID]];
         [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:groupName]];
+        [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_CLOUD_ID stringValue:@""]];
         
-        NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:[NSString stringWithFormat:@"测试 群组:%@",groupName]],
+        NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:[NSString stringWithFormat:@"群组:%@",groupName]],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
                               [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
@@ -115,6 +123,7 @@
     return capsuleDocument;
 }
 
+//FIXME:什么鬼
 - (BOOL)readDocument:(NSString *)documentPath withMasterPassword:(NSString *)masterPassword{
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL fileExists = [fileManager fileExistsAtPath:documentPath];
@@ -166,10 +175,9 @@
     //遍历group
     for (DDXMLElement *group in groups) {
         PCCapsuleGroup *aGroup = [PCCapsuleGroup new];
-        NSString *name = [[group attributeForName:CAPSULE_GROUP_NAME] stringValue];
-        NSString *groupCloudID = [[group attributeForName:CAPSULE_CLOUD_ID] stringValue];
-        aGroup.groupName = name;
-        aGroup.cloudID = groupCloudID;
+        aGroup.groupID = [[[group attributeForName:CAPSULE_GROUP_ID] stringValue] integerValue];
+        aGroup.name = [[group attributeForName:CAPSULE_GROUP_NAME] stringValue];
+        aGroup.cloudID = [[group attributeForName:CAPSULE_CLOUD_ID] stringValue];
 
         NSArray *entries = [group children];
         //遍历group中的每个entry
@@ -178,8 +186,8 @@
             PCCapsule *aCapsule = [PCCapsule new];
             
             //entry 的标志符
-            NSUInteger capsuleID = [[[entry attributeForName:CAPSULE_ENTRY_ID] stringValue] integerValue];
-            aCapsule.capsuleID = capsuleID;
+            aCapsule.cloudID = [[entry attributeForName:CAPSULE_CLOUD_ID] stringValue];
+            aCapsule.capsuleID = [[[entry attributeForName:CAPSULE_ENTRY_ID] stringValue] integerValue];
             
             //遍历entry中的每个详细记录
             for (DDXMLNode *e in aEntry) {
@@ -207,8 +215,9 @@
 
             }
             //将entry反序列化到capsule对象后，保存到相关集合中
+            //FIXME:额外在维护一个全部记录的数组，意义何在，有待考证
             [self.documentDatabase.entries addObject:aCapsule];
-            [aGroup.groupEntries addObject:aCapsule];
+            [aGroup.entries addObject:aCapsule];
         }
         
         //保存group
@@ -216,15 +225,14 @@
         
     }
     
-    AVObject *database = [[PCCloudManager sharedCloudManager] createCloudDatabase:self.documentDatabase];
-    NSLog(@"avobjet id %@",[database objectId]);
+//    AVObject *database = [[PCCloudManager sharedCloudManager] createCloudDatabase:self.documentDatabase];
+//    NSLog(@"avobjet id %@",[database objectId]);
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
 }
 
+#pragma mark - entry API
 - (void)addNewEntry: (PCCapsule *)entry{
     if (self.documentDatabase.isLoad) {
-        
-        
         
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']",
@@ -243,20 +251,23 @@
         //id应该通过documentDatabase 的自动增长方法获取
         entry.capsuleID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseID];
         [newEntry addAttribute:[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entry.idString]];
-
+        //entry cloudID
+        [newEntry addAttribute:[DDXMLNode attributeWithName:CAPSULE_CLOUD_ID stringValue:entry.cloudID]];
         
+        //entry的子节点
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:entry.title]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:entry.account]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:entry.password]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:entry.site]];
         [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:entry.group]];
-        [newEntry addChild:[DDXMLElement elementWithName:CAPSULE_CLOUD_ID stringValue:entry.cloudID]];
         [groupElement addChild:newEntry];
         
         [self.documentDatabase.entries addObject:entry];
-        PCCapsuleGroup *group = self.documentDatabase.groups[0];
-        [group.groupEntries addObject:entry];
+        PCCapsuleGroup *group = self.documentDatabase.groups[PCGroupTypeDefault];
+        [group.entries addObject:entry];
         
+        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+        PCCloudEntry *cloudEntry = [manager cloudEntryWithEntry:entry andSync:YES];
         self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     }
@@ -280,10 +291,9 @@
         
         [self.documentDatabase.entries removeObject:entry];
         PCCapsuleGroup *group = self.documentDatabase.groups[0];
-        [group.groupEntries removeObject:entry];
-        
+        [group.entries removeObject:entry];
         self.documentDatabase.refreshDocument = YES;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
+
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
         [self deleteEntry:entry];
@@ -304,6 +314,7 @@
         DDXMLElement *modifyEntry = [results firstObject];
         //修改记录id
         [[modifyEntry attributeForName:CAPSULE_ENTRY_ID] setStringValue:entry.idString];
+        [[modifyEntry attributeForName:CAPSULE_CLOUD_ID] setStringValue:entry.cloudID];
         
         //修改记录内容
         NSArray *aEntry = [modifyEntry children];
@@ -333,8 +344,36 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
-        [self deleteEntry:entry];
+        [self modifyEntry:entry];
     }
+}
+
+#pragma mark - group API
+
+- (void)modifyGroup: (PCCapsuleGroup *)group{
+    if (self.documentDatabase.isLoad) {
+        DDXMLDocument *document = self.documentDatabase.document;
+        NSString *idString = [@(group.groupID) stringValue];
+        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]"
+                           ,CAPSULE_GROUP_ID,idString];
+        NSArray *results = [document nodesForXPath:xpath error:nil];
+        if ([results count] == 0) {
+            NSLog(@"group id error");
+            return;
+        }
+        DDXMLElement *modifyGroup = [results firstObject];
+        //修改记录id
+        [[modifyGroup attributeForName:CAPSULE_GROUP_ID] setStringValue:idString];
+        [[modifyGroup attributeForName:CAPSULE_CLOUD_ID] setStringValue:group.cloudID];
+        [[modifyGroup attributeForName:CAPSULE_GROUP_NAME] setStringValue:group.name];
+        
+        self.documentDatabase.refreshDocument = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
+    } else {
+        [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
+        [self modifyGroup:group];
+    }
+
 }
 
 - (void)saveDocument{

@@ -121,7 +121,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         PCCapsuleGroup *group = self.groups[indexPath.section];
-        PCCapsule *entry = group.groupEntries[indexPath.row];
+        PCCapsule *entry = group.entries[indexPath.row];
         [[PCDocumentManager sharedDocumentManager] deleteEntry:entry];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -137,14 +137,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     PCCapsuleGroup *group = self.groups[section];
-    return [group.groupEntries count];
+    return [group.entries count];
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     PCCapsuleGroup *group = self.groups[section];
     
-    if ([group.groupName length] > 0) {
-        return group.groupName;
+    if ([group.name length] > 0) {
+        return group.name;
     }
     
     return @"unkonw";
@@ -156,7 +156,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
     PCCapsuleGroup *group = self.groups[indexPath.section];
-    PCCapsule *capsule = [group.groupEntries objectAtIndex:indexPath.row];
+    PCCapsule *capsule = [group.entries objectAtIndex:indexPath.row];
     
     cell.textLabel.text = capsule.title;
     return cell;
@@ -171,7 +171,7 @@
             if ([segue.destinationViewController isKindOfClass:[PCEntryViewController class]]){
                 PCEntryViewController *cdvc = [segue destinationViewController];
                 PCCapsuleGroup *group = self.groups[indexPath.section];
-                PCCapsule *capsule = [group.groupEntries objectAtIndex:indexPath.row];
+                PCCapsule *capsule = [group.entries objectAtIndex:indexPath.row];
                 cdvc.capsule = capsule;
             }
         }
