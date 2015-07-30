@@ -11,7 +11,7 @@
 
 @implementation PCCloudUser
 
-- (void)registerUserWithUserName: (NSString *)username
++ (void)registerUserWithUserName: (NSString *)username
                         Password:(NSString *)password
                  andOtherOptions: (NSDictionary *)otherOptions{
     
@@ -26,17 +26,22 @@
     [aUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"user %@ register success !",username);
+            if (![AVUser currentUser]) {
+                [AVUser logInWithUsername:username password:password error:nil];
+            } else{
+                NSLog(@"current user %@ !",[AVUser currentUser].username);
+            }
         } else {
             NSLog(@"user %@ register error !",username);
         }
     }];
 }
 
-- (AVUser *)validUserWithUserName:(NSString *)username andPassword:(NSString *)password{
++ (AVUser *)validUserWithUserName:(NSString *)username andPassword:(NSString *)password{
     __block AVUser *aUser = [[AVUser alloc] init];
     [AVUser logInWithUsernameInBackground:username password:password block:^(AVUser *user, NSError *error) {
         if (user != nil) {
-            
+            NSLog(@"the user %@ login",username);
         } else {
             NSLog(@"the user %@ not exites",username);
             
@@ -46,9 +51,6 @@
     return aUser;
 }
 
-- (AVUser *)currentUser{
-    return [AVUser currentUser];
-}
 
 + (void)saveCloudDatabaseID:(NSString *)cloudDatabaseID{
     [[NSUserDefaults standardUserDefaults] setObject:cloudDatabaseID forKey:CLOUD_DATABASE_ID];

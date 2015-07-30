@@ -10,7 +10,7 @@
 
 @implementation PCCloudDatabase
 
-@dynamic name,file,fileID,cloudGroups;
+@dynamic name,file,cloudGroups,masterPassword;
 
 + (NSString *)parseClassName {
     return @"PCCloudDatabase";

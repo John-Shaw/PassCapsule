@@ -45,7 +45,7 @@
         NSString *path = [PCDocumentDatabase documentPath];
         NSLog(@"path = %@",path);
         NSData *xmlData = [NSData dataWithContentsOfFile:path];
-        NSLog(@"%@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
+        NSLog(@"xmldata %@",[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding]);
         [manager parserDocument:xmlData];
         dispatch_async(dispatch_get_main_queue(), ^{
                 [self.aSpinner stopAnimating];

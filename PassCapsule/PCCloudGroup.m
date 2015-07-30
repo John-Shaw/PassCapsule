@@ -9,7 +9,7 @@
 #import "PCCloudGroup.h"
 
 @implementation PCCloudGroup
-@dynamic groupEntries,groupName;
+@dynamic groupEntries,groupName,group_id,cloud_id;
 + (NSString *)parseClassName {
     return @"PCCloudGroup";
 }

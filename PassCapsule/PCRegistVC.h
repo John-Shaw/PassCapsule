@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PCRegistVC : UIViewController
+@interface PCRegistVC : UITableViewController
 
 @end

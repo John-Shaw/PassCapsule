@@ -88,5 +88,12 @@
     
     return [documentsPath stringByAppendingPathComponent:documentName];
 }
++ (NSDate *)lastModifyDate{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_LAST_DATE];
+}
++ (void)setLastModifyDate:(NSDate *)date{
+    [[NSUserDefaults standardUserDefaults] setObject:date forKey:USERDEFAULT_LAST_DATE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 @end

@@ -9,7 +9,7 @@
 #import "PCCloudEntry.h"
 
 @implementation PCCloudEntry
-@dynamic entry_id,title,password,site,account,iconName,group;
+@dynamic entry_id,title,password,site,account,iconName,group,cloud_id;
 + (NSString *)parseClassName {
     return @"PCCloudEntry";
 }

@@ -12,7 +12,8 @@
 #import "PCGroupTableVC.h"
 #import "PCDocumentDatabase.h"
 #import <AVOSCloud/AVOSCloud.h>
-
+#import "PCDocumentManager.h"
+#import "PCCloudManager.h"
 
 @interface PCUnLockVC ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *passwordTextField;
@@ -27,12 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-    
-    AVObject *testObject = [AVObject objectWithClassName:@"TestObject"];
-    [testObject setObject:@"bar" forKey:@"foo"];
-    [testObject addObjectsFromArray:@[@"123",@"johnShaw",@"qweewq"] forKey:@"aCapsule"];
-    [testObject save];
-    
+//    [[PCCloudManager sharedCloudManager] shouldSyncBy:[PCDocumentDatabase lastModifyDate]];
+    [[PCDocumentManager sharedDocumentManager] syncDocumentFormCloudWithUser:[AVUser currentUser]];
 }
 
 
@@ -151,11 +148,6 @@
                                               }
                                           }];
                      }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

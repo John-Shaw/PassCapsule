@@ -16,7 +16,7 @@ static NSString *const kDatabaseGroups = @"cloudGroups";
 @property (nonatomic, strong) NSMutableArray  *cloudGroups;
 @property (nonatomic, strong) AVFile   *file;
 @property (nonatomic, copy  ) NSString *name;
-@property (nonatomic, copy  ) NSString *fileID;
+@property (nonatomic, copy  ) NSString *masterPassword;
 
 + (NSString *)parseClassName;
 

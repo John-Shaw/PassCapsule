@@ -13,14 +13,13 @@ static NSString * const CLOUD_DATABASE_ID     = @"cloudDatabaseID";
 
 @interface PCCloudUser : NSObject
 
-- (void)registerUserWithUserName: (NSString *)username
++ (void)registerUserWithUserName: (NSString *)username
                         Password: (NSString *)password
                  andOtherOptions: (NSDictionary *)otherOptions;
 
-- (AVUser *)validUserWithUserName: (NSString *)username
++ (AVUser *)validUserWithUserName: (NSString *)username
                   andPassword: (NSString *)password;
 
-- (AVUser *)currentUser;
 
 + (void)saveCloudDatabaseID: (NSString *)cloudDatabaseID;
 + (NSString *)cloudDatabaseID;

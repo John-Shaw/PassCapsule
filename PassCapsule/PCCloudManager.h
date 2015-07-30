@@ -17,14 +17,19 @@
 
 @interface PCCloudManager : NSObject
 
-- (void)syncEntry: (PCCapsule *)entry andGroup: (PCCapsuleGroup *)group;
-- (void)syncDatabase: (NSString *)databaseID;
-- (void)saveDatabase: (NSData *)xmlData;
+- (void)shouldSyncBy: (NSDate *)date;
 
+- (void)syncEntry: (PCCapsule *)entry;
+- (void)syncgroup: (PCCapsuleGroup *)group;
+- (void)syncDatabase: (PCDocumentDatabase *)database;
 
-- (PCCloudEntry *)cloudEntryWithEntry: (PCCapsule *)entry andSync: (BOOL)shouldSync;
-- (PCCloudGroup *)cloudGroupWithGroup: (PCCapsuleGroup *)group andSync: (BOOL)shouldSync;
-- (PCCloudDatabase *)cloudDatabaseWithDatabase: (PCDocumentDatabase *)database andSync: (BOOL)shouldSync;
+- (PCCloudEntry *)queryCloudEntryByID:(NSString *)cloudID;
+- (PCCloudGroup *)queryCloudGroupByID:(NSString *)cloudID;
+- (PCCloudDatabase *)queryCloudDatabaseByID:(NSString *)cloudID;
+
+- (PCCloudEntry *)createCloudEntryWithEntry: (PCCapsule *)entry;
+- (PCCloudGroup *)createCloudGroupWithGroup: (PCCapsuleGroup *)group;
+- (PCCloudDatabase *)createCloudDatabaseWithDatabase: (PCDocumentDatabase *)database;
 
 
 +(instancetype)sharedCloudManager;

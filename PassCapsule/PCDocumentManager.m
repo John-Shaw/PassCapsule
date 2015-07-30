@@ -56,24 +56,65 @@
     NSString *basePassowrd = [[hashPassword dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [PCKeyChainUtils setString:basePassowrd forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
 
-    
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *documentName = [PCDocumentDatabase documentName];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:documentName];
     BOOL fileExists = [fileManager fileExistsAtPath:filePath];
     
+
+    
     if (fileExists) {
         NSLog(@"file is existed in path = %@",filePath);
         return NO;
     }else{
         DDXMLDocument *capsuleDocument = [self baseTreeWithPassword:masterPassword];
-
         [[capsuleDocument XMLData] writeToFile:filePath atomically:YES];
+        
+        AVUser *user = [AVUser currentUser];
+        if (user) {
+            [[PCCloudManager sharedCloudManager] createCloudDatabaseWithDatabase:[PCDocumentDatabase sharedDocumentDatabase]];
+        }
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         return YES;
     }
     return NO;
+}
 
+- (BOOL)syncDocumentFormCloudWithUser: (AVUser *)user{
+    if(user){
+        NSString *cloudID = [user objectForKey:CLOUD_DATABASE_ID];
+        if (cloudID) {
+            PCCloudDatabase *cloudDatabase = [[PCCloudManager sharedCloudManager] queryCloudDatabaseByID:cloudID];
+            AVFile *file = cloudDatabase.file;
+            
+            NSString *masterPassword = cloudDatabase.masterPassword;
+            NSString *databaseName = cloudDatabase.name;
+            
+            [PCPassword setPassword:masterPassword];
+            [PCDocumentDatabase setDocumentName:databaseName];
+            
+            NSString *hashPassword = [PCPassword hashPassword:masterPassword];
+            NSString *basePassowrd = [[hashPassword dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            [PCKeyChainUtils setString:basePassowrd forKey:KEYCHAIN_PASSWORD andServiceName:KEYCHAIN_PASSWORD_SERVICE];
+        
+            
+            NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+            NSString *documentName = [PCDocumentDatabase documentName];
+            NSString *filePath = [documentsPath stringByAppendingPathComponent:documentName];
+            
+            NSData *xmlData = [file getData];
+            [xmlData writeToFile:filePath atomically:YES];
+            self.documentDatabase.document = [[DDXMLDocument alloc] initWithData:xmlData options:0 error:nil];
+            self.documentDatabase.loadDocument = YES;
+            
+            [PCDocumentDatabase setLastModifyDate:[NSDate date]];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:USERDEFAULT_DATABASE_CREATE];
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (DDXMLDocument *)baseTreeWithPassword:(NSString *) password{
@@ -87,7 +128,7 @@
     
     DDXMLElement *databaseConfig = [[DDXMLElement alloc] initWithName:@"database"];
     [databaseConfig addAttribute:[DDXMLNode attributeWithName:@"database_cloud_id" stringValue:@""]];
-    [databaseConfig setStringValue:@"config xxxxxx"];
+    [databaseConfig setStringValue:@"config value for test"];
     [rootElement addChild:databaseConfig];
     
     NSArray *groups = @[CAPSULE_GROUP_DEFAULT,CAPSULE_GROUP_WEBACCOUNT,CAPSULE_GROUP_EMAIL,CAPSULE_GROUP_CARD];
@@ -99,16 +140,16 @@
         [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_GROUP_NAME stringValue:groupName]];
         [groupElement addAttribute:[DDXMLNode attributeWithName:CAPSULE_CLOUD_ID stringValue:@""]];
         
-        NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:[NSString stringWithFormat:@"群组:%@",groupName]],
-                              [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
-                              [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
-                              [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
-                              [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
-        
-        NSString *entryID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseIDString];
-        
-        NSArray *attributes = @[[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entryID]];
-        [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:attributes]];
+//        NSArray *aCapsule = @[[DDXMLElement elementWithName:CAPSULE_ENTRY_TITLE stringValue:[NSString stringWithFormat:@"群组:%@",groupName]],
+//                              [DDXMLElement elementWithName:CAPSULE_ENTRY_ACCOUNT stringValue:@"John Shaw"],
+//                              [DDXMLElement elementWithName:CAPSULE_ENTRY_PASSWORD stringValue:@"fuck cracker"],
+//                              [DDXMLElement elementWithName:CAPSULE_ENTRY_SITE stringValue:@"www.zerz.cn"],
+//                              [DDXMLElement elementWithName:CAPSULE_ENTRY_GROUP stringValue:groupName]];
+//        
+//        NSString *entryID = [[PCDocumentDatabase sharedDocumentDatabase] autoIncreaseIDString];
+//        
+//        NSArray *attributes = @[[DDXMLNode attributeWithName:CAPSULE_ENTRY_ID stringValue:entryID]];
+//        [groupElement addChild:[DDXMLElement elementWithName:CAPSULE_ENTRY children:aCapsule attributes:attributes]];
         
         [rootElement addChild:groupElement];
     }
@@ -157,7 +198,7 @@
             self.documentDatabase.document = document;
             self.documentDatabase.loadDocument = YES;
         });
-
+        
     });
     
 }
@@ -225,9 +266,6 @@
         
     }
     
-//    AVObject *database = [[PCCloudManager sharedCloudManager] createCloudDatabase:self.documentDatabase];
-//    NSLog(@"avobjet id %@",[database objectId]);
-//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PARSER_DONE object:nil];
 }
 
 #pragma mark - entry API
@@ -266,8 +304,12 @@
         PCCapsuleGroup *group = self.documentDatabase.groups[PCGroupTypeDefault];
         [group.entries addObject:entry];
         
-        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
-        PCCloudEntry *cloudEntry = [manager cloudEntryWithEntry:entry andSync:YES];
+        
+//        //sync cloudGroup
+//        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+//        [manager cloudGroupWithGroup:group andSync:YES];
+        
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     }
@@ -293,6 +335,7 @@
         PCCapsuleGroup *group = self.documentDatabase.groups[0];
         [group.entries removeObject:entry];
         self.documentDatabase.refreshDocument = YES;
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
 
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
@@ -304,7 +347,7 @@
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *idString = [@(entry.capsuleID) stringValue];
-        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]/entry[\"%@\"=\"%@\"]"
+        NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']/entry[@%@='%@']"
                            ,CAPSULE_GROUP_NAME,CAPSULE_GROUP_DEFAULT,CAPSULE_ENTRY_ID,idString];
         NSArray *results = [document nodesForXPath:xpath error:nil];
         if ([results count] == 0) {
@@ -340,6 +383,11 @@
             
         }
         
+//        //sync cloudEntry
+//        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+//        [manager cloudEntryWithEntry:entry andSync:YES];
+        
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
@@ -354,7 +402,7 @@
     if (self.documentDatabase.isLoad) {
         DDXMLDocument *document = self.documentDatabase.document;
         NSString *idString = [@(group.groupID) stringValue];
-        NSString *xpath = [NSString stringWithFormat:@"//group[\"%@\"=\"%@\"]"
+        NSString *xpath = [NSString stringWithFormat:@"//group[@%@='%@']"
                            ,CAPSULE_GROUP_ID,idString];
         NSArray *results = [document nodesForXPath:xpath error:nil];
         if ([results count] == 0) {
@@ -367,6 +415,7 @@
         [[modifyGroup attributeForName:CAPSULE_CLOUD_ID] setStringValue:group.cloudID];
         [[modifyGroup attributeForName:CAPSULE_GROUP_NAME] setStringValue:group.name];
         
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
@@ -376,6 +425,32 @@
 
 }
 
+#pragma mark - database API
+- (void)saveDatabase{
+    PCDocumentDatabase *database = [PCDocumentDatabase sharedDocumentDatabase];
+    if (self.documentDatabase.isLoad) {
+        DDXMLDocument *document = self.documentDatabase.document;
+
+        NSString *xpath = @"//database";
+        NSArray *results = [document nodesForXPath:xpath error:nil];
+        if ([results count] == 0) {
+            NSLog(@"group id error");
+            return;
+        }
+        DDXMLElement *modifyDatabase = [results firstObject];
+        //修改云端id
+        [[modifyDatabase attributeForName:@"database_cloud_id"] setStringValue:database.cloudID];
+        self.documentDatabase.refreshDocument = YES;
+        [PCDocumentDatabase setLastModifyDate:[NSDate date]];
+
+    } else {
+        [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
+        [self saveDatabase];
+    }
+
+}
+
+
 - (void)saveDocument{
     if (self.documentDatabase.shouldRefresh) {
         DDXMLElement *root = [self.documentDatabase.document rootElement];
@@ -384,53 +459,15 @@
         BOOL wirteSuccess = [[root XMLString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
         NSLog(@" %@ ",[root XMLString]);
         if (wirteSuccess) {
+            [PCDocumentDatabase setLastModifyDate:[NSDate date]];
             self.documentDatabase.refreshDocument = NO;
             NSLog(@"write file success");
         } else {
             NSLog(@"write file fail");
         }
+        [[PCCloudManager sharedCloudManager] syncDatabase:self.documentDatabase];
     }
 }
-
-//改用 apple security框架中的 SecRandom
-//- (void)testDecypyt{
-//    NSString *key = [PCKeyChainCapsule stringForKey:@"masterKey" andServiceName:KEYCHAIN_KEY_SERVICE];
-//    NSData *decryptData = [RNDecryptor decryptData:self.testEncryptData
-//                                      withPassword:key
-//                                             error:nil];
-//    NSString *decryptString = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
-//    NSLog(@"decrypt string is %@",decryptString);
-//}
-//
-//
-//NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+`-=[]\\;',./{}|:\"<>?";
-//
-//- (NSString *) randomStringWithLength: (int)len{
-//    
-//    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-//    
-//    for (int i=0; i<len; i++) {
-//        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
-//    }
-//    
-//    return randomString;
-//    
-////另一种方案
-////    char data[NUMBER_OF_CHARS];
-////    for (int x=0;x<NUMBER_OF_CHARS;data[x++] = (char)('A' + (arc4random_uniform(26))));
-////    return [[NSString alloc] initWithBytes:data length:NUMBER_OF_CHARS encoding:NSUTF8StringEncoding];
-////
-////
-//
-////第三种方案
-////    NSTimeInterval  today = [[NSDate date] timeIntervalSince1970];
-////    NSString *intervalString = [NSString stringWithFormat:@"%f", today];
-////    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[intervalString doubleValue]];
-////    
-////    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-////    [formatter setDateFormat:@"yyyyMMddhhmm"];
-////    NSString *strdate=[formatter stringFromDate:date];
-//}
 
 
 @end

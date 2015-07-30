@@ -11,6 +11,9 @@
 #import "PCKeyChainUtils.h"
 #import "PCDocumentDatabase.h"
 
+#import "PCCloudManager.h"
+#import "PCDocumentManager.h"
+
 
 @interface PCLoginVC ()<UIGestureRecognizerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -89,12 +92,38 @@
 
 #pragma mark - action
 - (IBAction)login:(id)sender {
-    BOOL isCreateDB = [[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_DATABASE_CREATE];
+    NSString *name = self.accountTextField.text;
+    NSString *password = self.passwordTextField.text;
+    
+    [AVUser logInWithUsername:name password:password error:nil];
+
     NSString *segueID = nil;
-    if(isCreateDB){
-        segueID = @"toUnLockView";
-    } else {
-        segueID = @"toNewDocumentView";
+    
+//    BOOL isCreateDB = [[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULT_DATABASE_CREATE];
+//    if(isCreateDB){
+//        segueID = @"toUnLockView";
+//    } else {
+//        segueID = @"toNewDocumentView";
+//    }
+
+    AVUser *current = [AVUser currentUser];
+    if (current) {
+        //do someting
+        NSString *cloudID = [current objectForKey:CLOUD_DATABASE_ID];
+        if (cloudID) {
+            segueID = @"toUnLockView";
+            PCDocumentManager *document = [PCDocumentManager sharedDocumentManager];
+            PCCloudDatabase *cloudDatabase = [[PCCloudManager sharedCloudManager] queryCloudDatabaseByID:cloudID];
+            
+            BOOL createSuccess = [document syncDocumentFormCloudWithUser:current];
+            if (createSuccess) {
+                NSLog(@"create cloud database ok!");
+            }
+
+        } else {
+            segueID = @"toNewDocumentView";
+        }
+        
     }
     [self performSegueWithIdentifier:segueID sender:self];
 }

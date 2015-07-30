@@ -21,7 +21,6 @@
 		5241FCE31B4237B800B059FB /* PCNewEntryTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5241FCE21B4237B800B059FB /* PCNewEntryTableVC.m */; };
 		524EE6F71B578FD9008FEAF3 /* PCCloudGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EE6F61B578FD9008FEAF3 /* PCCloudGroup.m */; };
 		524EE6FA1B578FEE008FEAF3 /* PCCloudEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EE6F91B578FEE008FEAF3 /* PCCloudEntry.m */; };
-		525FBA841B2FE99F0072F534 /* PCRegistTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FBA831B2FE99F0072F534 /* PCRegistTableVC.m */; };
 		525FBA891B319F740072F534 /* PCKeyChainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 525FBA881B319F740072F534 /* PCKeyChainUtils.m */; };
 		5263E8511AE8FDE000D79116 /* PCUnLockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5263E8501AE8FDE000D79116 /* PCUnLockVC.m */; };
 		526EEFDD1B2EFD0300B693CD /* PCDocumentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 526EEFDC1B2EFD0300B693CD /* PCDocumentManager.m */; };
@@ -81,8 +80,6 @@
 		524EE6F61B578FD9008FEAF3 /* PCCloudGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudGroup.m; sourceTree = "<group>"; };
 		524EE6F81B578FEE008FEAF3 /* PCCloudEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCloudEntry.h; sourceTree = "<group>"; };
 		524EE6F91B578FEE008FEAF3 /* PCCloudEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCCloudEntry.m; sourceTree = "<group>"; };
-		525FBA821B2FE99F0072F534 /* PCRegistTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCRegistTableVC.h; sourceTree = "<group>"; };
-		525FBA831B2FE99F0072F534 /* PCRegistTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCRegistTableVC.m; sourceTree = "<group>"; };
 		525FBA871B319F740072F534 /* PCKeyChainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCKeyChainUtils.h; sourceTree = "<group>"; };
 		525FBA881B319F740072F534 /* PCKeyChainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCKeyChainUtils.m; sourceTree = "<group>"; };
 		5263E84F1AE8FDE000D79116 /* PCUnLockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCUnLockVC.h; sourceTree = "<group>"; };
@@ -178,8 +175,6 @@
 				520E2F131AFB9E9B008FBC27 /* PCEntryViewController.m */,
 				526EEFDE1B2F04EB00B693CD /* PCNewDocumetTableVC.h */,
 				526EEFDF1B2F04EB00B693CD /* PCNewDocumetTableVC.m */,
-				525FBA821B2FE99F0072F534 /* PCRegistTableVC.h */,
-				525FBA831B2FE99F0072F534 /* PCRegistTableVC.m */,
 				5241FCE11B4237B800B059FB /* PCNewEntryTableVC.h */,
 				5241FCE21B4237B800B059FB /* PCNewEntryTableVC.m */,
 			);
@@ -482,7 +477,6 @@
 				52B2B1B81ADFB0E700192404 /* main.m in Sources */,
 				5241FCDC1B4159BB00B059FB /* PCDocumentWirter.m in Sources */,
 				526EEFE01B2F04EB00B693CD /* PCNewDocumetTableVC.m in Sources */,
-				525FBA841B2FE99F0072F534 /* PCRegistTableVC.m in Sources */,
 				52E3D8471B14792200C150FA /* PCRegistVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

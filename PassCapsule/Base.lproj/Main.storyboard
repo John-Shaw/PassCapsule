@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4n9-dn-zzk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4n9-dn-zzk">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -1398,7 +1398,7 @@
         <!--注册-->
         <scene sceneID="H3z-cJ-JRw">
             <objects>
-                <tableViewController storyboardIdentifier="PCRegistTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZPu-NS-Icd" userLabel="注册" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PCRegistTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZPu-NS-Icd" userLabel="注册" customClass="PCRegistVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RLn-wU-3NE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1640,9 +1640,23 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="注册" id="0tJ-pP-YK6">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="RIe-Rm-tfw"/>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="DFj-n0-Zmc"/>
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="RIe-Rm-tfw">
+                            <connections>
+                                <action selector="cancel:" destination="ZPu-NS-Icd" id="Dw2-ob-GgA"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="DFj-n0-Zmc">
+                            <connections>
+                                <action selector="regist:" destination="ZPu-NS-Icd" id="3uX-O6-BQj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="2Cy-XI-gAR" id="LjV-em-m99"/>
+                        <outlet property="nameTextField" destination="1oG-7h-Plr" id="E4P-i8-yKU"/>
+                        <outlet property="passwordTextField" destination="pAt-nH-a27" id="8q6-nV-yLk"/>
+                        <segue destination="iKv-bt-lQH" kind="presentation" identifier="toCreateDatabaseView" modalTransitionStyle="flipHorizontal" id="Az5-GD-x8r"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uzy-2O-yxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1690,7 +1704,7 @@
         <image name="testImage.jpg" width="260" height="260"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ehv-CQ-TKL"/>
         <segue reference="Dlb-jj-R6Z"/>
+        <segue reference="Az5-GD-x8r"/>
     </inferredMetricsTieBreakers>
 </document>

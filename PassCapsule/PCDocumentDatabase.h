@@ -15,6 +15,7 @@ static NSString * const NOTIFICATION_SHOULD_RELOAD = @"didLoadData";
 static NSString * const USERDEFAULT_DATABASE_CREATE = @"isCreateDatabase";
 static NSString * const USERDEFAULT_DOCUMENT_NAME = @"documentName";
 static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
+static NSString * const USERDEFAULT_LAST_DATE = @"lastModifyDate";
 
 @interface PCDocumentDatabase : NSObject
 
@@ -23,6 +24,8 @@ static NSString * const USERDEFAULT_CURRENT_ID = @"currentID";
 + (NSString *)databaseName;
 + (NSString *)documentName;
 + (NSString *)documentPath;
++ (NSDate *)lastModifyDate;
++ (void)setLastModifyDate:(NSDate *)date;
 
 @property (nonatomic, strong) DDXMLDocument *document;
 @property (nonatomic, strong) NSMutableArray *entries;

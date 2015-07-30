@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PCDocumentDatabase.h"
+@class AVUser;
 
 static char * const LOAD_DOCUMENT_QUEUE = "cn.zerz.passcapsule.loadDocumentQueue";
 
@@ -17,12 +18,15 @@ static char * const LOAD_DOCUMENT_QUEUE = "cn.zerz.passcapsule.loadDocumentQueue
 @property (nonatomic, strong) NSString *masterPassword;
 @property (nonatomic, strong) PCDocumentDatabase *documentDatabase;
 
-
+- (BOOL)syncDocumentFormCloudWithUser: (AVUser *)user;
 
 - (BOOL)createDocument:(NSString *)databaseName WithMasterPassword:(NSString *)masterPassword;
 - (void)parserDocument:(NSData *)xmlData;
 - (void)addNewEntry: (PCCapsule *)entry;
 - (void)deleteEntry: (PCCapsule *)entry;
+- (void)modifyEntry: (PCCapsule *)entry;
+- (void)modifyGroup: (PCCapsuleGroup *)group;
+- (void)saveDatabase;
 - (void)saveDocument;
 - (void)preLoadDocunent:(NSData *)xmlData;
 

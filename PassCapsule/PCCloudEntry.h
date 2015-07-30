@@ -9,6 +9,8 @@
 #import <AVOSCloud/AVOSCloud.h>
 
 @interface PCCloudEntry : AVObject<AVSubclassing>
+
+@property (nonatomic, copy) NSString  *cloud_id;
 @property (nonatomic, copy) NSString  *entry_id;
 @property (nonatomic, copy) NSString  *title;
 @property (nonatomic, copy) NSString  *password;

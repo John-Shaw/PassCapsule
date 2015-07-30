@@ -11,6 +11,9 @@
 static NSString *const kGroupEntries = @"groupEntries";
 
 @interface PCCloudGroup : AVObject<AVSubclassing>
+
+@property (nonatomic, copy) NSString *cloud_id;
+@property (nonatomic, copy) NSString *group_id;
 @property (nonatomic, copy) NSString *groupName;
 @property (nonatomic, strong) NSMutableArray *groupEntries;
 
