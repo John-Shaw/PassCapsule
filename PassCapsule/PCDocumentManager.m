@@ -304,13 +304,14 @@
         PCCapsuleGroup *group = self.documentDatabase.groups[PCGroupTypeDefault];
         [group.entries addObject:entry];
         
-        
 //        //sync cloudGroup
-//        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
-//        [manager cloudGroupWithGroup:group andSync:YES];
+        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+        PCCloudGroup *cloudGroup = (PCCloudGroup *)manager.cloudDatabase.cloudGroups[0];
+        [cloudGroup addUniqueObject:[manager createCloudEntryWithEntry:entry] forKey:kGroupEntries];
         
         [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
+        [self saveDocument];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     }
 }
@@ -336,6 +337,11 @@
         [group.entries removeObject:entry];
         self.documentDatabase.refreshDocument = YES;
         [PCDocumentDatabase setLastModifyDate:[NSDate date]];
+        
+        //sync
+        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+        PCCloudGroup *cloudGroup = (PCCloudGroup *)manager.cloudDatabase.cloudGroups[0];
+        [cloudGroup removeObject:[manager queryCloudEntryByID:entry.cloudID] forKey:kGroupEntries];
 
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
@@ -384,8 +390,8 @@
         }
         
 //        //sync cloudEntry
-//        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
-//        [manager cloudEntryWithEntry:entry andSync:YES];
+        PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+        [manager syncEntry:entry];
         
         [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
@@ -417,6 +423,7 @@
         
         [PCDocumentDatabase setLastModifyDate:[NSDate date]];
         self.documentDatabase.refreshDocument = YES;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOULD_RELOAD object:nil];
     } else {
         [self readDocument:[PCDocumentDatabase documentPath] withMasterPassword:@"the method is uncompeleted"];
@@ -456,15 +463,20 @@
         DDXMLElement *root = [self.documentDatabase.document rootElement];
         NSString *path = [PCDocumentDatabase documentPath];
         NSLog(@"documentPath = %@",path);
-        BOOL wirteSuccess = [[root XMLString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        NSLog(@" %@ ",[root XMLString]);
-        if (wirteSuccess) {
-            [PCDocumentDatabase setLastModifyDate:[NSDate date]];
-            self.documentDatabase.refreshDocument = NO;
-            NSLog(@"write file success");
-        } else {
-            NSLog(@"write file fail");
-        }
+        dispatch_queue_t saveDocumentQueue = dispatch_queue_create(SAVE_DOCUMENT_QUEUE, DISPATCH_QUEUE_SERIAL);
+        dispatch_async(saveDocumentQueue, ^{
+            BOOL wirteSuccess = [[root XMLString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//            NSLog(@" %@ ",[root XMLString]);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (wirteSuccess) {
+                    [PCDocumentDatabase setLastModifyDate:[NSDate date]];
+                    self.documentDatabase.refreshDocument = NO;
+                    NSLog(@"write file success");
+                } else {
+                    NSLog(@"write file fail");
+                }
+            });
+        });
         [[PCCloudManager sharedCloudManager] syncDatabase:self.documentDatabase];
     }
 }

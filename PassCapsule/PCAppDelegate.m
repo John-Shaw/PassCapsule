@@ -43,16 +43,19 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
     }
     
     AVUser *currentUser = [AVUser currentUser];
-    if (currentUser != nil) {
-        
-    } else {
-        //
+    if (currentUser) {
+        NSString *cloudID = [currentUser objectForKey:CLOUD_DATABASE_ID];
+        if (cloudID) {
+            [PCDocumentDatabase sharedDocumentDatabase].cloudID = cloudID;
+            PCCloudManager *manager = [PCCloudManager sharedCloudManager];
+            manager.cloudDatabase = [manager queryCloudDatabaseByID:cloudID];
+        }
     }
     
-    NSString *path = [PCDocumentDatabase documentPath];
-    NSData *xmlData = [NSData dataWithContentsOfFile:path];
-    [[PCDocumentManager sharedDocumentManager] preLoadDocunent:xmlData];
-    
+//    NSString *path = [PCDocumentDatabase documentPath];
+//    NSData *xmlData = [NSData dataWithContentsOfFile:path];
+//    [[PCDocumentManager sharedDocumentManager] preLoadDocunent:xmlData];
+//    
     return YES;
 }
 
@@ -79,8 +82,6 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [[PCDocumentManager sharedDocumentManager] saveDocument];
-    
-    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -90,7 +91,7 @@ static NSString * const USERDEFAULT_LAUNCH_FIRST = @"isFirstLaunch";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[PCDocumentManager sharedDocumentManager] saveDocument];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

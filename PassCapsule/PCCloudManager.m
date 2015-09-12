@@ -50,7 +50,7 @@
 }
 
 #pragma mark - sync cloud object
-- (void)syncEntry: (PCCapsule *)entry{
+- (PCCloudEntry *)syncEntry: (PCCapsule *)entry{
     NSString *cloudID = entry.cloudID;
     PCCloudEntry *cloudEntry = nil;
     if (cloudID) {
@@ -68,7 +68,7 @@
     cloudEntry.cloud_id = entry.cloudID;
     
     [cloudEntry saveInBackground];
-    
+    return cloudEntry;
 }
 
 - (void)syncgroup: (PCCapsuleGroup *)group{
@@ -84,8 +84,9 @@
     cloudGroup.groupName = group.name;
     
     for (PCCapsule *entry in group.entries) {
-        PCCloudEntry *cloudEntry = [self createCloudEntryWithEntry:entry];
-        [cloudGroup addObject:cloudEntry forKey:kGroupEntries];
+        PCCloudEntry *cloudEntry = [self syncEntry:entry];
+        [cloudGroup addUniqueObject:cloudEntry forKey:kGroupEntries];
+
     }
     
     [cloudGroup saveInBackground];
@@ -96,7 +97,7 @@
     if (cloudDatabase) {
         
     } else {
-        cloudDatabase = [[PCCloudDatabase alloc] init];
+        cloudDatabase = [self createCloudDatabaseWithDatabase:database];
     }
     
     NSString *databaseName = [PCDocumentDatabase databaseName];
@@ -105,15 +106,17 @@
     NSData *xmldata = [database.document XMLData];
     AVFile *xmlFile = [AVFile fileWithName:documentName data:xmldata];
     
+//    [cloudDatabase.file deleteInBackground];
+    
     cloudDatabase.name = databaseName;
     cloudDatabase.file = xmlFile;
     
-    for (PCCapsuleGroup *group in database.groups) {
-        PCCloudGroup *cloudGroup = [self createCloudGroupWithGroup:group];
-        if (cloudGroup) {
-                    [cloudDatabase addObject:cloudGroup forKey:kDatabaseGroups];
-        }
-    }
+//    for (PCCapsuleGroup *group in database.groups) {
+//        PCCloudGroup *cloudGroup = cloudDatabase.cloudGroups[0];
+//        if (cloudGroup) {
+//            [cloudDatabase addUniqueObject:cloudGroup forKey:kDatabaseGroups];
+//        }
+//    }
     
     [cloudDatabase saveInBackground];
     NSLog(@"save database cloud");
@@ -204,7 +207,7 @@
     
     for (PCCapsule *entry in group.entries) {
         PCCloudEntry *cloudEntry = [self createCloudEntryWithEntry:entry];
-        [cloudGroup addObject:cloudEntry forKey:kGroupEntries];
+        [cloudGroup addUniqueObject:cloudEntry forKey:kGroupEntries];
     }
     
     AVUser *user = [AVUser currentUser];
@@ -232,16 +235,18 @@
     NSString *documentName = [PCDocumentDatabase documentName];
     
     cloudDatabase.name = databaseName;
-    cloudDatabase.masterPassword = [PCPassword password];;
+    cloudDatabase.masterPassword = [PCPassword password];
+    
+//    [cloudDatabase.file deleteInBackground];
     
     NSData *xmldata = [database.document XMLData];
-    AVFile *xmlFile = [AVFile fileWithName:documentName data:xmldata];
-    cloudDatabase.file = xmlFile;
+    cloudDatabase.file = [AVFile fileWithName:documentName data:xmldata];
     
     
     for (PCCapsuleGroup *group in database.groups) {
         PCCloudGroup *cloudGroup = [self createCloudGroupWithGroup:group];
-        [cloudDatabase addObject:cloudGroup forKey:kDatabaseGroups];
+        [cloudDatabase addUniqueObject:cloudGroup forKey:kDatabaseGroups];
+
     }
     AVUser *user = [AVUser currentUser];
     if (user) {

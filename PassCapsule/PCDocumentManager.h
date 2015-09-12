@@ -11,6 +11,8 @@
 @class AVUser;
 
 static char * const LOAD_DOCUMENT_QUEUE = "cn.zerz.passcapsule.loadDocumentQueue";
+static char * const SAVE_DOCUMENT_QUEUE = "cn.zerz.passcapsule.saveDocumentQueue";
+
 
 @interface PCDocumentManager : NSObject
 

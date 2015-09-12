@@ -19,7 +19,7 @@
 
 - (void)shouldSyncBy: (NSDate *)date;
 
-- (void)syncEntry: (PCCapsule *)entry;
+- (PCCloudEntry *)syncEntry: (PCCapsule *)entry;
 - (void)syncgroup: (PCCapsuleGroup *)group;
 - (void)syncDatabase: (PCDocumentDatabase *)database;
 
@@ -31,6 +31,7 @@
 - (PCCloudGroup *)createCloudGroupWithGroup: (PCCapsuleGroup *)group;
 - (PCCloudDatabase *)createCloudDatabaseWithDatabase: (PCDocumentDatabase *)database;
 
+@property (nonatomic,strong) PCCloudDatabase *cloudDatabase;
 
 +(instancetype)sharedCloudManager;
 /**
